@@ -12,6 +12,8 @@ abstract class BaseItem: Serializable {
         private const val DATE_TIME_FORMATTER_PATTERN = "yyyy-MM-dd HH:mm:ss.SSS"
     }
 
+    /* =================================================================== */
+
     // the unique id of every instance
     protected val mId: String = UUID.randomUUID().toString()
 
@@ -24,10 +26,10 @@ abstract class BaseItem: Serializable {
     val pathNodesCopied: ArrayList<String> get() = ArrayList(mPathNodes)
 
     // the local-date-time when this item was created
-    protected abstract val mCreateLocalDateTime: LocalDateTime
+    protected val mCreateLocalDateTime: LocalDateTime = LocalDateTime.now()
 
     // the local-date-time at the latest modification
-    protected var mLastModifiedLocalDateTime: LocalDateTime = LocalDateTime.now()
+    protected var mLastModifiedLocalDateTime = mCreateLocalDateTime
     var lastModifiedLocalDateTime get() = mLastModifiedLocalDateTime; set(value) { mLastModifiedLocalDateTime = value }
 
     // the count of the chakans

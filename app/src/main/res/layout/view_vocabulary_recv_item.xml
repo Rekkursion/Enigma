@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="@dimen/dim_recv_item_spacing"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- for placing the english text-view -->
+    <HorizontalScrollView
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+        <!-- english -->
+        <TextView
+                android:id="@+id/txtv_english_at_vocabulary_recv_item"
+                android:textSize="@dimen/dim_vocabulary_recv_item_english_text_size"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+
+    <!-- the exact-rating-bar for showing the proficiency -->
+    <com.rekkursion.exactratingbar.ExactRatingBar
+            android:id="@+id/erb_proficiency_at_vocabulary_recv_item"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:star_size="50"
+            app:spacing="0"
+            app:stars_num="5"
+            app:is_indicator="true"
+            app:star_style="star"
+            app:value_change_scale="continuous"
+            app:gravity="right" />
+</androidx.appcompat.widget.LinearLayoutCompat>

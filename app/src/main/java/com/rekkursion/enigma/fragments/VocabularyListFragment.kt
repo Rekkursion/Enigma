@@ -11,6 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
 
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.enums.PartOfSpeech
+import com.rekkursion.enigma.models.BaseItem
+import com.rekkursion.enigma.models.FolderItem
+import com.rekkursion.enigma.models.Meaning
+import com.rekkursion.enigma.models.VocabularyItem
+import com.rekkursion.enigma.utils.adapters.ItemRecyclerViewAdapter
 
 class VocabularyListFragment: Fragment() {
     // static scope
@@ -24,8 +30,11 @@ class VocabularyListFragment: Fragment() {
 
     // the recycler-view for showing the folders and/or vocabularies
     private lateinit var mRecvItemList: RecyclerView
+
     // d-fab to prompt up the list-bottom-sheet-dialog and let the user choose add folder or vocabulary
     private lateinit var mDfabAddFolderOrVocabulary: ListBottomSheetDialogFloatingActionButton
+
+//    private val mRecvAdapter = ItemRecyclerViewAdapter()
 
     /* =================================================================== */
 
@@ -65,6 +74,34 @@ class VocabularyListFragment: Fragment() {
     }
 
     private fun initEvents() {
+        val list = ArrayList<BaseItem>()
+        list.add(VocabularyItem(
+            arrayListOf("this", "that"),
+            "ObeseObeseObeseObeseObeseObeseObeseObeseObeseObeseObeseObeseObeseObeseObese",
+            arrayListOf(Meaning(PartOfSpeech.ADJECTIVE, "極度肥胖的")),
+            4.81F,
+            "remaaaark"
+        ))
+        list.add(FolderItem(
+            arrayListOf("good", "bad"),
+            "UnclassifiedUnclassifiedUnclassifiedUnclassifiedUnclassifiedUnclassifiedUnclassifiedUnclassifiedUnclassified"
+        ))
+        list.add(FolderItem(
+            arrayListOf("1", "2", "3", "4"),
+            "觀光英文",
+            arrayListOf(list[0] as VocabularyItem)
+        ))
+        list.add(VocabularyItem(
+            arrayListOf("naruto", "sasuke"),
+            "construe",
+            arrayListOf(Meaning(PartOfSpeech.VERB, "把...理解為"), Meaning(PartOfSpeech.TRANSITIVE_VERB, "把...解釋為", arrayListOf(), "notes")),
+            1.33F,
+            "remaaaark"
+        ))
+        val adapter = ItemRecyclerViewAdapter(list)
+        mRecvItemList.adapter = adapter
+        adapter.notifyDataSetChanged()
+
         // new folder
         mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_folder), View.OnClickListener {
 

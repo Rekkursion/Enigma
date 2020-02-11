@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:padding="@dimen/dim_recv_item_spacing"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <!-- the folder name -->
+        <TextView
+                android:id="@+id/txtv_folder_name_at_folder_recv_item"
+                android:textSize="@dimen/dim_folder_recv_item_group_name_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <!-- the number of vocabularies -->
+        <TextView
+                android:id="@+id/txtv_num_of_vocabularies_at_folder_recv_item"
+                android:textSize="@dimen/dim_folder_recv_item_num_of_vocabularies_text_size"
+                android:textColor="@android:color/darker_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</HorizontalScrollView>

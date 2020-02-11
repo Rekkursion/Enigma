@@ -1,3 +1,15 @@
 <resources>
+    <!-- the margin of the fab's -->
     <dimen name="dim_fab_margin">16dp</dimen>
+
+    <!-- the spacing among items at the recycler-view -->
+    <dimen name="dim_recv_item_spacing">6dp</dimen>
+
+    <!-- the text-size of a folder's name at the recycler-view -->
+    <dimen name="dim_folder_recv_item_group_name_text_size">28sp</dimen>
+    <!-- the text-size of a folder's number-of-vocabularies at the recycler-view -->
+    <dimen name="dim_folder_recv_item_num_of_vocabularies_text_size">16sp</dimen>
+
+    <!-- the text-size of a vocabulary's english at the recycler-view -->
+    <dimen name="dim_vocabulary_recv_item_english_text_size">28sp</dimen>
 </resources>
