@@ -1,21 +1,14 @@
 package com.rekkursion.enigma
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
+import com.rekkursion.enigma.fragments.VocabularyListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
-    // d-fab to prompt up the list-bottom-sheet-dialog and let the user choose add folder or vocabulary
-    private lateinit var mDfabAddFolderOrVocabulary: ListBottomSheetDialogFloatingActionButton
-    // the root for placing each fragment
-    private lateinit var mLlyRoot: LinearLayoutCompat
     // b-nav to switch among all fragments
     private lateinit var mBnavMain: BottomNavigationView
 
@@ -53,11 +46,11 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         return when (menuItem.itemId) {
             // vocabulary list
             R.id.bnav_item_vocabulary_list -> {
-//                val f = VocabularyListFragment.newInstance()
-//                supportFragmentManager
-//                    .beginTransaction()
-//                    .add(R.id.lly_fragment_root_at_main, f)
-//                    .commit()
+                val f = VocabularyListFragment.newInstance()
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.lly_fragment_root_at_main, f)
+                    .commit()
                 true
             }
 
@@ -82,21 +75,11 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
     // initialize views
     private fun initViews() {
-        mLlyRoot = findViewById(R.id.lly_fragment_root_at_main)
         mBnavMain = findViewById(R.id.bnav_main)
-        mDfabAddFolderOrVocabulary = findViewById(R.id.dfab_add_folder_or_vocabulary)
     }
 
     // initialize events of views
     private fun initEvents() {
-        // new folder
-        mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_folder), View.OnClickListener {
-
-        })
-
-        // new vocabulary
-        mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_vocabulary), View.OnClickListener {
-
-        })
+        mBnavMain.setOnNavigationItemSelectedListener(this)
     }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context=".fragments.VocabularyListFragment">
+
+    <!-- the linear-layout for placing the recycler-view -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <!-- the recycler-view for showing the folders and/or vocabularies -->
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recv_item_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- the relative-layout for placing floating views -->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <!-- the d-fab for adding new item (folder or vocabulary) -->
+        <com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
+                android:id="@+id/dfab_add_folder_or_vocabulary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/dim_fab_margin"
+                android:src="@android:drawable/ic_menu_add"
+                app:srcCompat="@android:drawable/ic_menu_add" />
+    </RelativeLayout>
+</FrameLayout>
