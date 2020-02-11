@@ -4,7 +4,7 @@ import java.io.*
 import java.lang.ClassCastException
 
 @Suppress("UNCHECKED_CAST")
-class SerializationUtils {
+object SerializationUtils {
     // serialize
     @Synchronized fun serialize(obj: Any?, path: String): Boolean {
         if (obj == null)
