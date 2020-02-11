@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_main"
+        tools:context=".MainActivity">
+
+    <!-- the root for all fragments at the main-activity -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lly_fragment_root_at_main"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="0dp">
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- for navigating among the different pages (bnav: bottom-navigation-view) -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnav_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/menu_bottom_navigation_view" />
+</androidx.appcompat.widget.LinearLayoutCompat>

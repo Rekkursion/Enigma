@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Enigma</string>
+
+    <string name="str_action_settings">Settings</string>
+
+    <string name="str_new_folder">New folder</string>
+    <string name="str_new_vocabulary">New vocabulary</string>
+
+    <string name="str_bnav_item_vocabulary_list">List</string>
+    <string name="str_bnav_item_practice">Practice</string>
+    <string name="str_bnav_item_more">More</string>
+</resources>

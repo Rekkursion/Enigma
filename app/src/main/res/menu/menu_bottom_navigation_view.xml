@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/bnav_item_vocabulary_list"
+            android:icon="@drawable/ic_vocabulary_list_black_24dp"
+            android:title="@string/str_bnav_item_vocabulary_list" />
+
+    <item
+            android:id="@+id/bnav_item_practice"
+            android:icon="@drawable/ic_practice_black_24dp"
+            android:title="@string/str_bnav_item_practice" />
+
+    <item
+            android:id="@+id/bnav_item_more"
+            android:icon="@drawable/ic_more_horizontal_black_24dp"
+            android:title="@string/str_bnav_item_more" />
+</menu>
