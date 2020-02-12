@@ -1,15 +1,18 @@
 package com.rekkursion.enigma.activities
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.children
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.listeners.OnItemCardCloseListener
+import com.rekkursion.enigma.managers.NewItemFieldsManager
+import com.rekkursion.enigma.views.BaseItemCard
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
 import com.rekkursion.enigma.views.FolderItemCard
 
@@ -52,11 +55,21 @@ class NewItemActivity: AppCompatActivity() {
         // click on the cancel button or the submit button
         mCancelSubmitButtonBar.setOnButtonBarClickListener(object: OnButtonBarClickListener {
             override fun onCancelClickListener() {
-                AlertDialog.Builder(this@NewItemActivity).setMessage("Cancel").show()
+                setResult(Activity.RESULT_CANCELED)
+                NewItemFieldsManager.reset()
+                finish()
             }
 
             override fun onSubmitClickListener() {
-                AlertDialog.Builder(this@NewItemActivity).setMessage("Submit").show()
+                setResult(Activity.RESULT_OK)
+
+                NewItemFieldsManager.reset()
+                mLlyCardsContainer.children.forEach { card ->
+                    if (card is BaseItemCard)
+                        NewItemFieldsManager.addNewItemFields(card.getAllFields())
+                }
+
+                finish()
             }
         })
     }

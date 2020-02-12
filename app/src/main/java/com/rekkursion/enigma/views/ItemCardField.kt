@@ -7,14 +7,17 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.children
 import com.rekkursion.enigma.R
 
 class ItemCardField(context: Context, attrs: AttributeSet? = null): LinearLayoutCompat(context, attrs) {
     // the text-view for showing the field name
     private val mTxtvFieldName: TextView
+    val fieldName: String get() = mTxtvFieldName.text.toString()
 
     // the container for placing the field content
     private val mFlyFieldContentContainer: FrameLayout
+    val fieldContentViews: ArrayList<View> get() = ArrayList(mFlyFieldContentContainer.children.toList())
 
     /* =================================================================== */
 

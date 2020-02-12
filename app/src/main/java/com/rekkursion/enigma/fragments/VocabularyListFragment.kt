@@ -1,8 +1,11 @@
 package com.rekkursion.enigma.fragments
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +20,7 @@ import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.enums.ItemType
+import com.rekkursion.enigma.managers.NewItemFieldsManager
 
 class VocabularyListFragment: Fragment() {
     // static scope
@@ -26,7 +30,8 @@ class VocabularyListFragment: Fragment() {
         fun newInstance() = VocabularyListFragment()
 
         // request codes
-        private const val REQ_GO_TO_NEW_ITEM_ACTIVITY = 4731
+        private const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER = 4731
+        private const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY = 5371
     }
 
     /* =================================================================== */
@@ -59,6 +64,34 @@ class VocabularyListFragment: Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // if back from new-item-activity
+        if (requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER || requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY) {
+            // but the result-code is canceled, return directly
+            if (resultCode == Activity.RESULT_CANCELED)
+                return
+
+            NewItemFieldsManager.newItemsFieldsList.forEach { fieldsHashMap ->
+                fieldsHashMap.forEach { fieldName, fieldContentViews ->
+                    // TODO: deal w/ the returned new items
+                }
+            }
+        }
+
+        when (requestCode) {
+            // back from adding new folder
+            REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER -> {
+                Log.e("on-activity-result", "NEW FOLDERS")
+            }
+
+            // back from adding new vocabulary
+            REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY -> {
+                Log.e("on-activity-result", "NEW VOCABULARIES")
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     /* =================================================================== */
@@ -94,14 +127,14 @@ class VocabularyListFragment: Fragment() {
         mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_folder), View.OnClickListener {
             val intent = Intent(this.context, NewItemActivity::class.java)
             intent.putExtra(ItemType::name.toString(), ItemType.FOLDER.name)
-            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY)
+            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER)
         })
 
         // new vocabulary
         mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_vocabulary), View.OnClickListener {
             val intent = Intent(this.context, NewItemActivity::class.java)
             intent.putExtra(ItemType::name.toString(), ItemType.VOCABULARY.name)
-            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY)
+            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY)
         })
 
         //mRecvItemList.addOnItemTouchListener()
