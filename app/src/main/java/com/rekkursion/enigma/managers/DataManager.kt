@@ -23,6 +23,8 @@ object DataManager {
             if (!serialOutFile.exists()) return
             val loaded = SerializationUtils.deSerialize<HashMap<String, ArrayList<BaseItem>>>(serialOutFile.path)
             mBaseItemHashMap.putAll(loaded ?: hashMapOf())
+
+            PathManager.updateCurrentBaseItems()
         }
     }
 }

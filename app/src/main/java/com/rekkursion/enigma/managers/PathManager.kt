@@ -13,7 +13,7 @@ object PathManager {
     /* =================================================================== */
 
     // when path-nodes are changed, the current base-items shall be updated as well
-    fun updateCurrentBaseItems() {
+    internal fun updateCurrentBaseItems() {
         val path = mCurrentPathNodes.joinToString("/")
         mCurrentBaseItems.clear()
         mCurrentBaseItems.addAll(DataManager.baseItemHashMap.getOrElse(path) { arrayListOf() })

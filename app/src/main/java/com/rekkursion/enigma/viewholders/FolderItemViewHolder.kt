@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.utils.viewholders
+package com.rekkursion.enigma.viewholders
 
 import android.view.View
 import android.widget.TextView

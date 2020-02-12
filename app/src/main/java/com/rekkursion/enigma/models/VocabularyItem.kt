@@ -10,7 +10,8 @@ class VocabularyItem(
     english: String,
     meanings: ArrayList<Meaning>,
     proficiency: Float,
-    remark: String = ""
+    remark: String = "",
+    tags: ArrayList<String> = arrayListOf()
 ): BaseItem() {
     // override the item-type as a VOCABULARY type
     override val mItemType: ItemType = ItemType.VOCABULARY
@@ -32,6 +33,10 @@ class VocabularyItem(
     // the remark (beizhu) of this word
     private var mRemark: String = remark
     var remark get() = mRemark; set(value) { mRemark = value }
+
+    // the tags of this word
+    private val mTagList = ArrayList<String>(tags)
+    val tagListCopied get() = ArrayList(mTagList)
 
     /* =================================================================== */
 

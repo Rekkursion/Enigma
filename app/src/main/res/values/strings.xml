@@ -9,4 +9,6 @@
     <string name="str_bnav_item_vocabulary_list">List</string>
     <string name="str_bnav_item_practice">Practice</string>
     <string name="str_bnav_item_more">More</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_submit">Submit</string>
 </resources>

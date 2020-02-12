@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.utils.adapters
+package com.rekkursion.enigma.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.models.BaseItem
 import com.rekkursion.enigma.models.FolderItem
 import com.rekkursion.enigma.models.VocabularyItem
-import com.rekkursion.enigma.utils.viewholders.BaseItemViewHolder
-import com.rekkursion.enigma.utils.viewholders.FolderItemViewHolder
-import com.rekkursion.enigma.utils.viewholders.VocabularyItemViewHolder
+import com.rekkursion.enigma.viewholders.BaseItemViewHolder
+import com.rekkursion.enigma.viewholders.FolderItemViewHolder
+import com.rekkursion.enigma.viewholders.VocabularyItemViewHolder
 
 class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<BaseItemViewHolder>() {
     // the list of all folders and/or vocabularies

@@ -1,6 +1,7 @@
 package com.rekkursion.enigma.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
 
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.managers.PathManager
-import com.rekkursion.enigma.utils.adapters.ItemRecyclerViewAdapter
+import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
+import com.rekkursion.enigma.enums.ItemType
 
 class VocabularyListFragment: Fragment() {
     // static scope
@@ -21,6 +24,9 @@ class VocabularyListFragment: Fragment() {
         // create a new instance of this fragment
         @JvmStatic
         fun newInstance() = VocabularyListFragment()
+
+        // request codes
+        private const val REQ_GO_TO_NEW_ITEM_ACTIVITY = 4731
     }
 
     /* =================================================================== */
@@ -65,7 +71,6 @@ class VocabularyListFragment: Fragment() {
 
         DataManager.loadAllItemsBySerialization(context, true)
         mRecvItemList.adapter = mRecvAdapter
-        PathManager.updateCurrentBaseItems()
         mRecvAdapter.notifyDataSetChanged()
     }
 
@@ -87,12 +92,16 @@ class VocabularyListFragment: Fragment() {
     private fun initEvents() {
         // new folder
         mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_folder), View.OnClickListener {
-            // TODO: add new folder
+            val intent = Intent(this.context, NewItemActivity::class.java)
+            intent.putExtra(ItemType::name.toString(), ItemType.FOLDER.name)
+            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY)
         })
 
         // new vocabulary
         mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_vocabulary), View.OnClickListener {
-            // TODO: add new vocabulary
+            val intent = Intent(this.context, NewItemActivity::class.java)
+            intent.putExtra(ItemType::name.toString(), ItemType.VOCABULARY.name)
+            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY)
         })
 
         //mRecvItemList.addOnItemTouchListener()

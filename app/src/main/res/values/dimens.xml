@@ -2,6 +2,9 @@
     <!-- the margin of the fab's -->
     <dimen name="dim_fab_margin">16dp</dimen>
 
+    <!-- the general margin -->
+    <dimen name="dim_general_margin">8dp</dimen>
+
     <!-- the spacing among items at the recycler-view -->
     <dimen name="dim_recv_item_spacing">6dp</dimen>
 
@@ -12,4 +15,5 @@
 
     <!-- the text-size of a vocabulary's english at the recycler-view -->
     <dimen name="dim_vocabulary_recv_item_english_text_size">28sp</dimen>
+    <dimen name="dim_general_text_size">16sp</dimen>
 </resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_margin="@dimen/dim_general_margin"
+        android:weightSum="15"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- the text-view for showing the field name -->
+    <TextView
+            android:id="@+id/txtv_field_name"
+            android:textSize="@dimen/dim_general_text_size"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    <!-- the container for placing the field content -->
+    <FrameLayout
+            android:id="@+id/fly_field_content_container"
+            android:layout_weight="13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+    </FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
