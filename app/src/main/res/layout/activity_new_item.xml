@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.appcompat.widget.LinearLayoutCompat
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.NewItemActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/lly_new_item_cards_container_at_new_item_activity"
-            android:orientation="vertical"
+    <!-- the cancel & submit button-bar -->
+    <com.rekkursion.enigma.views.CancelOrSubmitButtonBar
+            android:id="@+id/cancel_or_submit_button_bar_at_new_item_activity"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</ScrollView>
+            android:layout_height="0dp" />
+
+    <!-- all cards and the cancel-or-submit-button-bar -->
+    <ScrollView
+            android:layout_weight="10"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        <!-- the container for placing all cards -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lly_new_item_cards_container_at_new_item_activity"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+
+    <!-- the button for adding a new folder-item- or vocabulary-item- card -->
+    <Button
+            android:id="@+id/btn_add_new_card_at_new_item_activity"
+            android:background="@color/colorPrimary"
+            android:text="@string/str_add_more"
+            android:textSize="@dimen/dim_general_text_size"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            style="@style/Widget.AppCompat.ButtonBar" />
+</androidx.appcompat.widget.LinearLayoutCompat>

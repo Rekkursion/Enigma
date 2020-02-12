@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<androidx.appcompat.widget.LinearLayoutCompat
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/background_base_item_card"
+        android:layout_margin="@dimen/dim_base_item_card_margin"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- the scroll-view's child -->
-    <androidx.appcompat.widget.LinearLayoutCompat
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <!-- the linear-layout for placing all fields -->
-        <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/lly_fields_container_at_folder_item_card"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <!-- the field of the folder name -->
-            <com.rekkursion.enigma.views.ItemCardField
-                    android:id="@+id/icf_folder_name_at_folder_item_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <!-- the button-bar w/ cancel & submit buttons -->
-        <com.rekkursion.enigma.views.CancelOrSubmitButtonBar
-                android:id="@+id/cancel_or_submit_button_bar_at_folder_item_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</ScrollView>
+    <!-- include the base-item-card -->
+    <include layout="@layout/view_base_item_card" />
+</androidx.appcompat.widget.LinearLayoutCompat>

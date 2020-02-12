@@ -4,6 +4,8 @@
 
     <!-- the general margin -->
     <dimen name="dim_general_margin">8dp</dimen>
+    <!-- the general text-size -->
+    <dimen name="dim_general_text_size">16sp</dimen>
 
     <!-- the spacing among items at the recycler-view -->
     <dimen name="dim_recv_item_spacing">6dp</dimen>
@@ -15,5 +17,6 @@
 
     <!-- the text-size of a vocabulary's english at the recycler-view -->
     <dimen name="dim_vocabulary_recv_item_english_text_size">28sp</dimen>
-    <dimen name="dim_general_text_size">16sp</dimen>
+
+    <dimen name="dim_base_item_card_margin">12dp</dimen>
 </resources>
