@@ -8,6 +8,7 @@
 
     <!-- the linear-layout for placing the recycler-view -->
     <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
