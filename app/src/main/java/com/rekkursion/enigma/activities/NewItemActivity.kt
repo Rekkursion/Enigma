@@ -66,7 +66,10 @@ class NewItemActivity: AppCompatActivity() {
         if (intent.getStringExtra(ItemType::name.toString()) == ItemType.FOLDER.name) {
             val card = FolderItemCard(this)
             card.setOnItemCardCloseListener(object: OnItemCardCloseListener {
-                override fun onItemCardClose() { mLlyCardsContainer.removeView(card) }
+                override fun onItemCardClose() {
+                    mLlyCardsContainer.removeView(card)
+                    mCancelSubmitButtonBar.setEnabilities(isBtnSubmitEnabled = mLlyCardsContainer.childCount > 0)
+                }
             })
             mLlyCardsContainer.addView(card)
         }
@@ -75,5 +78,7 @@ class NewItemActivity: AppCompatActivity() {
             txtv.text = "loser"
             mLlyCardsContainer.addView(txtv)
         }
+
+        mCancelSubmitButtonBar.setEnabilities(isBtnSubmitEnabled = mLlyCardsContainer.childCount > 0)
     }
 }

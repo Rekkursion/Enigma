@@ -42,4 +42,10 @@ class CancelOrSubmitButtonBar(context: Context, attrs: AttributeSet?): LinearLay
     fun setOnButtonBarClickListener(onButtonBarClickListener: OnButtonBarClickListener) {
         mOnButtonBarClickListener = onButtonBarClickListener
     }
+
+    // set the enabilities of those two buttons
+    fun setEnabilities(isBtnCancelEnabled: Boolean = mBtnCancel.isEnabled, isBtnSubmitEnabled: Boolean = mBtnSubmit.isEnabled) {
+        mBtnCancel.isEnabled = isBtnCancelEnabled
+        mBtnSubmit.isEnabled = isBtnSubmitEnabled
+    }
 }
