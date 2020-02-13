@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.views.ItemCard
+package com.rekkursion.enigma.views.itemcard
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,14 +9,16 @@ import com.rekkursion.enigma.views.ItemCardField
 class FolderItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCard(context, attrs) {
     // primary constructor
     init {
-        // set events
-        mImgbtnClose.setOnClickListener { mOnItemCardCloseListener?.onItemCardClose() }
-
         // set fields
         setFields()
     }
 
     /* =================================================================== */
+
+    // initialize all fields of a folder-item-card
+    override fun initFields() {
+
+    }
 
     // set all fields of a folder-item-card
     override fun setFields() {

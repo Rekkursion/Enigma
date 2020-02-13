@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.views.ItemCard
+package com.rekkursion.enigma.views.itemcard
 
 import android.content.Context
 import android.util.AttributeSet
@@ -33,9 +33,15 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
         // get views that are in the base item's layout
         mLlyFieldsContainer = findViewById(R.id.lly_fields_container)
         mImgbtnClose = findViewById(R.id.imgbtn_close_item_card)
+
+        // set events
+        mImgbtnClose.setOnClickListener { mOnItemCardCloseListener?.onItemCardClose() }
     }
 
     /* =================================================================== */
+
+    // initialize all fields which are to be set
+    protected abstract fun initFields()
 
     // set the fields determined by the type of the item, i.e., folder or vocabulary
     protected abstract fun setFields()
