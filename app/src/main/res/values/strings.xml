@@ -53,4 +53,6 @@
     <string name="str_new_example_sentence">新增例句</string>
     <!--<string name="str_notes">Notes</string>-->
     <string name="str_notes">補充</string>
+    <!--<string name="str_select_a_part_of_speech">Select a part of speech</string>-->
+    <string name="str_select_a_part_of_speech">請選擇詞性</string>
 </resources>

@@ -15,8 +15,9 @@
                 android:id="@+id/imgbtn_go_up"
                 android:src="@drawable/ic_arrow_upward_black_24dp"
                 android:contentDescription="@string/str_go_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 style="?android:attr/buttonBarButtonStyle" />
 
         <!-- the imgbtn for going down -->
@@ -24,8 +25,9 @@
                 android:id="@+id/imgbtn_go_down"
                 android:src="@drawable/ic_arrow_downward_black_24dp"
                 android:contentDescription="@string/str_go_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 style="?android:attr/buttonBarButtonStyle" />
 
         <!-- the imgbtn for closing this card -->
@@ -33,8 +35,9 @@
                 android:id="@+id/imgbtn_close"
                 android:src="@drawable/ic_close_black_24dp"
                 android:contentDescription="@string/str_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 style="?android:attr/buttonBarButtonStyle" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>

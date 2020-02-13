@@ -20,5 +20,9 @@ enum class PartOfSpeech(val abbr: String, val chinese: String) {
     AUXILIARY_VERB("aux", "助動詞"),
     SINGLE("s", "單數"),
     PLURAL("pl", "複數"),
-    ABBREVIATION("abbr", "縮寫")
+    ABBREVIATION("abbr", "縮寫");
+
+    companion object {
+        fun getChineseWithAbbrArray(): Array<String> = values().map { "${it.chinese} ${it.abbr}" }.toTypedArray()
+    }
 }

@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.EditText
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.views.ItemCardField
+import com.rekkursion.enigma.views.MeaningSettingView
 import com.rekkursion.exactratingbar.ExactRatingBar
 import com.rekkursion.exactratingbar.enums.ValueChangeScale
 
@@ -59,6 +60,15 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
             .setContentView(mEdtEnglish)
             .create()
         mLlyFieldsContainer.addView(englishField)
+
+        /**
+         * test!
+         */
+        val v = ItemCardField.Builder(context)
+            .setFieldName("意義")
+            .setContentView(MeaningSettingView(context))
+            .create()
+        mLlyFieldsContainer.addView(v)
 
         // the exact-rating-bar of the proficiency field
         val proficiencyField = ItemCardField.Builder(context)
