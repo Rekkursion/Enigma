@@ -8,7 +8,7 @@ import kotlin.collections.ArrayList
 
 abstract class BaseItem: Serializable {
     companion object {
-        private const val serialVersionUID = 8829975621220483374L
+        private const val serialVersionUID = 306125L
         private const val DATE_TIME_FORMATTER_PATTERN = "yyyy-MM-dd HH:mm:ss.SSS"
     }
 

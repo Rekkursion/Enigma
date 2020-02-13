@@ -10,14 +10,38 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.rekkursion.enigma.R
 
-class ItemCardField(context: Context, attrs: AttributeSet? = null): LinearLayoutCompat(context, attrs) {
+class ItemCardField private constructor(context: Context, attrs: AttributeSet? = null): LinearLayoutCompat(context, attrs) {
+    // for building a new item-card-field
+    class Builder(context: Context, attrs: AttributeSet? = null) {
+        // the instance to be created
+        private val mInstance = ItemCardField(context, attrs)
+
+        // return the instance
+        fun create(): ItemCardField = mInstance
+
+        // set the field name
+        fun setFieldName(fieldName: String): Builder {
+            mInstance.mTxtvFieldName.text = fieldName
+            return this
+        }
+
+        // set the content view
+        fun setContentView(view: View): Builder {
+            mInstance.mFlyFieldContentContainer.removeAllViews()
+            mInstance.mFlyFieldContentContainer.addView(view)
+            return this
+        }
+    }
+
+    /* =================================================================== */
+
     // the text-view for showing the field name
     private val mTxtvFieldName: TextView
     val fieldName: String get() = mTxtvFieldName.text.toString()
 
     // the container for placing the field content
     private val mFlyFieldContentContainer: FrameLayout
-    val fieldContentViews: ArrayList<View> get() = ArrayList(mFlyFieldContentContainer.children.toList())
+    val fieldContentView: View? get() = mFlyFieldContentContainer.children.toList().getOrNull(0)
 
     /* =================================================================== */
 
@@ -30,12 +54,4 @@ class ItemCardField(context: Context, attrs: AttributeSet? = null): LinearLayout
         mTxtvFieldName = findViewById(R.id.txtv_field_name)
         mFlyFieldContentContainer = findViewById(R.id.fly_field_content_container)
     }
-
-    /* =================================================================== */
-
-    // set the field name
-    fun setFieldName(fieldName: String) { mTxtvFieldName.text = fieldName }
-
-    // add the view into the field content container
-    fun addContentView(contentView: View) { mFlyFieldContentContainer.addView(contentView) }
 }

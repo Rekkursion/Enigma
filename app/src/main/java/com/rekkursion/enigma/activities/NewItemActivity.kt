@@ -12,9 +12,9 @@ import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.listeners.OnItemCardCloseListener
 import com.rekkursion.enigma.managers.NewItemFieldsManager
-import com.rekkursion.enigma.views.BaseItemCard
+import com.rekkursion.enigma.views.ItemCard.BaseItemCard
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
-import com.rekkursion.enigma.views.FolderItemCard
+import com.rekkursion.enigma.views.ItemCard.FolderItemCard
 
 class NewItemActivity: AppCompatActivity() {
     // the cancel & submit button-bar
@@ -54,12 +54,14 @@ class NewItemActivity: AppCompatActivity() {
 
         // click on the cancel button or the submit button
         mCancelSubmitButtonBar.setOnButtonBarClickListener(object: OnButtonBarClickListener {
+            // cancelled
             override fun onCancelClickListener() {
                 setResult(Activity.RESULT_CANCELED)
                 NewItemFieldsManager.reset()
                 finish()
             }
 
+            // submitted
             override fun onSubmitClickListener() {
                 setResult(Activity.RESULT_OK)
 

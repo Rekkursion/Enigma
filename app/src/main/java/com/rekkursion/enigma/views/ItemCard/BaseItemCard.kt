@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.views
+package com.rekkursion.enigma.views.ItemCard
 
 import android.content.Context
 import android.util.AttributeSet
@@ -10,6 +10,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.listeners.OnItemCardCloseListener
+import com.rekkursion.enigma.views.ItemCardField
 
 @Suppress("LeakingThis")
 abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout(context, attrs) {
@@ -47,11 +48,11 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
     }
 
     // get all fields and their corresponding content views
-    fun getAllFields(): HashMap<String, ArrayList<View>> {
-        val ret = HashMap<String, ArrayList<View>>()
+    fun getAllFields(): HashMap<String, View?> {
+        val ret = HashMap<String, View?>()
         mLlyFieldsContainer.children.forEach { itemCardField ->
             if (itemCardField is ItemCardField)
-                ret[itemCardField.fieldName] = itemCardField.fieldContentViews
+                ret[itemCardField.fieldName] = itemCardField.fieldContentView
         }
         return ret
     }
