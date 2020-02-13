@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_margin="@dimen/dim_meaning_setting_view_margin"
+        android:background="@color/color_meaning_setting_view_background"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- the title bar of some actions -->
+    <com.rekkursion.enigma.views.ActionsTitleImageButtonBar
+            android:id="@+id/actions_title_bar_at_meaning_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <!-- for placing part of speech, chinese, and notes -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <!-- the button for selecting the part of speech -->
+        <Button
+                android:id="@+id/btn_select_part_of_speech_at_meaning_setting"
+                android:text="@string/str_noun_abbreviation"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        <!-- the edit-text for the chinese meaning -->
+        <EditText
+                android:id="@+id/edt_chinese_at_meaning_setting"
+                android:hint="@string/str_what_does_it_mean"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:layout_weight="7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        <!-- the edit-text for the notes -->
+        <EditText
+                android:id="@+id/edt_notes_at_meaning_setting"
+                android:hint="@string/str_notes"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- the container for placing example sentences -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lly_sentences_container_at_meaning_setting"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- for placing the new-example-sentence button -->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <!-- the button for adding new example sentence -->
+        <Button
+                android:id="@+id/btn_add_sentence_at_meaning_setting"
+                android:text="@string/str_new_example_sentence"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle" />
+    </RelativeLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

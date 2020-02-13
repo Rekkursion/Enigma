@@ -3,4 +3,7 @@
     <color name="colorPrimary">#E99870</color>
     <color name="colorPrimaryDark">#FF6500</color>
     <color name="colorAccent">#EC7638</color>
+
+    <!-- the color of meaning-setting-view's background -->
+    <color name="color_meaning_setting_view_background">#50E190AA</color>
 </resources>

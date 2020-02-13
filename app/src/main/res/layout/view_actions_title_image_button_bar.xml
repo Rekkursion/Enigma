@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <!-- the imgbtn for going up -->
+        <ImageButton
+                android:id="@+id/imgbtn_go_up"
+                android:src="@drawable/ic_arrow_upward_black_24dp"
+                android:contentDescription="@string/str_go_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        <!-- the imgbtn for going down -->
+        <ImageButton
+                android:id="@+id/imgbtn_go_down"
+                android:src="@drawable/ic_arrow_downward_black_24dp"
+                android:contentDescription="@string/str_go_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        <!-- the imgbtn for closing this card -->
+        <ImageButton
+                android:id="@+id/imgbtn_close"
+                android:src="@drawable/ic_close_black_24dp"
+                android:contentDescription="@string/str_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>

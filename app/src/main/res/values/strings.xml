@@ -3,8 +3,13 @@
 
     <!--<string name="str_action_settings">Settings</string>-->
     <string name="str_action_settings">設置</string>
+
     <!--<string name="str_close">close</string>-->
     <string name="str_close">關閉</string>
+    <!--<string name="str_go_up">Go up</string>-->
+    <string name="str_go_up">往上</string>
+    <!--<string name="str_go_down">Go down</string>-->
+    <string name="str_go_down">往下</string>
 
     <!--<string name="str_new_folder">New folder</string>-->
     <string name="str_new_folder">新分類夾</string>
@@ -33,7 +38,19 @@
     <string name="str_vocabulary_item_card_english_field">單字</string>
     <!--<string name="str_vocabulary_item_card_proficiency_field">Proficiency</string>-->
     <string name="str_vocabulary_item_card_proficiency_field">熟練度</string>
+    <!--<string name="str_vocabulary_item_card_remark_field">Remarks</string>-->
+    <string name="str_vocabulary_item_card_remark_field">備註</string>
 
-    <!--<string name="str_vocabulary_item_card_english_field_edit_text_hint">Enter a word here</string>-->
+    <!--<string name="str_vocabulary_item_card_english_field_edit_text_hint">Enter a word here.</string>-->
     <string name="str_vocabulary_item_card_english_field_edit_text_hint">欲新增的單字</string>
+    <!--<string name="str_vocabulary_item_card_remark_field_edit_text_hint">Notes, usage, synonyms, antonyms, or anything you want to add.</string>-->
+    <string name="str_vocabulary_item_card_remark_field_edit_text_hint">注意事項、同義詞、反義詞、詳細的用法，或任何你想要補充的</string>
+    <!--<string name="str_noun_abbreviation">n</string>-->
+    <string name="str_noun_abbreviation">n</string>
+    <!--<string name="str_what_does_it_mean">What does it mean?</string>-->
+    <string name="str_what_does_it_mean">是什麼意思呢？</string>
+    <!--<string name="str_new_example_sentence">New example sentence</string>-->
+    <string name="str_new_example_sentence">新增例句</string>
+    <!--<string name="str_notes">Notes</string>-->
+    <string name="str_notes">補充</string>
 </resources>

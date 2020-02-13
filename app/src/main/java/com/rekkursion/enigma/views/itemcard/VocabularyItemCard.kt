@@ -2,8 +2,6 @@ package com.rekkursion.enigma.views.itemcard
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.View
 import android.widget.EditText
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.views.ItemCardField
@@ -14,8 +12,17 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
     // the edit-text of the english field
     private lateinit var mEdtEnglish: EditText
 
+    // TODO: meanings
+
     // the exact-rating-bar of the proficiency field
     private lateinit var mErbProficiency: ExactRatingBar
+
+    // the edit-text of the remark field
+    private lateinit var mEdtRemark: EditText
+
+    // TODO: tags
+
+    /* =================================================================== */
 
     // primary constructor
     init {
@@ -31,12 +38,17 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
     override fun initFields() {
         // the edit-text of the english field
         mEdtEnglish = EditText(context)
+        mEdtEnglish.isSingleLine = true
         mEdtEnglish.hint = context.getString(R.string.str_vocabulary_item_card_english_field_edit_text_hint)
 
         // the exact-rating-bar of the proficiency field
         mErbProficiency = ExactRatingBar(context)
         mErbProficiency.valueChangeScale = ValueChangeScale.HALF_STAR
         mErbProficiency.isIndicator = false
+
+        // the edit-text of the remark field
+        mEdtRemark = EditText(context)
+        mEdtRemark.hint = context.getString(R.string.str_vocabulary_item_card_remark_field_edit_text_hint)
     }
 
     // set all fields of a folder-item-card
@@ -54,5 +66,12 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
             .setContentView(mErbProficiency)
             .create()
         mLlyFieldsContainer.addView(proficiencyField)
+
+        // the edit-text of the remark field
+        val remarkField = ItemCardField.Builder(context)
+            .setFieldName(context.getString(R.string.str_vocabulary_item_card_remark_field))
+            .setContentView(mEdtRemark)
+            .create()
+        mLlyFieldsContainer.addView(remarkField)
     }
 }
