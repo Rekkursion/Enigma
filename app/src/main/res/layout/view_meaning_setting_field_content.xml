@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- the container of meaning-setting-views -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lly_meaning_setting_views_container_at_meaning_setting_field_content_view"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- for placing the new-meaning-setting-view button -->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <!-- the button for adding a new meaning-setting-view -->
+        <Button
+                android:id="@+id/btn_add_new_meaning_setting_view_at_meaning_setting_field_content_view"
+                android:text="@string/str_new_meaning_setting_view"
+                android:textSize="@dimen/dim_general_text_size"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ButtonBar" />
+    </RelativeLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

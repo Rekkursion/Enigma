@@ -36,6 +36,8 @@
 
     <!--<string name="str_vocabulary_item_card_english_field">Vocabulary</string>-->
     <string name="str_vocabulary_item_card_english_field">單字</string>
+    <!--<string name="str_vocabulary_item_card_meaning_field">Meaning</string>-->
+    <string name="str_vocabulary_item_card_meaning_field">意義</string>
     <!--<string name="str_vocabulary_item_card_proficiency_field">Proficiency</string>-->
     <string name="str_vocabulary_item_card_proficiency_field">熟練度</string>
     <!--<string name="str_vocabulary_item_card_remark_field">Remarks</string>-->
@@ -59,4 +61,6 @@
     <string name="str_enter_new_sentence_hint">在此輸入例句</string>
     <!--<string name="str_example_sentence_label_at_sentence_view">Ex: </string>-->
     <string name="str_example_sentence_label_at_sentence_view">例句：</string>
+    <!--<string name="str_new_meaning_setting_view">New meaning</string>-->
+    <string name="str_new_meaning_setting_view">新增意義</string>
 </resources>

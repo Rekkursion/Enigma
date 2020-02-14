@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.widget.EditText
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.views.ItemCardField
-import com.rekkursion.enigma.views.MeaningSettingView
+import com.rekkursion.enigma.views.MeaningSettingFieldContentView
 import com.rekkursion.exactratingbar.ExactRatingBar
 import com.rekkursion.exactratingbar.enums.ValueChangeScale
 
@@ -13,7 +13,8 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
     // the edit-text of the english field
     private lateinit var mEdtEnglish: EditText
 
-    // TODO: meanings
+    // the meaning-setting-field-content-view of the meaning field
+    private lateinit var mMeaningSettingFieldContentView: MeaningSettingFieldContentView
 
     // the exact-rating-bar of the proficiency field
     private lateinit var mErbProficiency: ExactRatingBar
@@ -42,6 +43,9 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
         mEdtEnglish.isSingleLine = true
         mEdtEnglish.hint = context.getString(R.string.str_vocabulary_item_card_english_field_edit_text_hint)
 
+        // the meaning-setting-field-content-view of the meaning field
+        mMeaningSettingFieldContentView = MeaningSettingFieldContentView(context)
+
         // the exact-rating-bar of the proficiency field
         mErbProficiency = ExactRatingBar(context)
         mErbProficiency.valueChangeScale = ValueChangeScale.HALF_STAR
@@ -61,14 +65,12 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
             .create()
         mLlyFieldsContainer.addView(englishField)
 
-        /**
-         * test!
-         */
-        val v = ItemCardField.Builder(context)
-            .setFieldName("意義")
-            .setContentView(MeaningSettingView(context))
+        // the meaning-setting-field-content-view of the meaning field
+        val meaningsField = ItemCardField.Builder(context)
+            .setFieldName(context.getString(R.string.str_vocabulary_item_card_meaning_field))
+            .setContentView(mMeaningSettingFieldContentView)
             .create()
-        mLlyFieldsContainer.addView(v)
+        mLlyFieldsContainer.addView(meaningsField)
 
         // the exact-rating-bar of the proficiency field
         val proficiencyField = ItemCardField.Builder(context)
