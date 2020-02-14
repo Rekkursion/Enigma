@@ -2,26 +2,18 @@ package com.rekkursion.enigma.activities
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
-import com.rekkursion.enigma.commands.BaseCommand
-import com.rekkursion.enigma.commands.ItemCardAddCommand
-import com.rekkursion.enigma.commands.ItemCardGoUpOrGoDownCommand
-import com.rekkursion.enigma.commands.ItemCardRemoveCommand
-import com.rekkursion.enigma.enums.ItemType
-import com.rekkursion.enigma.listeners.OnActionsClickListener
+import com.rekkursion.enigma.commands.*
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
-import com.rekkursion.enigma.managers.NewItemFieldsManager
-import com.rekkursion.enigma.views.itemcard.BaseItemCard
+import com.rekkursion.enigma.managers.NewItemManager
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
-import com.rekkursion.enigma.views.itemcard.FolderItemCard
-import com.rekkursion.enigma.views.itemcard.VocabularyItemCard
 import java.util.HashMap
 
 @SuppressLint("SetTextI18n")
@@ -77,6 +69,8 @@ class NewItemActivity: AppCompatActivity() {
         mCommands[ItemCardRemoveCommand::class.java.name] = ItemCardRemoveCommand(this)
         // command of going-up or going-down of a certain item-card
         mCommands[ItemCardGoUpOrGoDownCommand::class.java.name] = ItemCardGoUpOrGoDownCommand(this)
+        // command of creating all items
+        mCommands[ItemCardCreateCommand::class.java.name] = ItemCardCreateCommand(this)
     }
 
     // initialize events of views
@@ -98,19 +92,16 @@ class NewItemActivity: AppCompatActivity() {
             // cancelled
             override fun onCancelClickListener() {
                 setResult(Activity.RESULT_CANCELED)
-                NewItemFieldsManager.reset()
+                NewItemManager.reset()
                 finish()
             }
 
             // submitted
             override fun onSubmitClickListener() {
                 setResult(Activity.RESULT_OK)
+                getCommand(ItemCardCreateCommand::class.java.name)?.execute(*(mLlyCardsContainer.children.toList().toTypedArray()))
 
-                NewItemFieldsManager.reset()
-                mLlyCardsContainer.children.forEach { card ->
-                    if (card is BaseItemCard)
-                        NewItemFieldsManager.addNewItemFields(card.getAllFields())
-                }
+                Log.e("size", NewItemManager.newItemList.size.toString())
 
                 finish()
             }

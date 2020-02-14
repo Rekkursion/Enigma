@@ -1,7 +1,6 @@
 package com.rekkursion.enigma.fragments
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +19,7 @@ import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.enums.ItemType
-import com.rekkursion.enigma.managers.NewItemFieldsManager
+import com.rekkursion.enigma.managers.NewItemManager
 
 class VocabularyListFragment: Fragment() {
     // static scope
@@ -72,12 +71,7 @@ class VocabularyListFragment: Fragment() {
             // but the result-code is canceled, return directly
             if (resultCode == Activity.RESULT_CANCELED)
                 return
-
-            NewItemFieldsManager.newItemsFieldsList.forEach { fieldsHashMap ->
-                fieldsHashMap.forEach { fieldName, fieldContentViews ->
-                    // TODO: deal w/ the returned new items
-                }
-            }
+            // TODO: deal w/ the returned new items
         }
 
         when (requestCode) {

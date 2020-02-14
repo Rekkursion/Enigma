@@ -53,12 +53,12 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
         mActionsBar.setTitle(title)
     }
 
-    // get all fields and their corresponding content views
-    fun getAllFields(): HashMap<String, View?> {
-        val ret = HashMap<String, View?>()
+    // get content views of all fields
+    fun getAllFieldsContentViews(): ArrayList<View?> {
+        val ret = ArrayList<View?>()
         mLlyFieldsContainer.children.forEach { itemCardField ->
             if (itemCardField is ItemCardField)
-                ret[itemCardField.fieldName] = itemCardField.fieldContentView
+                ret.add(itemCardField.fieldContentView)
         }
         return ret
     }
