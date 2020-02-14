@@ -10,6 +10,10 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.commands.BaseCommand
+import com.rekkursion.enigma.commands.ItemCardAddCommand
+import com.rekkursion.enigma.commands.ItemCardGoUpOrGoDownCommand
+import com.rekkursion.enigma.commands.ItemCardRemoveCommand
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnActionsClickListener
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
@@ -18,6 +22,7 @@ import com.rekkursion.enigma.views.itemcard.BaseItemCard
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
 import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import com.rekkursion.enigma.views.itemcard.VocabularyItemCard
+import java.util.HashMap
 
 @SuppressLint("SetTextI18n")
 class NewItemActivity: AppCompatActivity() {
@@ -28,13 +33,16 @@ class NewItemActivity: AppCompatActivity() {
     /* ================================================================== */
 
     // the cancel & submit button-bar
-    private lateinit var mCancelSubmitButtonBar: CancelOrSubmitButtonBar
+    internal lateinit var mCancelSubmitButtonBar: CancelOrSubmitButtonBar
 
     // the container for placing item-cards
-    private lateinit var mLlyCardsContainer: LinearLayoutCompat
+    internal lateinit var mLlyCardsContainer: LinearLayoutCompat
 
     // the button for adding a new item-cards
-    private lateinit var mBtnAddNewCard: Button
+    internal lateinit var mBtnAddNewCard: Button
+
+    // some commands for item-card operations
+    private val mCommands = HashMap<String, BaseCommand>()
 
     /* ================================================================== */
 
@@ -43,6 +51,7 @@ class NewItemActivity: AppCompatActivity() {
         setContentView(R.layout.activity_new_item)
 
         initViews()
+        initCommands()
         initEvents()
 
         addNewCard()
@@ -57,6 +66,16 @@ class NewItemActivity: AppCompatActivity() {
         mBtnAddNewCard = findViewById(R.id.btn_add_new_card_at_new_item_activity)
 
         mBtnAddNewCard.text = getString(R.string.str_add_more) + "（1）"
+    }
+
+    // initialize commands
+    private fun initCommands() {
+        // command of adding a new item-card
+        mCommands[ItemCardAddCommand::class.java.name] = ItemCardAddCommand(this)
+        // command of removing a certain item-card
+        mCommands[ItemCardRemoveCommand::class.java.name] = ItemCardRemoveCommand(this)
+        // command of going-up or going-down of a certain item-card
+        mCommands[ItemCardGoUpOrGoDownCommand::class.java.name] = ItemCardGoUpOrGoDownCommand(this)
     }
 
     // initialize events of views
@@ -99,55 +118,11 @@ class NewItemActivity: AppCompatActivity() {
 
     // add a new item card
     private fun addNewCard() {
-        // create a new item-card whose type is determined by the item-type of the passed intent
-        val card = if (intent.getStringExtra(ItemType::name.toString()) == ItemType.FOLDER.name)
-            FolderItemCard(this)
-        else
-            VocabularyItemCard(this)
-
-        // set the listener & title of the card
-        card.setOnActionsClickListener(object: OnActionsClickListener {
-            override fun onGoUpClickListener() {
-                val indexOfThisCard = mLlyCardsContainer.indexOfChild(card)
-                if (indexOfThisCard <= 0) return
-                mLlyCardsContainer.removeViewAt(indexOfThisCard)
-                mLlyCardsContainer.addView(card, indexOfThisCard - 1)
-                (mLlyCardsContainer.getChildAt(indexOfThisCard) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 1))
-                (mLlyCardsContainer.getChildAt(indexOfThisCard - 1) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard))
-            }
-
-            override fun onGoDownClickListener() {
-                val indexOfThisCard = mLlyCardsContainer.indexOfChild(card)
-                if (indexOfThisCard < 0 || indexOfThisCard >= mLlyCardsContainer.children.toList().size - 1) return
-                mLlyCardsContainer.removeViewAt(indexOfThisCard)
-                mLlyCardsContainer.addView(card, indexOfThisCard + 1)
-                (mLlyCardsContainer.getChildAt(indexOfThisCard) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 1))
-                (mLlyCardsContainer.getChildAt(indexOfThisCard + 1) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 2))
-            }
-
-            override fun onCloseClickListener() {
-                // get the index of this to-be-removed card
-                val indexOfThisCard = mLlyCardsContainer.indexOfChild(card)
-                // remove the selected card
-                mLlyCardsContainer.removeViewAt(indexOfThisCard)
-                // disable the submit button iff the number of cards is zero
-                mCancelSubmitButtonBar.setEnabilities(isBtnSubmitEnabled = mLlyCardsContainer.childCount > 0)
-                // update the text of the add-new-card button
-                mBtnAddNewCard.text = getString(R.string.str_add_more) + "（${mLlyCardsContainer.childCount}）"
-                // update titles of all cards below this removed card
-                for (idx in indexOfThisCard until mLlyCardsContainer.childCount)
-                    (mLlyCardsContainer.getChildAt(idx) as BaseItemCard).setTitle(String.format("%02d", idx + 1))
-            }
-        })
-        card.setTitle(String.format("%02d", mLlyCardsContainer.childCount + 1))
-
-        // add this card and enable the submit button
-        mLlyCardsContainer.addView(card)
-        mCancelSubmitButtonBar.setEnabilities(isBtnSubmitEnabled = true)
+        getCommand(ItemCardAddCommand::class.java.name)?.execute()
     }
 
-    // remove a certain item card
-    private fun removeCard() {
+    /* ================================================================== */
 
-    }
+    // get the designated command
+    internal fun getCommand(commandSelector: String): BaseCommand? = mCommands[commandSelector]
 }
