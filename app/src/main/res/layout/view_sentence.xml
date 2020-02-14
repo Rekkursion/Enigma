@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- the text-view for showing the label -->
+    <TextView
+            android:id="@+id/txtv_label_at_sentence_view"
+            android:textSize="@dimen/dim_general_text_size"
+            android:text="@string/str_example_sentence_label_at_sentence_view"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <!-- for placing the sentence -->
+    <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <!-- the text-view for showing the inputted example sentence -->
+        <TextView
+                android:id="@+id/txtv_sentence_at_sentence_view"
+                android:textSize="@dimen/dim_general_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

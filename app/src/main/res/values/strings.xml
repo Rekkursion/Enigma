@@ -55,4 +55,8 @@
     <string name="str_notes">補充</string>
     <!--<string name="str_select_a_part_of_speech">Select a part of speech</string>-->
     <string name="str_select_a_part_of_speech">請選擇詞性</string>
+    <!--<string name="str_enter_new_sentence_hint">Enter a new example sentence here.</string>-->
+    <string name="str_enter_new_sentence_hint">在此輸入例句</string>
+    <!--<string name="str_example_sentence_label_at_sentence_view">Ex: </string>-->
+    <string name="str_example_sentence_label_at_sentence_view">例句：</string>
 </resources>

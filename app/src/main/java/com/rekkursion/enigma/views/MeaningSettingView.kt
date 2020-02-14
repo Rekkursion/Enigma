@@ -67,6 +67,26 @@ class MeaningSettingView(context: Context, attrs: AttributeSet? = null): LinearL
                 .create()
                 .show()
         }
+
+        // the event of adding a new example sentence
+        mBtnAddSentence.setOnClickListener {
+            // the edit-text to let the user to input the sentence at the dialog
+            val edtNewSentenceAtDialog = EditText(context)
+            edtNewSentenceAtDialog.isSingleLine = true
+            edtNewSentenceAtDialog.hint = context.getString(R.string.str_enter_new_sentence_hint)
+
+            // the prompted-up dialog
+            AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.str_new_example_sentence))
+                .setView(edtNewSentenceAtDialog)
+                .setPositiveButton(context.getString(R.string.str_submit)) { _, _ ->
+                    val newSentenceView = SentenceView(context, edtNewSentenceAtDialog.text.toString())
+                    mSentencesContainer.addView(newSentenceView)
+                }
+                .setNegativeButton(context.getString(R.string.str_cancel), null)
+                .create()
+                .show()
+        }
     }
 
     /* ================================================================== */
