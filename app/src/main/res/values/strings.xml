@@ -23,6 +23,11 @@
     <!--<string name="str_bnav_item_more">More</string>-->
     <string name="str_bnav_item_more">更多</string>
 
+    <!--<string name="str_attention_of_maximum_new_items_prefix">The maximum is&#160;</string>-->
+    <string name="str_attention_of_maximum_new_items_prefix">一次最多只能新增&#160;</string>
+    <!--<string name="str_attention_of_maximum_new_items_suffix">.</string>-->
+    <string name="str_attention_of_maximum_new_items_suffix">&#160;個</string>
+
     <!--<string name="str_cancel">Cancel</string>-->
     <string name="str_cancel">取消</string>
     <!--<string name="str_submit">Submit</string>-->

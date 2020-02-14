@@ -48,6 +48,11 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
         mActionsBar.setOnActionsClickListener(onActionsClickListener)
     }
 
+    // set the title of actions-title-bar
+    fun setTitle(title: String) {
+        mActionsBar.setTitle(title)
+    }
+
     // get all fields and their corresponding content views
     fun getAllFields(): HashMap<String, View?> {
         val ret = HashMap<String, View?>()

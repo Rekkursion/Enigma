@@ -60,6 +60,7 @@ class MeaningSettingFieldContentView(context: Context, attrs: AttributeSet? = nu
                 mLlyMeaningSettingViewsContainer.removeViewAt(indexOfThisView)
             }
         })
+        // set the title
         // add it into the container
         mLlyMeaningSettingViewsContainer.addView(meaningSettingView)
     }
