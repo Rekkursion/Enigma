@@ -5,23 +5,21 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageButton
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.listeners.OnActionsClickListener
 import com.rekkursion.enigma.listeners.OnItemCardCloseListener
+import com.rekkursion.enigma.views.ActionsTitleImageButtonBar
 import com.rekkursion.enigma.views.ItemCardField
 
 @Suppress("LeakingThis")
 abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout(context, attrs) {
+    // the actions bar
+    protected val mActionsBar: ActionsTitleImageButtonBar
+
     // the linear-layout for placing all fields
     protected val mLlyFieldsContainer: LinearLayoutCompat
-
-    // the imgbtn for closing the item-card
-    protected val mImgbtnClose: ImageButton
-
-    // the on-item-card-close-listener
-    protected var mOnItemCardCloseListener: OnItemCardCloseListener? = null
 
     /* =================================================================== */
 
@@ -32,10 +30,7 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
 
         // get views that are in the base item's layout
         mLlyFieldsContainer = findViewById(R.id.lly_fields_container)
-        mImgbtnClose = findViewById(R.id.imgbtn_close_item_card)
-
-        // set events
-        mImgbtnClose.setOnClickListener { mOnItemCardCloseListener?.onItemCardClose() }
+        mActionsBar = findViewById(R.id.actions_title_bar_at_base_item_card)
     }
 
     /* =================================================================== */
@@ -48,9 +43,9 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
 
     /* =================================================================== */
 
-    // set the on-item-card-close-listener
-    fun setOnItemCardCloseListener(onItemCardCloseListener: OnItemCardCloseListener) {
-        mOnItemCardCloseListener = onItemCardCloseListener
+    // set the listener of actions-title-bar
+    fun setOnActionsClickListener(onActionsClickListener: OnActionsClickListener) {
+        mActionsBar.setOnActionsClickListener(onActionsClickListener)
     }
 
     // get all fields and their corresponding content views

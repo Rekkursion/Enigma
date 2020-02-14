@@ -8,21 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <!-- for placing the close imgbtn -->
-    <RelativeLayout
+    <!-- the title bar of some actions -->
+    <com.rekkursion.enigma.views.ActionsTitleImageButtonBar
+            android:id="@+id/actions_title_bar_at_base_item_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <!-- the imgbtn for closing this card -->
-        <ImageButton
-                android:id="@+id/imgbtn_close_item_card"
-                android:src="@drawable/ic_close_black_24dp"
-                android:contentDescription="@string/str_close"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?android:attr/buttonBarButtonStyle" />
-    </RelativeLayout>
+            android:layout_height="wrap_content" />
 
     <!-- the linear-layout for placing all fields -->
     <androidx.appcompat.widget.LinearLayoutCompat

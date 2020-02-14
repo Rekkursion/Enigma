@@ -9,6 +9,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
+import com.rekkursion.enigma.listeners.OnActionsClickListener
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.listeners.OnItemCardCloseListener
 import com.rekkursion.enigma.managers.NewItemFieldsManager
@@ -85,9 +86,23 @@ class NewItemActivity: AppCompatActivity() {
         else
             VocabularyItemCard(this)
 
-        // set the listener to listen the closing event of the card
-        card.setOnItemCardCloseListener(object: OnItemCardCloseListener {
-            override fun onItemCardClose() {
+        // set the listener to listen the actions' events
+        card.setOnActionsClickListener(object: OnActionsClickListener {
+            override fun onGoUpClickListener() {
+                val indexOfThisCard = mLlyCardsContainer.indexOfChild(card)
+                if (indexOfThisCard <= 0) return
+                mLlyCardsContainer.removeViewAt(indexOfThisCard)
+                mLlyCardsContainer.addView(card, indexOfThisCard - 1)
+            }
+
+            override fun onGoDownClickListener() {
+                val indexOfThisCard = mLlyCardsContainer.indexOfChild(card)
+                if (indexOfThisCard < 0 || indexOfThisCard >= mLlyCardsContainer.children.toList().size - 1) return
+                mLlyCardsContainer.removeViewAt(indexOfThisCard)
+                mLlyCardsContainer.addView(card, indexOfThisCard + 1)
+            }
+
+            override fun onCloseClickListener() {
                 // remove the selected card
                 mLlyCardsContainer.removeView(card)
                 // disable the submit button iff the number of cards is zero
