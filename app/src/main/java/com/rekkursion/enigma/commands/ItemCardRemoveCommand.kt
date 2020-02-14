@@ -1,6 +1,7 @@
 package com.rekkursion.enigma.commands
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.views.itemcard.BaseItemCard
@@ -13,10 +14,27 @@ class ItemCardRemoveCommand(newItemActivity: NewItemActivity): ItemCardCommand {
      *      1. BaseItemCard: the item-card which is about to be removed
      * }
      */
-    @SuppressLint("SetTextI18n")
     override fun execute(vararg args: Any?) {
         val card = args[0] as BaseItemCard
+        promptUpDialog(card)
+    }
+    
+    // first, prompt up a dialog to check if the user really want to remove this item-card or not
+    private fun promptUpDialog(card: BaseItemCard) {
+        AlertDialog.Builder(mNewItemActivityInstance)
+            .setTitle(mNewItemActivityInstance.getString(R.string.str_attention_of_removing_item_card))
+            .setPositiveButton(mNewItemActivityInstance.getString(R.string.str_confirm)) { _, _ ->
+                // if yes, really remove the designated item-card
+                reallyRemoveDesignatedCard(card)
+            }
+            .setNegativeButton(mNewItemActivityInstance.getString(R.string.str_cancel), null)
+            .create()
+            .show()
+    }
 
+    // remove the designated item-card
+    @SuppressLint("SetTextI18n")
+    private fun reallyRemoveDesignatedCard(card: BaseItemCard) {
         // get the index of this to-be-removed card
         val indexOfThisCard = mNewItemActivityInstance.mLlyCardsContainer.indexOfChild(card)
         // remove the selected card

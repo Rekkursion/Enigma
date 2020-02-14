@@ -27,11 +27,15 @@
     <string name="str_attention_of_maximum_new_items_prefix">一次最多只能新增&#160;</string>
     <!--<string name="str_attention_of_maximum_new_items_suffix">.</string>-->
     <string name="str_attention_of_maximum_new_items_suffix">&#160;個</string>
+    <!--<string name="str_attention_of_removing_item_card">Are you sure?</string>-->
+    <string name="str_attention_of_removing_item_card">確定要刪除嗎？</string>
 
     <!--<string name="str_cancel">Cancel</string>-->
     <string name="str_cancel">取消</string>
     <!--<string name="str_submit">Submit</string>-->
     <string name="str_submit">送出</string>
+    <!--<string name="str_confirm">Confirm</string>-->
+    <string name="str_confirm">確定</string>
 
     <!--<string name="str_add_more">Add more</string>-->
     <string name="str_add_more">再加一個</string>

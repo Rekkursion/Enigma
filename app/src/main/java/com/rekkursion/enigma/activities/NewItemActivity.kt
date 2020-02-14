@@ -27,6 +27,7 @@ import java.util.HashMap
 @SuppressLint("SetTextI18n")
 class NewItemActivity: AppCompatActivity() {
     companion object {
+        // the max number of new items at a time
         private const val MAX_NUMBER_OF_NEW_ITEMS = 99
     }
 
