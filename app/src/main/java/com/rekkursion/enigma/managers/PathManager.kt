@@ -6,16 +6,19 @@ object PathManager {
     // the current location of path
     private var mCurrentPathNodes: ArrayList<String> = arrayListOf()
 
-    // the base-items at the current path
-    private val mCurrentBaseItems: ArrayList<BaseItem> = arrayListOf()
-    val currentBaseItems get() = mCurrentBaseItems
+    // the list for the recycler-view
+    private val mCurrentItemListForRecv: ArrayList<BaseItem> = arrayListOf()
+    val itemListForRecv get() = mCurrentItemListForRecv
 
     /* =================================================================== */
 
-    // when path-nodes are changed, the current base-items shall be updated as well
-    internal fun updateCurrentBaseItems() {
-        val path = mCurrentPathNodes.joinToString("/")
-        mCurrentBaseItems.clear()
-        mCurrentBaseItems.addAll(DataManager.baseItemHashMap.getOrElse(path) { arrayListOf() })
+    fun updateListForRecv() {
+        mCurrentItemListForRecv.clear()
+        mCurrentItemListForRecv.addAll(DataManager.getAllItemsAtCertainPath(getCurrentPath()))
     }
+
+    /* =================================================================== */
+
+    // combine the current path nodes and get the current path string
+    fun getCurrentPath(): String = mCurrentPathNodes.joinToString("/")
 }

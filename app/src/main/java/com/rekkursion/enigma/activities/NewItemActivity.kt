@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
@@ -70,7 +69,7 @@ class NewItemActivity: AppCompatActivity() {
         // command of going-up or going-down of a certain item-card
         mCommands[ItemCardGoUpOrGoDownCommand::class.java.name] = ItemCardGoUpOrGoDownCommand(this)
         // command of creating all items
-        mCommands[ItemCardCreateCommand::class.java.name] = ItemCardCreateCommand(this)
+        mCommands[ItemCardCreateItemsCommand::class.java.name] = ItemCardCreateItemsCommand(this)
     }
 
     // initialize events of views
@@ -91,18 +90,21 @@ class NewItemActivity: AppCompatActivity() {
         mCancelSubmitButtonBar.setOnButtonBarClickListener(object: OnButtonBarClickListener {
             // cancelled
             override fun onCancelClickListener() {
+                // first, set the result of result-canceled
                 setResult(Activity.RESULT_CANCELED)
+                // clear the new-item-list of new-item-manager
                 NewItemManager.reset()
+                // finish this activity
                 finish()
             }
 
             // submitted
             override fun onSubmitClickListener() {
+                // first, set the result of result-ok
                 setResult(Activity.RESULT_OK)
-                getCommand(ItemCardCreateCommand::class.java.name)?.execute(*(mLlyCardsContainer.children.toList().toTypedArray()))
-
-                Log.e("size", NewItemManager.newItemList.size.toString())
-
+                // create all items and store them in the new-item-list of new-item-manager
+                getCommand(ItemCardCreateItemsCommand::class.java.name)?.execute(*(mLlyCardsContainer.children.toList().toTypedArray()))
+                // finish this activity
                 finish()
             }
         })

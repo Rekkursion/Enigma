@@ -3,12 +3,12 @@ package com.rekkursion.enigma.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Button
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.listeners.OnActionsClickListener
+import com.rekkursion.enigma.models.Meaning
 
 class MeaningSettingFieldContentView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompat(context, attrs) {
     // the container of meaning-setting-views
@@ -60,8 +60,16 @@ class MeaningSettingFieldContentView(context: Context, attrs: AttributeSet? = nu
                 mLlyMeaningSettingViewsContainer.removeViewAt(indexOfThisView)
             }
         })
-        // set the title
         // add it into the container
         mLlyMeaningSettingViewsContainer.addView(meaningSettingView)
     }
+
+    /* =================================================================== */
+
+    // get all meanings as type of an array-list
+    fun getAllMeanings(): ArrayList<Meaning> = mLlyMeaningSettingViewsContainer
+        .children
+        .filter { it is MeaningSettingView }
+        .map { (it as MeaningSettingView).createMeaningModel() }
+        .toCollection(ArrayList())
 }

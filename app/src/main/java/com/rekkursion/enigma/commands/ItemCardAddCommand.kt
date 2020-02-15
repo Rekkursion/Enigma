@@ -11,7 +11,7 @@ class ItemCardAddCommand(newItemActivity: NewItemActivity): ItemCardCommand {
     override val mNewItemActivityInstance: NewItemActivity = newItemActivity
 
     /**
-     * @param args: varargs Any? { *no parameters* }
+     * @param args: *no parameters*
      */
     override fun execute(vararg args: Any?) {
         // create a new item-card whose type is determined by the item-type of the passed intent

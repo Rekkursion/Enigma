@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.children
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.PartOfSpeech
 import com.rekkursion.enigma.listeners.OnActionsClickListener
+import com.rekkursion.enigma.models.Meaning
 
 class MeaningSettingView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompat(context, attrs) {
     // the actions bar
@@ -95,4 +97,16 @@ class MeaningSettingView(context: Context, attrs: AttributeSet? = null): LinearL
     fun setOnActionsClickListener(onActionsClickListener: OnActionsClickListener) {
         mActionsBar.setOnActionsClickListener(onActionsClickListener)
     }
+
+    // create a new meaning model
+    fun createMeaningModel(): Meaning = Meaning(
+        mSelectedPartOfSpeech,
+        mEdtChinese.text.toString(),
+        mSentencesContainer
+            .children
+            .filter { it is SentenceView }
+            .map { (it as SentenceView).getSentence() }
+            .toCollection(ArrayList()),
+        mEdtNotes.text.toString()
+    )
 }

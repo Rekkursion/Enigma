@@ -1,10 +1,10 @@
 package com.rekkursion.enigma.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +42,7 @@ class VocabularyListFragment: Fragment() {
     private lateinit var mDfabAddFolderOrVocabulary: ListBottomSheetDialogFloatingActionButton
 
     // the adapter for the recycler-view
-    private val mRecvAdapter = ItemRecyclerViewAdapter(PathManager.currentBaseItems)
+    private val mRecvAdapter = ItemRecyclerViewAdapter(PathManager.itemListForRecv)
 
     /* =================================================================== */
 
@@ -65,25 +65,16 @@ class VocabularyListFragment: Fragment() {
         super.onDetach()
     }
 
+    // back from an activity's finishing started at this fragment
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // if back from new-item-activity
         if (requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER || requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY) {
             // but the result-code is canceled, return directly
-            if (resultCode == Activity.RESULT_CANCELED)
-                return
-            // TODO: deal w/ the returned new items
-        }
+            if (resultCode == Activity.RESULT_CANCELED) return
 
-        when (requestCode) {
-            // back from adding new folder
-            REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER -> {
-                Log.e("on-activity-result", "NEW FOLDERS")
-            }
-
-            // back from adding new vocabulary
-            REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY -> {
-                Log.e("on-activity-result", "NEW VOCABULARIES")
-            }
+            // add all items and notify that the data set has been changed
+            DataManager.addItems(NewItemManager.newItemList)
+            changeRecvAdapter()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -96,9 +87,8 @@ class VocabularyListFragment: Fragment() {
         initAttributes()
         initEvents()
 
-        DataManager.loadAllItemsBySerialization(context, true)
-        mRecvItemList.adapter = mRecvAdapter
-        mRecvAdapter.notifyDataSetChanged()
+        DataManager.loadAllItemsByDeSerialization(context, false)
+        changeRecvAdapter()
     }
 
     // initialize views
@@ -131,6 +121,13 @@ class VocabularyListFragment: Fragment() {
             startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY)
         })
 
-        //mRecvItemList.addOnItemTouchListener()
+        // TODO: mRecvItemList.addOnItemTouchListener()
+    }
+
+    // change the recycler-view's adapter
+    private fun changeRecvAdapter() {
+        val adapter = ItemRecyclerViewAdapter(PathManager.itemListForRecv)
+        mRecvItemList.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 }

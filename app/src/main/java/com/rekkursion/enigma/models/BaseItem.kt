@@ -24,6 +24,7 @@ abstract class BaseItem: Serializable {
     // the nodes of this item's path
     protected val mPathNodes: ArrayList<String> = ArrayList()
     val pathNodesCopied: ArrayList<String> get() = ArrayList(mPathNodes)
+    val pathString: String get() = mPathNodes.joinToString("/")
 
     // the local-date-time when this item was created
     protected val mCreateLocalDateTime: LocalDateTime = LocalDateTime.now()

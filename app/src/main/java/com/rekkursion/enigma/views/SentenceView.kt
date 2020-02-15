@@ -57,4 +57,9 @@ class SentenceView(context: Context, attrs: AttributeSet? = null): LinearLayoutC
 
     // override the set-on-long-click-listener and let it do nothing
     override fun setOnLongClickListener(l: OnLongClickListener?) {}
+
+    /* =================================================================== */
+
+    // get the sentence as type of a string
+    fun getSentence(): String = mTxtvSentence.text.toString()
 }
