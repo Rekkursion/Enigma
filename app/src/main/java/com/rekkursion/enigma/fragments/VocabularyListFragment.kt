@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.managers.NewItemManager
+import com.rekkursion.enigma.utils.SerializationUtils
 
 class VocabularyListFragment: Fragment() {
     // static scope
@@ -40,9 +42,6 @@ class VocabularyListFragment: Fragment() {
 
     // d-fab to prompt up the list-bottom-sheet-dialog and let the user choose add folder or vocabulary
     private lateinit var mDfabAddFolderOrVocabulary: ListBottomSheetDialogFloatingActionButton
-
-    // the adapter for the recycler-view
-    private val mRecvAdapter = ItemRecyclerViewAdapter(PathManager.itemListForRecv)
 
     /* =================================================================== */
 
@@ -74,6 +73,9 @@ class VocabularyListFragment: Fragment() {
 
             // add all items and notify that the data set has been changed
             DataManager.addItems(NewItemManager.newItemList)
+            // serialize all items
+            DataManager.saveAllItemsBySerialization(context)
+            // update the adapter of the recycler-view
             changeRecvAdapter()
         }
         super.onActivityResult(requestCode, resultCode, data)
@@ -87,7 +89,9 @@ class VocabularyListFragment: Fragment() {
         initAttributes()
         initEvents()
 
+        // load all saved items by de-serialization
         DataManager.loadAllItemsByDeSerialization(context, false)
+        // update the adapter of the recycler-view
         changeRecvAdapter()
     }
 

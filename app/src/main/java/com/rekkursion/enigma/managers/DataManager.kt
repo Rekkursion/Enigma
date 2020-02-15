@@ -1,6 +1,7 @@
 package com.rekkursion.enigma.managers
 
 import android.content.Context
+import android.util.Log
 import com.rekkursion.enigma.models.BaseItem
 import com.rekkursion.enigma.utils.SerializationUtils
 import java.io.File
@@ -13,6 +14,21 @@ object DataManager {
     private val mBaseItemHashMap: HashMap<String, ArrayList<BaseItem>> = hashMapOf()
 
     /* =================================================================== */
+
+    // save all items by serialization
+    fun saveAllItemsBySerialization(context: Context?): Boolean {
+        context?.let {
+            // serial out the words
+            val serialOutFile = File(context.filesDir, SERIALIZATION_ITEM_FILENAME)
+            if (!serialOutFile.exists())
+                serialOutFile.createNewFile()
+            val serialOutSuccessOrNot = SerializationUtils.serialize(mBaseItemHashMap, serialOutFile.path)
+            if (!serialOutSuccessOrNot)
+                Log.e("add-new-classification", "serial-out failed")
+            return serialOutSuccessOrNot
+        }
+        return false
+    }
 
     // load all items by de-serialization
     fun loadAllItemsByDeSerialization(context: Context?, clearFirst: Boolean) {
