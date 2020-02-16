@@ -7,6 +7,7 @@ import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.fragments.VocabularyListFragment
+import com.rekkursion.enigma.utils.GoBackListenerUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -70,6 +71,12 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             // error
             else -> false
         }
+    }
+
+    // override the on-back-pressed method to let fragments are able to handle the go-back event
+    override fun onBackPressed() {
+        if (!GoBackListenerUtils.handleGoBack(this))
+            super.onBackPressed()
     }
 
     /* ================================================================== */

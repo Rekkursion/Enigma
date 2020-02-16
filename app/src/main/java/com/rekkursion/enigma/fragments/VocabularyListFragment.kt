@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,11 +22,13 @@ import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsComman
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.enums.ItemType
+import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
+import com.rekkursion.enigma.utils.GoBackListenerUtils
 import com.rekkursion.enigma.viewholders.BaseItemViewHolder
 import java.util.HashMap
 
-class VocabularyListFragment: Fragment() {
+class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
     // static scope
     companion object {
         // create a new instance of this fragment
@@ -79,6 +82,12 @@ class VocabularyListFragment: Fragment() {
             mCommands[ItemListAddNewItemsCommand::class.java.name]?.execute()
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    // is equivalent to activity's on-back-pressed
+    override fun onGoBack(): Boolean {
+        mCommands[ItemListBackToPreviousFolderCommand::class.java.name]?.execute()
+        return true
     }
 
     /* =================================================================== */
