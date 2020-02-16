@@ -50,4 +50,9 @@ class VocabularyItem(
         mPathNodes.clear()
         mPathNodes.addAll(pathNodes)
     }
+
+    /* =================================================================== */
+
+    // get the meaning by a certain index
+    fun getMeaningAt(idx: Int): Meaning? = mMeaningList.getOrNull(idx)
 }

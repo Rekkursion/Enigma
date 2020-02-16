@@ -6,4 +6,7 @@
 
     <!-- the color of meaning-setting-view's background -->
     <color name="color_meaning_setting_view_background">#50E190AA</color>
+
+    <!-- the color of vocabulary-item-slave's background of the recycler-view -->
+    <color name="color_vocabulary_recv_item_slave_background">#4BBB</color>
 </resources>

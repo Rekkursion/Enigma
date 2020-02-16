@@ -17,8 +17,8 @@
 
         <!-- english -->
         <TextView
-                android:id="@+id/txtv_english_at_vocabulary_recv_item"
-                android:textSize="@dimen/dim_vocabulary_recv_item_english_text_size"
+                android:id="@+id/txtv_english_at_vocabulary_recv_item_master"
+                android:textSize="@dimen/dim_vocabulary_recv_item_master_english_text_size"
                 android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@
 
     <!-- the exact-rating-bar for showing the proficiency -->
     <com.rekkursion.exactratingbar.ExactRatingBar
-            android:id="@+id/erb_proficiency_at_vocabulary_recv_item"
+            android:id="@+id/erb_proficiency_at_vocabulary_recv_item_master"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"

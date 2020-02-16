@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
-import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.models.BaseItem
 import com.rekkursion.enigma.models.FolderItem
 import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.viewholders.BaseItemViewHolder
 import com.rekkursion.enigma.viewholders.FolderItemViewHolder
-import com.rekkursion.enigma.viewholders.VocabularyItemViewHolder
+import com.rekkursion.enigma.viewholders.VocabularyItemMasterViewHolder
+import com.rekkursion.enigma.viewholders.VocabularyItemSlaveViewHolder
 
 class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<BaseItemViewHolder>() {
     // the list of all folders and/or vocabularies
@@ -37,14 +37,14 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
 
             // if it's a vocabulary-item-master
             BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal ->
-                VocabularyItemViewHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item, parent, false)
+                VocabularyItemMasterViewHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item_master, parent, false)
                 )
 
-            // TODO: vocabulary-item-slave
+            // if it's a vocabulary-item-slave
             else ->
-                VocabularyItemViewHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item, parent, false)
+                VocabularyItemSlaveViewHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item_slave, parent, false)
                 )
         }
     }
@@ -53,7 +53,7 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(vh: BaseItemViewHolder, position: Int) {
         val viewType = getItemViewType(position)
-        val baseItem = getBaseItem(position)
+        val (baseItem, baseItemPosition) = getBaseItemAndItsTruePosition(position)
 
         when (viewType) {
             // if it's a folder-item
@@ -65,16 +65,21 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
 
             // if it's a vocabulary-item
             BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal -> {
-                baseItem as VocabularyItem; vh as VocabularyItemViewHolder
+                baseItem as VocabularyItem; vh as VocabularyItemMasterViewHolder
                 vh.txtvEnglish.text = baseItem.english
                 vh.erbProficiency.currentValue = baseItem.proficiency
             }
 
             // TODO: vocabulary-item-slave
             BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_SLAVE.ordinal -> {
-                baseItem as VocabularyItem; vh as VocabularyItemViewHolder
-                vh.txtvEnglish.text = "good"
-                vh.erbProficiency.currentValue = 0F
+                baseItem as VocabularyItem; vh as VocabularyItemSlaveViewHolder
+
+                val meaningIdx = position - baseItemPosition - 1
+                if (meaningIdx >= 0 && meaningIdx < baseItem.numOfMeanings) {
+                    val meaning = baseItem.getMeaningAt(meaningIdx)
+                    vh.txtvPartOfSpeech.text = meaning?.partOfSpeech?.abbr ?: "null"
+                    vh.txtvChinese.text = meaning?.chinese ?: "null"
+                }
             }
         }
     }
@@ -110,20 +115,25 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
         return BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal
     }
 
-    fun getBaseItem(position: Int): BaseItem {
-        var counter = position
+    // return the base-item (folder-item or vocabulary-item) by the position
+    fun getBaseItemAndItsTruePosition(position: Int): Pair<BaseItem, Int> {
+        var pos = position
+        var counter = 0
         for ((idx, it) in mBaseItemList.withIndex()) {
             if (it is VocabularyItem && it.isExpanded) {
-                if (counter >= idx && counter <= idx + it.numOfMeanings)
-                    return it
+                if (pos >= idx && pos <= idx + it.numOfMeanings)
+                    return Pair(it, counter)
 
-                counter -= it.numOfMeanings
+                pos -= it.numOfMeanings
+                counter += it.numOfMeanings
             }
 
-            if (idx == counter)
-                return it
+            if (idx == pos)
+                return Pair(it, counter)
+
+            ++counter
         }
 
-        return mBaseItemList[0]
+        return Pair(mBaseItemList[0], 0)
     }
 }

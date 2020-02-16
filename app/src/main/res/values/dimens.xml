@@ -16,7 +16,9 @@
     <dimen name="dim_folder_recv_item_num_of_vocabularies_text_size">16sp</dimen>
 
     <!-- the text-size of a vocabulary's english at the recycler-view -->
-    <dimen name="dim_vocabulary_recv_item_english_text_size">28sp</dimen>
+    <dimen name="dim_vocabulary_recv_item_master_english_text_size">28sp</dimen>
+    <!-- the text-size of a meaning's text -->
+    <dimen name="dim_vocabulary_recv_item_slave_text_size">16sp</dimen>
 
     <dimen name="dim_base_item_card_margin">10dp</dimen>
     <dimen name="dim_meaning_setting_view_margin">4dp</dimen>
