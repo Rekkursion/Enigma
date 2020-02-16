@@ -1,12 +1,10 @@
-package com.rekkursion.enigma.commands
+package com.rekkursion.enigma.commands.itemcardcommand
 
 import androidx.core.view.children
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.views.itemcard.BaseItemCard
 
-class ItemCardGoUpOrGoDownCommand(newItemActivity: NewItemActivity): ItemCardCommand {
-    override val mNewItemActivityInstance: NewItemActivity = newItemActivity
-
+class ItemCardGoUpOrGoDownCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
     /**
      * @param args: varargs Any? {
      *      1. BaseItemCard: the item-card which is about to be moved (go up or go down)

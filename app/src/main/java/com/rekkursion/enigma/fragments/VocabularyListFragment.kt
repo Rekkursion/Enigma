@@ -1,11 +1,9 @@
 package com.rekkursion.enigma.fragments
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +14,14 @@ import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingAc
 
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
-import com.rekkursion.enigma.managers.DataManager
-import com.rekkursion.enigma.managers.PathManager
-import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.enums.ItemType
-import com.rekkursion.enigma.managers.NewItemManager
-import com.rekkursion.enigma.utils.SerializationUtils
+import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
+import com.rekkursion.enigma.viewholders.BaseItemViewHolder
+import java.util.HashMap
 
 class VocabularyListFragment: Fragment() {
     // static scope
@@ -42,6 +42,9 @@ class VocabularyListFragment: Fragment() {
 
     // d-fab to prompt up the list-bottom-sheet-dialog and let the user choose add folder or vocabulary
     private lateinit var mDfabAddFolderOrVocabulary: ListBottomSheetDialogFloatingActionButton
+
+    // some commands for item list operations
+    private val mCommands = HashMap<String, ItemListCommand>()
 
     /* =================================================================== */
 
@@ -70,13 +73,8 @@ class VocabularyListFragment: Fragment() {
         if (requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER || requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY) {
             // but the result-code is canceled, return directly
             if (resultCode == Activity.RESULT_CANCELED) return
-
-            // add all items and notify that the data set has been changed
-            DataManager.addItems(NewItemManager.newItemList)
-            // serialize all items
-            DataManager.saveAllItemsBySerialization(context)
-            // update the adapter of the recycler-view
-            changeRecvAdapter()
+            // add new items
+            mCommands[ItemListAddNewItemsCommand::class.java.name]?.execute()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -87,12 +85,11 @@ class VocabularyListFragment: Fragment() {
     private fun init(rootView: View) {
         initViews(rootView)
         initAttributes()
+        initCommands()
         initEvents()
 
         // load all saved items by de-serialization
-        DataManager.loadAllItemsByDeSerialization(context, false)
-        // update the adapter of the recycler-view
-        changeRecvAdapter()
+        mCommands[ItemListLoadAllItemsCommand::class.java.name]?.execute()
     }
 
     // initialize views
@@ -107,6 +104,16 @@ class VocabularyListFragment: Fragment() {
         val layoutManager = LinearLayoutManager(context!!)
         layoutManager.orientation = RecyclerView.VERTICAL
         mRecvItemList.layoutManager = layoutManager
+    }
+
+    // initialize commands
+    private fun initCommands() {
+        // command of loading all items by de-serialization
+        mCommands[ItemListLoadAllItemsCommand::class.java.name] = ItemListLoadAllItemsCommand(mRecvItemList)
+        // command of adding new items
+        mCommands[ItemListAddNewItemsCommand::class.java.name] = ItemListAddNewItemsCommand(mRecvItemList)
+        // command of expanding or unexpanding a certain vocabulary-item
+        mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] = CertainItemExpandOrUnexpandCommand(mRecvItemList)
     }
 
     // initialize events of views
@@ -125,13 +132,20 @@ class VocabularyListFragment: Fragment() {
             startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY)
         })
 
-        // TODO: mRecvItemList.addOnItemTouchListener()
-    }
+        // click-events of items of the recycler-view
+        mRecvItemList.addOnItemTouchListener(OnItemListRecyclerViewItemTouchListener(
+            mRecvItemList,
+            object: OnItemListRecyclerViewItemTouchListener.OnItemListItemClickListener {
+                override fun onItemClick(view: View?, position: Int) {
+                    if (mRecvItemList.adapter?.getItemViewType(position) == BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal)
+                        (mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] as? CertainItemExpandOrUnexpandCommand)?.executeAt(position)
+                    // TODO: click on folder-item or vocabulary-item-slave
+                }
 
-    // change the recycler-view's adapter
-    private fun changeRecvAdapter() {
-        val adapter = ItemRecyclerViewAdapter(PathManager.itemListForRecv)
-        mRecvItemList.adapter = adapter
-        adapter.notifyDataSetChanged()
+                override fun onItemLongClick(view: View?, position: Int) {
+                    // TODO: long-click on folder- or vocabulary- item
+                }
+            }
+        ))
     }
 }

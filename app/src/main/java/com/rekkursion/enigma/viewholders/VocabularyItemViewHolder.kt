@@ -7,8 +7,8 @@ import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.exactratingbar.ExactRatingBar
 
 class VocabularyItemViewHolder(itemView: View): BaseItemViewHolder(itemView) {
-    // override the type as a vocabulary
-    override val type: Int = ItemType.VOCABULARY.ordinal
+    // override the view-type as a vocabulary-item-master
+    override val type: Int = BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal
 
     // the text-view of the english
     private val mTxtvEnglish: TextView = itemView.findViewById(R.id.txtv_english_at_vocabulary_recv_item)

@@ -25,6 +25,7 @@ class VocabularyItem(
     // the meanings
     private val mMeaningList = ArrayList<Meaning>(meanings)
     val meaningListCopied get() = ArrayList(mMeaningList)
+    val numOfMeanings: Int get() = mMeaningList.size
 
     // the proficiency (shouliandu) of this word
     private var mProficiency: Float = proficiency
@@ -37,6 +38,10 @@ class VocabularyItem(
     // the tags of this word
     private val mTagList = ArrayList<String>(tags)
     val tagListCopied get() = ArrayList(mTagList)
+
+    // if the item on the recycler-view is expanded or not
+    private var mIsExpanded: Boolean = false
+    var isExpanded get() = mIsExpanded; set(value) { mIsExpanded = value }
 
     /* =================================================================== */
 

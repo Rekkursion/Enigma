@@ -10,6 +10,10 @@ import androidx.core.view.children
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.commands.*
+import com.rekkursion.enigma.commands.itemcardcommand.ItemCardAddCommand
+import com.rekkursion.enigma.commands.itemcardcommand.ItemCardCreateItemsCommand
+import com.rekkursion.enigma.commands.itemcardcommand.ItemCardGoUpOrGoDownCommand
+import com.rekkursion.enigma.commands.itemcardcommand.ItemCardRemoveCommand
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.managers.NewItemManager
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar

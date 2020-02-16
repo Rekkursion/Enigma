@@ -30,12 +30,18 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseItemViewHolder {
         return when (viewType) {
             // if it's a folder-item
-            ItemType.FOLDER.ordinal ->
+            BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal ->
                 FolderItemViewHolder(
                     LayoutInflater.from(parent.context).inflate(R.layout.view_folder_recv_item, parent, false)
                 )
 
-            // if it's a vocabulary-item
+            // if it's a vocabulary-item-master
+            BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal ->
+                VocabularyItemViewHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item, parent, false)
+                )
+
+            // TODO: vocabulary-item-slave
             else ->
                 VocabularyItemViewHolder(
                     LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item, parent, false)
@@ -47,28 +53,77 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(vh: BaseItemViewHolder, position: Int) {
         val viewType = getItemViewType(position)
-        val baseItem = mBaseItemList[position]
+        val baseItem = getBaseItem(position)
 
         when (viewType) {
             // if it's a folder-item
-            ItemType.FOLDER.ordinal -> {
+            BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal -> {
                 baseItem as FolderItem; vh as FolderItemViewHolder
                 vh.txtvFolderName.text = baseItem.folderName
                 vh.txtvNumOfVocabularies.text = "(${baseItem.numOfVocabularies})"
             }
 
             // if it's a vocabulary-item
-            else -> {
+            BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal -> {
                 baseItem as VocabularyItem; vh as VocabularyItemViewHolder
                 vh.txtvEnglish.text = baseItem.english
                 vh.erbProficiency.currentValue = baseItem.proficiency
+            }
+
+            // TODO: vocabulary-item-slave
+            BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_SLAVE.ordinal -> {
+                baseItem as VocabularyItem; vh as VocabularyItemViewHolder
+                vh.txtvEnglish.text = "good"
+                vh.erbProficiency.currentValue = 0F
             }
         }
     }
 
     // return the count of items
-    override fun getItemCount(): Int = mBaseItemList.size
+    override fun getItemCount(): Int = mBaseItemList
+        .map {
+            if (it is FolderItem) 1
+            else { if ((it as VocabularyItem).isExpanded) 1 + it.numOfMeanings else 1 }
+        }
+        .sum()
 
     // return the view-type by the position
-    override fun getItemViewType(position: Int): Int = mBaseItemList[position].type.ordinal
+    override fun getItemViewType(position: Int): Int {
+        var counter = 0
+        for (it in mBaseItemList) {
+            if (counter == position) {
+                return if (it is FolderItem)
+                    BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal
+                else
+                    BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal
+            }
+
+            ++counter
+            if (it is VocabularyItem && it.isExpanded) {
+                if (position >= counter && position < counter + it.numOfMeanings)
+                    return BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_SLAVE.ordinal
+
+                counter += it.numOfMeanings
+            }
+        }
+
+        return BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal
+    }
+
+    fun getBaseItem(position: Int): BaseItem {
+        var counter = position
+        for ((idx, it) in mBaseItemList.withIndex()) {
+            if (it is VocabularyItem && it.isExpanded) {
+                if (counter >= idx && counter <= idx + it.numOfMeanings)
+                    return it
+
+                counter -= it.numOfMeanings
+            }
+
+            if (idx == counter)
+                return it
+        }
+
+        return mBaseItemList[0]
+    }
 }

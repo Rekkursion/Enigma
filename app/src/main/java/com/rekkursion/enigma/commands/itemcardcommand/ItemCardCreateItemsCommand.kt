@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.commands
+package com.rekkursion.enigma.commands.itemcardcommand
 
 import android.view.View
 import android.widget.EditText
@@ -11,9 +11,7 @@ import com.rekkursion.enigma.views.itemcard.BaseItemCard
 import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import com.rekkursion.exactratingbar.ExactRatingBar
 
-class ItemCardCreateItemsCommand(newItemActivity: NewItemActivity): ItemCardCommand {
-    override val mNewItemActivityInstance: NewItemActivity = newItemActivity
-
+class ItemCardCreateItemsCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
     /**
      * @param args: varargs Any? -> varargs BaseItemCard (FolderItemCard or VocabularyItemCard)
      */

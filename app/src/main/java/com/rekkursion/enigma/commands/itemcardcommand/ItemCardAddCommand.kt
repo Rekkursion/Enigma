@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.commands
+package com.rekkursion.enigma.commands.itemcardcommand
 
 import android.annotation.SuppressLint
 import android.widget.EditText
@@ -8,9 +8,7 @@ import com.rekkursion.enigma.listeners.OnActionsClickListener
 import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import com.rekkursion.enigma.views.itemcard.VocabularyItemCard
 
-class ItemCardAddCommand(newItemActivity: NewItemActivity): ItemCardCommand {
-    override val mNewItemActivityInstance: NewItemActivity = newItemActivity
-
+class ItemCardAddCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
     /**
      * @param args: *no parameters*
      */
