@@ -15,8 +15,10 @@ import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingAc
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
@@ -112,8 +114,12 @@ class VocabularyListFragment: Fragment() {
         mCommands[ItemListLoadAllItemsCommand::class.java.name] = ItemListLoadAllItemsCommand(mRecvItemList)
         // command of adding new items
         mCommands[ItemListAddNewItemsCommand::class.java.name] = ItemListAddNewItemsCommand(mRecvItemList)
+        // command of going back to the previous folder
+        mCommands[ItemListBackToPreviousFolderCommand::class.java.name] = ItemListBackToPreviousFolderCommand(mRecvItemList)
         // command of expanding or unexpanding a certain vocabulary-item
         mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] = CertainItemExpandOrUnexpandCommand(mRecvItemList)
+        // command of entering a certain folder-item
+        mCommands[CertainItemEnterFolderCommand::class.java.name] = CertainItemEnterFolderCommand(mRecvItemList)
     }
 
     // initialize events of views
@@ -137,9 +143,15 @@ class VocabularyListFragment: Fragment() {
             mRecvItemList,
             object: OnItemListRecyclerViewItemTouchListener.OnItemListItemClickListener {
                 override fun onItemClick(view: View?, position: Int) {
-                    if (mRecvItemList.adapter?.getItemViewType(position) == BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal)
-                        (mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] as? CertainItemExpandOrUnexpandCommand)?.executeAt(position)
-                    // TODO: click on folder-item or vocabulary-item-slave
+                    when (mRecvItemList.adapter?.getItemViewType(position)) {
+                        // folder-item
+                        BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal ->
+                            (mCommands[CertainItemEnterFolderCommand::class.java.name] as? CertainItemEnterFolderCommand)?.executeAt(position)
+                        // vocabulary-item-master
+                        BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal ->
+                            (mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] as? CertainItemExpandOrUnexpandCommand)?.executeAt(position)
+                    }
+                    // TODO: click on vocabulary-item-slave
                 }
 
                 override fun onItemLongClick(view: View?, position: Int) {
