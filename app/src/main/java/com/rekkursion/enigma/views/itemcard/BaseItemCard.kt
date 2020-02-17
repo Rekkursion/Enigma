@@ -10,11 +10,16 @@ import androidx.core.view.children
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.listeners.OnActionsClickListener
 import com.rekkursion.enigma.listeners.OnItemCardCloseListener
+import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.views.ActionsTitleImageButtonBar
 import com.rekkursion.enigma.views.ItemCardField
+import com.rekkursion.pathview.PathView
 
 @Suppress("LeakingThis")
 abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout(context, attrs) {
+    // the path-view field
+    protected lateinit var mPathView: PathView
+
     // the actions bar
     protected val mActionsBar: ActionsTitleImageButtonBar
 
@@ -31,6 +36,21 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
         // get views that are in the base item's layout
         mLlyFieldsContainer = findViewById(R.id.lly_fields_container)
         mActionsBar = findViewById(R.id.actions_title_bar_at_base_item_card)
+
+        // initialize the path-view in the item-card
+        initPathViewInItemCard()
+    }
+
+    /* =================================================================== */
+
+    // initialize the path-view in the item-card
+    private fun initPathViewInItemCard() {
+        // the path-view field
+        mPathView = PathView(context)
+        mPathView.isIndicator = true
+        mPathView.separator = "\\"
+        mPathView.viewHeight = 20
+        mPathView.pushAll(PathManager.getAllPathNodes())
     }
 
     /* =================================================================== */

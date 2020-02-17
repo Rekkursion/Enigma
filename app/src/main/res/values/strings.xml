@@ -40,6 +40,9 @@
     <!--<string name="str_add_more">Add more</string>-->
     <string name="str_add_more">再加一個</string>
 
+    <!--<string name="str_base_item_card_path_field">Path</string>-->
+    <string name="str_base_item_card_path_field">位置</string>
+
     <!--<string name="str_folder_item_card_folder_name_field">Name</string>-->
     <string name="str_folder_item_card_folder_name_field">分類夾名稱</string>
 

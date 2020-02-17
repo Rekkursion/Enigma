@@ -14,13 +14,15 @@ import com.rekkursion.enigma.commands.itemcardcommand.ItemCardAddCommand
 import com.rekkursion.enigma.commands.itemcardcommand.ItemCardCreateItemsCommand
 import com.rekkursion.enigma.commands.itemcardcommand.ItemCardGoUpOrGoDownCommand
 import com.rekkursion.enigma.commands.itemcardcommand.ItemCardRemoveCommand
+import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.managers.NewItemManager
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
+import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import java.util.HashMap
 
 @SuppressLint("SetTextI18n")
-class NewItemActivity: AppCompatActivity() {
+class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
     companion object {
         // the max number of new items at a time
         private const val MAX_NUMBER_OF_NEW_ITEMS = 99
@@ -51,6 +53,28 @@ class NewItemActivity: AppCompatActivity() {
         initEvents()
 
         addNewCard()
+    }
+
+    // cancel
+    override fun onCancelClickListener() {
+        // first, set the result of result-canceled
+        setResult(Activity.RESULT_CANCELED)
+        // clear the new-item-list of new-item-manager
+        NewItemManager.reset()
+        // finish this activity
+        finish()
+    }
+
+    // submit
+    override fun onSubmitClickListener() {
+        if (validateFieldsBeforeSubmission()) {
+            // first, set the result of result-ok
+            setResult(Activity.RESULT_OK)
+            // create all items and store them in the new-item-list of new-item-manager
+            getCommand(ItemCardCreateItemsCommand::class.java.name)?.execute(*(mLlyCardsContainer.children.toList().toTypedArray()))
+            // finish this activity
+            finish()
+        }
     }
 
     /* ================================================================== */
@@ -91,32 +115,28 @@ class NewItemActivity: AppCompatActivity() {
         }
 
         // click on the cancel button or the submit button
-        mCancelSubmitButtonBar.setOnButtonBarClickListener(object: OnButtonBarClickListener {
-            // cancelled
-            override fun onCancelClickListener() {
-                // first, set the result of result-canceled
-                setResult(Activity.RESULT_CANCELED)
-                // clear the new-item-list of new-item-manager
-                NewItemManager.reset()
-                // finish this activity
-                finish()
-            }
-
-            // submitted
-            override fun onSubmitClickListener() {
-                // first, set the result of result-ok
-                setResult(Activity.RESULT_OK)
-                // create all items and store them in the new-item-list of new-item-manager
-                getCommand(ItemCardCreateItemsCommand::class.java.name)?.execute(*(mLlyCardsContainer.children.toList().toTypedArray()))
-                // finish this activity
-                finish()
-            }
-        })
+        mCancelSubmitButtonBar.setOnButtonBarClickListener(this)
     }
 
     // add a new item card
     private fun addNewCard() {
         getCommand(ItemCardAddCommand::class.java.name)?.execute()
+    }
+
+    // check if all fields are valid or not before the submission
+    private fun validateFieldsBeforeSubmission(): Boolean {
+        // TODO: check if all fields are valid or not before the submission
+        // cards are the folder-item-cards
+        if (intent.getStringExtra(ItemType::name.toString()) == ItemType.FOLDER.name) {
+            mLlyCardsContainer.children.forEach {
+
+            }
+        }
+        // cards are the vocabulary-item-cards
+        else {
+
+        }
+        return true
     }
 
     /* ================================================================== */

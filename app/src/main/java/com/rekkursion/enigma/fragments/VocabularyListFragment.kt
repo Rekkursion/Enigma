@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +14,7 @@ import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingAc
 
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.enums.ItemType
@@ -31,7 +27,7 @@ import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView
 import java.util.HashMap
 
-class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
+class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeClickListener {
     // static scope
     companion object {
         // create a new instance of this fragment
@@ -50,6 +46,9 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
 
     // d-fab to prompt up the list-bottom-sheet-dialog and let the user choose add folder or vocabulary
     private lateinit var mDfabAddFolderOrVocabulary: ListBottomSheetDialogFloatingActionButton
+
+    // the path-view
+    private lateinit var mPathView: PathView
 
     // some commands for item list operations
     private val mCommands = HashMap<String, ItemListCommand>()
@@ -93,6 +92,11 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
         return true
     }
 
+    // click on a certain path node
+    override fun onPathNodeClick(pathView: PathView, index: Int) {
+        mCommands[ItemListBackToCertainFolderCommand::class.java.name]?.execute()
+    }
+
     /* =================================================================== */
 
     // initialize everything
@@ -108,14 +112,16 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
 
     // initialize views
     private fun initViews(rootView: View) {
-        // set the path view at the path-manager
-        PathManager.setPathView(rootView.findViewById(R.id.path_view))
+        mPathView = rootView.findViewById(R.id.path_view)
         mRecvItemList = rootView.findViewById(R.id.recv_item_list)
         mDfabAddFolderOrVocabulary = rootView.findViewById(R.id.dfab_add_folder_or_vocabulary)
     }
 
     // initialize attributes of views
     private fun initAttributes() {
+        // set the path view at the path-manager
+        PathManager.setPathView(mPathView)
+
         // set the layout-manager on the recycler-view
         val layoutManager = LinearLayoutManager(context!!)
         layoutManager.orientation = RecyclerView.VERTICAL
@@ -130,6 +136,8 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
         mCommands[ItemListAddNewItemsCommand::class.java.name] = ItemListAddNewItemsCommand(mRecvItemList)
         // command of going back to the previous folder
         mCommands[ItemListBackToPreviousFolderCommand::class.java.name] = ItemListBackToPreviousFolderCommand(mRecvItemList)
+        // command of going back to a certain folder
+        mCommands[ItemListBackToCertainFolderCommand::class.java.name] = ItemListBackToCertainFolderCommand(mRecvItemList)
         // command of expanding or unexpanding a certain vocabulary-item
         mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] = CertainItemExpandOrUnexpandCommand(mRecvItemList)
         // command of entering a certain folder-item
@@ -138,6 +146,9 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
 
     // initialize events of views
     private fun initEvents() {
+        // set the event of clicking on a certain path node
+        mPathView.setOnPathNodeClickListener(this)
+
         // new folder
         mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_folder), View.OnClickListener {
             val intent = Intent(this.context, NewItemActivity::class.java)

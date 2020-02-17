@@ -8,6 +8,7 @@ import com.rekkursion.enigma.views.ItemCardField
 import com.rekkursion.enigma.views.MeaningSettingFieldContentView
 import com.rekkursion.exactratingbar.ExactRatingBar
 import com.rekkursion.exactratingbar.enums.ValueChangeScale
+import com.rekkursion.pathview.PathView
 
 class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCard(context, attrs) {
     // the edit-text of the english field
@@ -58,6 +59,13 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
 
     // set all fields of a folder-item-card
     override fun setFields() {
+        // the path-view field
+        val pathViewField = ItemCardField.Builder(context)
+            .setFieldName(context.getString(R.string.str_base_item_card_path_field))
+            .setContentView(mPathView)
+            .create()
+        mLlyFieldsContainer.addView(pathViewField)
+
         // the edit-text of the english field
         val englishField = ItemCardField.Builder(context)
             .setFieldName(context.getString(R.string.str_vocabulary_item_card_english_field))

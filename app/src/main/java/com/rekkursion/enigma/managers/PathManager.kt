@@ -1,10 +1,10 @@
 package com.rekkursion.enigma.managers
 
+import android.graphics.Color
 import com.rekkursion.enigma.models.BaseItem
-import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView
 
-object PathManager: OnPathNodeClickListener {
+object PathManager {
     // the path view
     private var mPathView: PathView? = null
 
@@ -17,8 +17,9 @@ object PathManager: OnPathNodeClickListener {
     // set the path view
     fun setPathView(pathView: PathView, defaultNodes: ArrayList<String>? = mPathView?.getAllPathNodes()) {
         mPathView = pathView
-        mPathView?.setOnPathNodeClickListener(this)
-        defaultNodes?.forEach { defaultNode -> mPathView?.push(defaultNode) }
+        mPathView?.separatorColor = Color.BLACK
+        if (defaultNodes != null)
+            mPathView?.pushAll(defaultNodes)
     }
 
     // update the list which is used for the recycler-view
@@ -47,9 +48,6 @@ object PathManager: OnPathNodeClickListener {
     // combine the current path nodes and get the current path string
     fun getCurrentPath(): String = mPathView?.getAllPathNodes()?.joinToString("/") ?: ""
 
-    /* =================================================================== */
-
-    override fun onPathNodeClick(pathView: PathView, index: Int) {
-
-    }
+    // get all nodes
+    fun getAllPathNodes(): ArrayList<String> = mPathView?.getAllPathNodes() ?: arrayListOf()
 }

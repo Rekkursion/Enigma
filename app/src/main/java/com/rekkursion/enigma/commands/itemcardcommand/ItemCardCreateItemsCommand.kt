@@ -10,6 +10,7 @@ import com.rekkursion.enigma.views.MeaningSettingFieldContentView
 import com.rekkursion.enigma.views.itemcard.BaseItemCard
 import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import com.rekkursion.exactratingbar.ExactRatingBar
+import com.rekkursion.pathview.PathView
 
 class ItemCardCreateItemsCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
     /**
@@ -40,18 +41,18 @@ class ItemCardCreateItemsCommand(newItemActivity: NewItemActivity): ItemCardComm
 
     // region create a single folder-item
     private fun createSingleFolderItem(allFields: ArrayList<View?>): FolderItem = FolderItem(
-        arrayListOf(),
-        (allFields.getOrNull(0) as? EditText)?.text.toString()
+        (allFields.getOrNull(0) as? PathView)?.getAllPathNodes() ?: arrayListOf(),
+        (allFields.getOrNull(1) as? EditText)?.text.toString()
     )
     // endregion
 
     // region create a single vocabulary-item
     private fun createSingleVocabularyItem(allFields: ArrayList<View?>): VocabularyItem = VocabularyItem(
-        arrayListOf(),
-        (allFields.getOrNull(0) as? EditText)?.text?.toString() ?: "null",
-        (allFields.getOrNull(1) as? MeaningSettingFieldContentView)?.getAllMeanings() ?: arrayListOf(),
-        (allFields.getOrNull(2) as? ExactRatingBar)?.currentValue ?: 0F,
-        (allFields.getOrNull(3) as? EditText)?.text?.toString() ?: "null",
+        (allFields.getOrNull(0) as? PathView)?.getAllPathNodes() ?: arrayListOf(),
+        (allFields.getOrNull(1) as? EditText)?.text?.toString() ?: "null",
+        (allFields.getOrNull(2) as? MeaningSettingFieldContentView)?.getAllMeanings() ?: arrayListOf(),
+        (allFields.getOrNull(3) as? ExactRatingBar)?.currentValue ?: 0F,
+        (allFields.getOrNull(4) as? EditText)?.text?.toString() ?: "null",
         arrayListOf()
     )
     // endregion
