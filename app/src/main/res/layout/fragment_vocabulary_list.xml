@@ -6,11 +6,22 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".fragments.VocabularyListFragment">
 
-    <!-- the linear-layout for placing the recycler-view -->
+    <!-- the linear-layout for placing the path-view and the recycler-view -->
     <androidx.appcompat.widget.LinearLayoutCompat
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+        <!-- the path view -->
+        <com.rekkursion.pathview.PathView
+                android:id="@+id/path_view"
+                app:put_single_separator_when_nothing="true"
+                app:separator_color="@color/colorPrimary"
+                app:node_text_color="@color/colorPrimaryDark"
+                app:separator=">"
+                app:text_height="20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         <!-- the recycler-view for showing the folders and/or vocabularies -->
         <androidx.recyclerview.widget.RecyclerView

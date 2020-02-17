@@ -24,8 +24,11 @@ import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.Certain
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
+import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.utils.GoBackListenerUtils
 import com.rekkursion.enigma.viewholders.BaseItemViewHolder
+import com.rekkursion.pathview.OnPathNodeClickListener
+import com.rekkursion.pathview.PathView
 import java.util.HashMap
 
 class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
@@ -105,6 +108,8 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener {
 
     // initialize views
     private fun initViews(rootView: View) {
+        // set the path view at the path-manager
+        PathManager.setPathView(rootView.findViewById(R.id.path_view))
         mRecvItemList = rootView.findViewById(R.id.recv_item_list)
         mDfabAddFolderOrVocabulary = rootView.findViewById(R.id.dfab_add_folder_or_vocabulary)
     }
