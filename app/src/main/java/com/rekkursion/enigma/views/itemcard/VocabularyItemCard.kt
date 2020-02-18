@@ -8,7 +8,8 @@ import com.rekkursion.enigma.views.ItemCardField
 import com.rekkursion.enigma.views.MeaningSettingFieldContentView
 import com.rekkursion.exactratingbar.ExactRatingBar
 import com.rekkursion.exactratingbar.enums.ValueChangeScale
-import com.rekkursion.pathview.PathView
+import com.rekkursion.tagview.TagCloud
+import com.rekkursion.tagview.TagView
 
 class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCard(context, attrs) {
     // the edit-text of the english field
@@ -23,7 +24,8 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
     // the edit-text of the remark field
     private lateinit var mEdtRemark: EditText
 
-    // TODO: tags
+    // the tag-cloud to let the user to add tags for this vocabulary
+    private lateinit var mTagCloud: TagCloud
 
     /* =================================================================== */
 
@@ -55,6 +57,10 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
         // the edit-text of the remark field
         mEdtRemark = EditText(context)
         mEdtRemark.hint = context.getString(R.string.str_vocabulary_item_card_remark_field_edit_text_hint)
+
+        // the tag-cloud to let the user to add tags for this vocabulary
+        mTagCloud = TagCloud(context)
+        mTagCloud.possibleBackgroundColors = hashSetOf(TagView.DefaultBackgroundColor.YELLOW.color)
     }
 
     // set all fields of a folder-item-card
@@ -93,5 +99,12 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
             .setContentView(mEdtRemark)
             .create()
         mLlyFieldsContainer.addView(remarkField)
+
+        // the tag-cloud to let the user to add tags for this vocabulary
+        val tagsField = ItemCardField.Builder(context)
+            .setFieldName(context.getString(R.string.str_vocabulary_item_card_tags_field))
+            .setContentView(mTagCloud)
+            .create()
+        mLlyFieldsContainer.addView(tagsField)
     }
 }

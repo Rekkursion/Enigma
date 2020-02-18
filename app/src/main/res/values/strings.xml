@@ -54,6 +54,8 @@
     <string name="str_vocabulary_item_card_proficiency_field">熟練度</string>
     <!--<string name="str_vocabulary_item_card_remark_field">Remarks</string>-->
     <string name="str_vocabulary_item_card_remark_field">備註</string>
+    <!--<string name="str_vocabulary_item_card_tags_field">Tags</string>-->
+    <string name="str_vocabulary_item_card_tags_field">標籤</string>
 
     <!--<string name="str_vocabulary_item_card_english_field_edit_text_hint">Enter a word here.</string>-->
     <string name="str_vocabulary_item_card_english_field_edit_text_hint">欲新增的單字</string>

@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.github.rekkursion:DialogFloatingActionButton:1.0.1'
     implementation 'com.github.rekkursion:ExactRatingBar:1.0.1'
     implementation 'com.github.rekkursion:PathView:1.0.4'
+    implementation 'com.github.rekkursion:TagView:1.0.2'
 }

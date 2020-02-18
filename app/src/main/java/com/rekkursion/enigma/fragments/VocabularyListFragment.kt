@@ -176,7 +176,6 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
                         BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal ->
                             (mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] as? CertainItemExpandOrUnexpandCommand)?.executeAt(position)
                     }
-                    // TODO: click on vocabulary-item-slave
                 }
 
                 override fun onItemLongClick(view: View?, position: Int) {

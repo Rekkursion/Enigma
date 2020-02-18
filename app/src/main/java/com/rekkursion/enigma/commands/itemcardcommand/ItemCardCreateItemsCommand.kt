@@ -11,6 +11,7 @@ import com.rekkursion.enigma.views.itemcard.BaseItemCard
 import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import com.rekkursion.exactratingbar.ExactRatingBar
 import com.rekkursion.pathview.PathView
+import com.rekkursion.tagview.TagCloud
 
 class ItemCardCreateItemsCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
     /**
@@ -53,7 +54,7 @@ class ItemCardCreateItemsCommand(newItemActivity: NewItemActivity): ItemCardComm
         (allFields.getOrNull(2) as? MeaningSettingFieldContentView)?.getAllMeanings() ?: arrayListOf(),
         (allFields.getOrNull(3) as? ExactRatingBar)?.currentValue ?: 0F,
         (allFields.getOrNull(4) as? EditText)?.text?.toString() ?: "null",
-        arrayListOf()
+        (allFields.getOrNull(5) as? TagCloud)?.getAllTagStrings()?.toCollection(ArrayList()) ?: arrayListOf()
     )
     // endregion
 }
