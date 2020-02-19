@@ -20,11 +20,12 @@ import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.Certain
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
+import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.managers.PathManager
-import com.rekkursion.enigma.viewholders.BaseItemViewHolder
+import com.rekkursion.enigma.states.ItemRecvContext
+import com.rekkursion.enigma.states.ItemRecvState
 import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView
-import java.util.HashMap
 
 class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeClickListener {
     // static scope
@@ -49,8 +50,11 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
     // the path-view
     private lateinit var mPathView: PathView
 
-    // some commands for item list operations
-    private val mCommands = HashMap<String, ItemListCommand>()
+    // the context of the item recycler-view
+    private lateinit var mItemRecvContext: ItemRecvContext
+
+    // the current state of the item recycler-view
+    private lateinit var mItemRecvState: ItemRecvState
 
     /* =================================================================== */
 
@@ -80,20 +84,20 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
             // but the result-code is canceled, return directly
             if (resultCode == Activity.RESULT_CANCELED) return
             // add new items
-            mCommands[ItemListAddNewItemsCommand::class.java.name]?.execute()
+            CommandManager.doCommand(ItemListAddNewItemsCommand::class)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     // is equivalent to activity's on-back-pressed
     override fun onGoBack(): Boolean {
-        mCommands[ItemListBackToPreviousFolderCommand::class.java.name]?.execute()
+        CommandManager.doCommand(ItemListBackToPreviousFolderCommand::class)
         return true
     }
 
     // click on a certain path node
     override fun onPathNodeClick(pathView: PathView, index: Int) {
-        mCommands[ItemListBackToCertainFolderCommand::class.java.name]?.execute()
+        CommandManager.doCommand(ItemListBackToCertainFolderCommand::class)
     }
 
     /* =================================================================== */
@@ -106,7 +110,7 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         initEvents()
 
         // load all saved items by de-serialization
-        mCommands[ItemListLoadAllItemsCommand::class.java.name]?.execute()
+        CommandManager.doCommand(ItemListLoadAllItemsCommand::class)
     }
 
     // initialize views
@@ -125,22 +129,26 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         val layoutManager = LinearLayoutManager(context!!)
         layoutManager.orientation = RecyclerView.VERTICAL
         mRecvItemList.layoutManager = layoutManager
+
+        // initialize the context and state of the item recycler-view
+        mItemRecvContext = ItemRecvContext(mRecvItemList)
+        mItemRecvState = mItemRecvContext.state
     }
 
     // initialize commands
     private fun initCommands() {
         // command of loading all items by de-serialization
-        mCommands[ItemListLoadAllItemsCommand::class.java.name] = ItemListLoadAllItemsCommand(mRecvItemList)
+        CommandManager.putCommand(ItemListLoadAllItemsCommand::class, ItemListLoadAllItemsCommand(mRecvItemList))
         // command of adding new items
-        mCommands[ItemListAddNewItemsCommand::class.java.name] = ItemListAddNewItemsCommand(mRecvItemList)
+        CommandManager.putCommand(ItemListAddNewItemsCommand::class, ItemListAddNewItemsCommand(mRecvItemList))
         // command of going back to the previous folder
-        mCommands[ItemListBackToPreviousFolderCommand::class.java.name] = ItemListBackToPreviousFolderCommand(mRecvItemList)
+        CommandManager.putCommand(ItemListBackToPreviousFolderCommand::class, ItemListBackToPreviousFolderCommand(mRecvItemList))
         // command of going back to a certain folder
-        mCommands[ItemListBackToCertainFolderCommand::class.java.name] = ItemListBackToCertainFolderCommand(mRecvItemList)
+        CommandManager.putCommand(ItemListBackToCertainFolderCommand::class, ItemListBackToCertainFolderCommand(mRecvItemList))
         // command of expanding or unexpanding a certain vocabulary-item
-        mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] = CertainItemExpandOrUnexpandCommand(mRecvItemList)
+        CommandManager.putCommand(CertainItemExpandOrUnexpandCommand::class, CertainItemExpandOrUnexpandCommand(mRecvItemList))
         // command of entering a certain folder-item
-        mCommands[CertainItemEnterFolderCommand::class.java.name] = CertainItemEnterFolderCommand(mRecvItemList)
+        CommandManager.putCommand(CertainItemEnterFolderCommand::class, CertainItemEnterFolderCommand(mRecvItemList))
     }
 
     // initialize events of views
@@ -167,14 +175,7 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
             mRecvItemList,
             object: OnItemListRecyclerViewItemTouchListener.OnItemListItemClickListener {
                 override fun onItemClick(view: View?, position: Int) {
-                    when (mRecvItemList.adapter?.getItemViewType(position)) {
-                        // folder-item
-                        BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal ->
-                            (mCommands[CertainItemEnterFolderCommand::class.java.name] as? CertainItemEnterFolderCommand)?.executeAt(position)
-                        // vocabulary-item-master
-                        BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal ->
-                            (mCommands[CertainItemExpandOrUnexpandCommand::class.java.name] as? CertainItemExpandOrUnexpandCommand)?.executeAt(position)
-                    }
+                    mItemRecvState.doOnClick(mItemRecvContext, position)
                 }
 
                 override fun onItemLongClick(view: View?, position: Int) {

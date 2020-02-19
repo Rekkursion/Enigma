@@ -10,6 +10,7 @@ import com.rekkursion.enigma.R
 import com.rekkursion.enigma.commands.FragmentCommand
 import com.rekkursion.enigma.commands.FragmentSwitchCommand
 import com.rekkursion.enigma.fragments.VocabularyListFragment
+import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.utils.GoBackListenerUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -19,8 +20,6 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
     private lateinit var mVocabularyListFragment: Fragment
     private lateinit var mFragment: Fragment
-
-    private val mFragmentCommands = HashMap<String, FragmentCommand>()
 
     /* ================================================================== */
 
@@ -33,7 +32,8 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         initCommands()
         initEvents()
 
-        mFragmentCommands[FragmentSwitchCommand::class.java.name]?.execute(R.id.lly_fragment_root_at_main, mVocabularyListFragment)
+        // initially add the vocabulary-list-fragment
+        CommandManager.doCommand(FragmentSwitchCommand::class, R.id.lly_fragment_root_at_main, mVocabularyListFragment)
     }
 
     // inflate the menu at the bar
@@ -56,13 +56,13 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         return when (menuItem.itemId) {
             // vocabulary list
             R.id.bnav_item_vocabulary_list -> {
-                mFragmentCommands[FragmentSwitchCommand::class.java.name]?.execute(R.id.lly_fragment_root_at_main, mVocabularyListFragment)
+                CommandManager.doCommand(FragmentSwitchCommand::class, R.id.lly_fragment_root_at_main, mVocabularyListFragment)
                 true
             }
 
             // practice
             R.id.bnav_item_practice -> {
-                mFragmentCommands[FragmentSwitchCommand::class.java.name]?.execute(R.id.lly_fragment_root_at_main, mFragment)
+                CommandManager.doCommand(FragmentSwitchCommand::class, R.id.lly_fragment_root_at_main, mFragment)
                 // TODO: practice
                 true
             }
@@ -94,7 +94,8 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     }
 
     private fun initCommands() {
-        mFragmentCommands[FragmentSwitchCommand::class.java.name] = FragmentSwitchCommand(supportFragmentManager)
+        // command of switching among fragments in main-activity
+        CommandManager.putCommand(FragmentSwitchCommand::class, FragmentSwitchCommand(supportFragmentManager))
     }
 
     // initialize events of views

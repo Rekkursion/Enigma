@@ -13,6 +13,7 @@ import com.rekkursion.enigma.R
 import com.rekkursion.enigma.commands.*
 import com.rekkursion.enigma.commands.itemcardcommand.*
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
+import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.managers.NewItemManager
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
 import java.util.HashMap
@@ -34,9 +35,6 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
 
     // the button for adding a new item-cards
     internal lateinit var mBtnAddNewCard: Button
-
-    // some commands for item-card operations
-    private val mCommands = HashMap<String, BaseCommand>()
 
     /* ================================================================== */
 
@@ -68,7 +66,7 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
             // first, set the result of result-ok
             setResult(Activity.RESULT_OK)
             // create all items and store them in the new-item-list of new-item-manager
-            getCommand(ItemCardCreateItemsCommand::class.java.name)?.execute(*(mLlyCardsContainer.children.toList().toTypedArray()))
+            CommandManager.doCommand(ItemCardCreateItemsCommand::class, *(mLlyCardsContainer.children.toList().toTypedArray()))
             // finish this activity
             finish()
         }
@@ -88,15 +86,15 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
     // initialize commands
     private fun initCommands() {
         // command of adding a new item-card
-        mCommands[ItemCardAddCommand::class.java.name] = ItemCardAddCommand(this)
+        CommandManager.putCommand(ItemCardAddCommand::class, ItemCardAddCommand(this))
         // command of removing a certain item-card
-        mCommands[ItemCardRemoveCommand::class.java.name] = ItemCardRemoveCommand(this)
+        CommandManager.putCommand(ItemCardRemoveCommand::class, ItemCardRemoveCommand(this))
         // command of going-up or going-down of a certain item-card
-        mCommands[ItemCardGoUpOrGoDownCommand::class.java.name] = ItemCardGoUpOrGoDownCommand(this)
+        CommandManager.putCommand(ItemCardGoUpOrGoDownCommand::class, ItemCardGoUpOrGoDownCommand(this))
         // command of creating all items
-        mCommands[ItemCardCreateItemsCommand::class.java.name] = ItemCardCreateItemsCommand(this)
+        CommandManager.putCommand(ItemCardCreateItemsCommand::class, ItemCardCreateItemsCommand(this))
         // command of validating if cards are all valid or not before the submission
-        mCommands[ItemCardValidateCommand::class.java.name] = ItemCardValidateCommand(this)
+        CommandManager.putCommand(ItemCardValidateCommand::class, ItemCardValidateCommand(this))
     }
 
     // initialize events of views
@@ -119,12 +117,12 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
 
     // add a new item card
     private fun addNewCard() {
-        getCommand(ItemCardAddCommand::class.java.name)?.execute()
+        CommandManager.doCommand(ItemCardAddCommand::class)
     }
 
     // check if all fields are valid or not before the submission
     private fun validateFieldsBeforeSubmission(): Boolean {
-        getCommand(ItemCardValidateCommand::class.java.name)?.execute()
+        CommandManager.doCommand(ItemCardValidateCommand::class)
         val valid = ItemCardValidateCommand.validateResult == ItemCardValidateCommand.ValidationResult.VALID
         if (!valid)
             AlertDialog.Builder(this)
@@ -134,9 +132,4 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
                 .show()
         return valid
     }
-
-    /* ================================================================== */
-
-    // get the designated command
-    internal fun getCommand(commandSelector: String): BaseCommand? = mCommands[commandSelector]
 }

@@ -5,6 +5,7 @@ import android.widget.EditText
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnActionsClickListener
+import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import com.rekkursion.enigma.views.itemcard.VocabularyItemCard
 
@@ -22,16 +23,15 @@ class ItemCardAddCommand(newItemActivity: NewItemActivity): ItemCardCommand(newI
         // set the listener & title of the card
         card.setOnActionsClickListener(object: OnActionsClickListener {
             override fun onGoUpClickListener() {
-                mNewItemActivityInstance.getCommand(ItemCardGoUpOrGoDownCommand::class.java.name)?.execute(card, true)
+                CommandManager.doCommand(ItemCardGoUpOrGoDownCommand::class, card, true)
             }
 
             override fun onGoDownClickListener() {
-                mNewItemActivityInstance.getCommand(ItemCardGoUpOrGoDownCommand::class.java.name)?.execute(card, false)
+                CommandManager.doCommand(ItemCardGoUpOrGoDownCommand::class, card, false)
             }
 
-            @SuppressLint("SetTextI18n")
             override fun onCloseClickListener() {
-                mNewItemActivityInstance.getCommand(ItemCardRemoveCommand::class.java.name)?.execute(card)
+                CommandManager.doCommand(ItemCardRemoveCommand::class, card)
             }
         })
         card.setTitle(String.format("%02d", mNewItemActivityInstance.mLlyCardsContainer.childCount + 1))
