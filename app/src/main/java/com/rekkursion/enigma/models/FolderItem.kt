@@ -31,4 +31,10 @@ class FolderItem(
         mPathNodes.clear()
         mPathNodes.addAll(pathNodes)
     }
+
+    /* =================================================================== */
+
+    fun addVocabulary(vocabularyItem: VocabularyItem) {
+        mVocabularyList.add(vocabularyItem)
+    }
 }

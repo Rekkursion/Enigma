@@ -56,6 +56,18 @@ object DataManager {
             else
                 mBaseItemHashMap[item.pathString] = arrayListOf(item)
 
+            // find the folder we are currently staying to add the vocabulary into it
+            if (item is VocabularyItem) {
+                val lastPathNode = PathManager.getLastPathNode(item.pathString)
+                val lastStrataPathString = PathManager.getLastStrataPathString(item.pathString)
+
+                lastStrataPathString?.let {
+                    val folder = mBaseItemHashMap[lastStrataPathString]
+                        ?.find { it is FolderItem && it.folderName == lastPathNode } as? FolderItem
+                    folder?.addVocabulary(item)
+                }
+            }
+
             // if there's any item added at the current path, an update on path-manager is a must
             if (!shouldUpdatePathManagersItemListForRecv && item.pathString == PathManager.getCurrentPath())
                 shouldUpdatePathManagersItemListForRecv = true
