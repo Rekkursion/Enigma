@@ -177,9 +177,8 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
                 override fun onItemClick(view: View?, position: Int) {
                     mItemRecvState.doOnClick(mItemRecvContext, position)
                 }
-
                 override fun onItemLongClick(view: View?, position: Int) {
-                    // TODO: long-click on folder- or vocabulary- item
+                    mItemRecvState.doOnLongClick(mItemRecvContext, position)
                 }
             }
         ))
