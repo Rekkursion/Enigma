@@ -2,6 +2,8 @@ package com.rekkursion.enigma.managers
 
 import android.graphics.Color
 import com.rekkursion.enigma.models.BaseItem
+import com.rekkursion.enigma.models.FolderItem
+import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.pathview.PathView
 
 object PathManager {
@@ -25,7 +27,11 @@ object PathManager {
     // update the list which is used for the recycler-view
     fun updateListForRecv() {
         mCurrentItemListForRecv.clear()
-        mCurrentItemListForRecv.addAll(DataManager.getAllItemsAtCertainPath(getCurrentPath()))
+        val allItems = DataManager.getAllItemsAtCertainPath(getCurrentPath())
+        val allFolderItems = allItems.filter { it is FolderItem }
+        val allVocabularyItems = allItems.filter { it is VocabularyItem }
+        mCurrentItemListForRecv.addAll(allFolderItems)
+        mCurrentItemListForRecv.addAll(allVocabularyItems)
     }
 
     // push a path node to the tail
