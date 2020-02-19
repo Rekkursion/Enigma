@@ -29,6 +29,16 @@
     <string name="str_attention_of_maximum_new_items_suffix">&#160;個</string>
     <!--<string name="str_attention_of_removing_item_card">Are you sure?</string>-->
     <string name="str_attention_of_removing_item_card">確定要刪除嗎？</string>
+    <!--<string name="str_attention_of_invalid_null_input">Please fill in the blank.</string>-->
+    <string name="str_attention_of_invalid_null_input">不可以留白</string>
+    <!--<string name="str_attention_of_invalid_same_folder_name_at_same_location">There\'s a folder with the same name at the same location.</string>-->
+    <string name="str_attention_of_invalid_same_folder_name_at_same_location">在同一層已有相同名稱的分類夾</string>
+    <!--<string name="str_attention_of_invalid_same_vocabulary">The same vocabulary already exists.</string>-->
+    <string name="str_attention_of_invalid_same_vocabulary">已存在相同的單字</string>
+    <!--<string name="str_attention_of_invalid_duplicated_new_folders">There\'re duplicated names among your new folders.</string>-->
+    <string name="str_attention_of_invalid_duplicated_new_folders">欲新增的所有分類夾中有名稱重複的情況</string>
+    <!--<string name="str_attention_of_invalid_duplicated_new_vocabularies">There\'re duplicated words among your new vocabularies.</string>-->
+    <string name="str_attention_of_invalid_duplicated_new_vocabularies">欲新增的所有單字中有名字重複的情況</string>
 
     <!--<string name="str_cancel">Cancel</string>-->
     <string name="str_cancel">取消</string>
@@ -36,6 +46,8 @@
     <string name="str_submit">送出</string>
     <!--<string name="str_confirm">Confirm</string>-->
     <string name="str_confirm">確定</string>
+    <!--<string name="str_ok">OK</string>-->
+    <string name="str_ok">好</string>
 
     <!--<string name="str_add_more">Add more</string>-->
     <string name="str_add_more">再加一個</string>

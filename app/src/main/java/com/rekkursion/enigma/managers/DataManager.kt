@@ -3,6 +3,8 @@ package com.rekkursion.enigma.managers
 import android.content.Context
 import android.util.Log
 import com.rekkursion.enigma.models.BaseItem
+import com.rekkursion.enigma.models.FolderItem
+import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.utils.SerializationUtils
 import java.io.File
 
@@ -65,4 +67,18 @@ object DataManager {
 
     // get all items at a certain path
     fun getAllItemsAtCertainPath(pathString: String): ArrayList<BaseItem> = mBaseItemHashMap.getOrDefault(pathString, arrayListOf())
+
+    // check if it contains a certain folder at a certain path
+    fun containsFolderAtCertainPath(folderName: String, pathString: String = PathManager.getCurrentPath()): Boolean = getAllItemsAtCertainPath(pathString)
+        .map { (it as? FolderItem)?.folderName }
+        .contains(folderName)
+
+    // check if it contains a certain vocabulary at a global range
+    fun containsVocabulary(english: String): Boolean = mBaseItemHashMap
+        .map { (_, itemList) ->
+            itemList
+                .map { (it as? VocabularyItem)?.english }
+                .contains(english)
+        }
+        .contains(true)
 }

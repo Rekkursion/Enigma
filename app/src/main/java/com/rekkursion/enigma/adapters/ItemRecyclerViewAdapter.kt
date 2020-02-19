@@ -70,7 +70,6 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
                 vh.erbProficiency.currentValue = baseItem.proficiency
             }
 
-            // TODO: vocabulary-item-slave
             BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_SLAVE.ordinal -> {
                 baseItem as VocabularyItem; vh as VocabularyItemSlaveViewHolder
 

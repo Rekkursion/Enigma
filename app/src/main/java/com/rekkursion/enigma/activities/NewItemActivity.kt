@@ -2,6 +2,7 @@ package com.rekkursion.enigma.activities
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,15 +11,10 @@ import androidx.core.view.children
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.commands.*
-import com.rekkursion.enigma.commands.itemcardcommand.ItemCardAddCommand
-import com.rekkursion.enigma.commands.itemcardcommand.ItemCardCreateItemsCommand
-import com.rekkursion.enigma.commands.itemcardcommand.ItemCardGoUpOrGoDownCommand
-import com.rekkursion.enigma.commands.itemcardcommand.ItemCardRemoveCommand
-import com.rekkursion.enigma.enums.ItemType
+import com.rekkursion.enigma.commands.itemcardcommand.*
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.managers.NewItemManager
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
-import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import java.util.HashMap
 
 @SuppressLint("SetTextI18n")
@@ -67,6 +63,7 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
 
     // submit
     override fun onSubmitClickListener() {
+        // all of the cards are valid
         if (validateFieldsBeforeSubmission()) {
             // first, set the result of result-ok
             setResult(Activity.RESULT_OK)
@@ -98,6 +95,8 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
         mCommands[ItemCardGoUpOrGoDownCommand::class.java.name] = ItemCardGoUpOrGoDownCommand(this)
         // command of creating all items
         mCommands[ItemCardCreateItemsCommand::class.java.name] = ItemCardCreateItemsCommand(this)
+        // command of validating if cards are all valid or not before the submission
+        mCommands[ItemCardValidateCommand::class.java.name] = ItemCardValidateCommand(this)
     }
 
     // initialize events of views
@@ -125,18 +124,15 @@ class NewItemActivity: AppCompatActivity(), OnButtonBarClickListener {
 
     // check if all fields are valid or not before the submission
     private fun validateFieldsBeforeSubmission(): Boolean {
-        // TODO: check if all fields are valid or not before the submission
-        // cards are the folder-item-cards
-        if (intent.getStringExtra(ItemType::name.toString()) == ItemType.FOLDER.name) {
-            mLlyCardsContainer.children.forEach {
-
-            }
-        }
-        // cards are the vocabulary-item-cards
-        else {
-
-        }
-        return true
+        getCommand(ItemCardValidateCommand::class.java.name)?.execute()
+        val valid = ItemCardValidateCommand.validateResult == ItemCardValidateCommand.ValidationResult.VALID
+        if (!valid)
+            AlertDialog.Builder(this)
+                .setMessage(ItemCardValidateCommand.validateResult.warningStringId)
+                .setPositiveButton(getString(R.string.str_ok), null)
+                .create()
+                .show()
+        return valid
     }
 
     /* ================================================================== */
