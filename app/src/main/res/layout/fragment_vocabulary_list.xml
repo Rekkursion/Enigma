@@ -18,7 +18,7 @@
                 app:put_single_separator_when_nothing="true"
                 app:separator_color="@color/colorPrimary"
                 app:node_text_color="@color/colorPrimaryDark"
-                app:separator=">"
+                app:separator="\\"
                 app:text_height="20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

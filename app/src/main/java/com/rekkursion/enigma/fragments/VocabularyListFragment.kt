@@ -21,7 +21,6 @@ import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.PathManager
-import com.rekkursion.enigma.utils.GoBackListenerUtils
 import com.rekkursion.enigma.viewholders.BaseItemViewHolder
 import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView

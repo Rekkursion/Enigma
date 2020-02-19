@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.commands.FragmentCommand
+import com.rekkursion.enigma.commands.FragmentSwitchCommand
 import com.rekkursion.enigma.fragments.VocabularyListFragment
 import com.rekkursion.enigma.utils.GoBackListenerUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,6 +16,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     // b-nav to switch among all fragments
     private lateinit var mBnavMain: BottomNavigationView
+
+    private lateinit var mVocabularyListFragment: Fragment
+    private lateinit var mFragment: Fragment
+
+    private val mFragmentCommands = HashMap<String, FragmentCommand>()
 
     /* ================================================================== */
 
@@ -22,7 +30,10 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         setSupportActionBar(toolbar)
 
         initViews()
+        initCommands()
         initEvents()
+
+        mFragmentCommands[FragmentSwitchCommand::class.java.name]?.execute(R.id.lly_fragment_root_at_main, mVocabularyListFragment)
     }
 
     // inflate the menu at the bar
@@ -41,23 +52,17 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
     // the item selection event of the bottom-navigation-view
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        // remove all fragments
-        supportFragmentManager.fragments.forEach { supportFragmentManager.beginTransaction().remove(it).commit() }
-
         // check which item has been selected
         return when (menuItem.itemId) {
             // vocabulary list
             R.id.bnav_item_vocabulary_list -> {
-                val f = VocabularyListFragment.newInstance()
-                supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.lly_fragment_root_at_main, f)
-                    .commit()
+                mFragmentCommands[FragmentSwitchCommand::class.java.name]?.execute(R.id.lly_fragment_root_at_main, mVocabularyListFragment)
                 true
             }
 
             // practice
             R.id.bnav_item_practice -> {
+                mFragmentCommands[FragmentSwitchCommand::class.java.name]?.execute(R.id.lly_fragment_root_at_main, mFragment)
                 // TODO: practice
                 true
             }
@@ -84,6 +89,12 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     // initialize views
     private fun initViews() {
         mBnavMain = findViewById(R.id.bnav_main)
+        mVocabularyListFragment = VocabularyListFragment.newInstance()
+        mFragment = Fragment()
+    }
+
+    private fun initCommands() {
+        mFragmentCommands[FragmentSwitchCommand::class.java.name] = FragmentSwitchCommand(supportFragmentManager)
     }
 
     // initialize events of views
