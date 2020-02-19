@@ -6,6 +6,9 @@ import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.models.FolderItem
 
 class CertainItemEnterFolderCommand(recyclerView: RecyclerView): CertainItemCommand(recyclerView) {
+    /**
+     * @param position: Int -> the position of the recycler-view to be executed
+     */
     override fun executeAt(position: Int) {
         val baseItem = (mRecvItemList.adapter as? ItemRecyclerViewAdapter)?.getBaseItemAndItsTruePosition(position)?.first
         baseItem?.let {

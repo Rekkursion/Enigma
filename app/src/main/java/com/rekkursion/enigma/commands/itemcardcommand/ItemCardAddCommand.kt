@@ -1,6 +1,5 @@
 package com.rekkursion.enigma.commands.itemcardcommand
 
-import android.annotation.SuppressLint
 import android.widget.EditText
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.enums.ItemType

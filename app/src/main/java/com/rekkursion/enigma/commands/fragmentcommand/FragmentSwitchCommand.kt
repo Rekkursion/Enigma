@@ -1,4 +1,4 @@
-package com.rekkursion.enigma.commands
+package com.rekkursion.enigma.commands.fragmentcommand
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

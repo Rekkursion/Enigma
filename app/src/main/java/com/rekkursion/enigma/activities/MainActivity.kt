@@ -7,8 +7,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rekkursion.enigma.R
-import com.rekkursion.enigma.commands.FragmentCommand
-import com.rekkursion.enigma.commands.FragmentSwitchCommand
+import com.rekkursion.enigma.commands.fragmentcommand.FragmentSwitchCommand
 import com.rekkursion.enigma.fragments.VocabularyListFragment
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.utils.GoBackListenerUtils
@@ -95,7 +94,10 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
     private fun initCommands() {
         // command of switching among fragments in main-activity
-        CommandManager.putCommand(FragmentSwitchCommand::class, FragmentSwitchCommand(supportFragmentManager))
+        CommandManager.putCommand(
+            FragmentSwitchCommand::class,
+            FragmentSwitchCommand(supportFragmentManager)
+        )
     }
 
     // initialize events of views
