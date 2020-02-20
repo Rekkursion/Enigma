@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingAc
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.commands.itemlistcommand.*
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckDetailsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.enums.ItemType
@@ -25,7 +24,6 @@ import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.states.RecvStateContext
-import com.rekkursion.enigma.states.RecvState
 import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView
 
@@ -147,8 +145,8 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         CommandManager.putCommand(CertainItemExpandOrUnexpandCommand::class, CertainItemExpandOrUnexpandCommand(mRecvItemList))
         // command of entering a certain folder-item
         CommandManager.putCommand(CertainItemEnterFolderCommand::class, CertainItemEnterFolderCommand(mRecvItemList))
-        // command of checking details of a certain item (folder- or vocabulary- item)
-        CommandManager.putCommand(CertainItemCheckDetailsCommand::class, CertainItemCheckDetailsCommand(mRecvItemList))
+        // command of checking summary of a certain item (folder- or vocabulary- item)
+        CommandManager.putCommand(CertainItemCheckSummaryCommand::class, CertainItemCheckSummaryCommand(mRecvItemList))
     }
 
     // initialize events of views

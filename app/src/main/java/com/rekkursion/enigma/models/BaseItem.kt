@@ -49,16 +49,16 @@ abstract class BaseItem: Serializable {
     // get the identifier of this item
     abstract fun getIdentifier(): String
 
-    // get the details of this item
-    abstract fun getDetails(context: Context): String
+    // get the summary of this item
+    abstract fun getSummary(context: Context): String
 
     /* =================================================================== */
 
-    // get the base details
-    protected fun getBaseDetails(context: Context): String =
-        "${context.getString(R.string.str_base_item_details_item_type)}${if (mItemType == ItemType.FOLDER) context.getString(R.string.str_folder) else context.getString(R.string.str_vocabulary)}\n" +
-        "${context.getString(R.string.str_base_item_details_path)}root$PATH_SEPARATOR$pathString${if (pathString.isEmpty()) "" else PATH_SEPARATOR}\n" +
-        "${context.getString(R.string.str_base_item_details_create_time)}${mCreateLocalDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN))}"
+    // get the base summary
+    protected fun getBaseSummary(context: Context): String =
+        "${context.getString(R.string.str_base_item_summary_item_type)}${if (mItemType == ItemType.FOLDER) context.getString(R.string.str_folder) else context.getString(R.string.str_vocabulary)}\n" +
+        "${context.getString(R.string.str_base_item_summary_path)}root$PATH_SEPARATOR$pathString${if (pathString.isEmpty()) "" else PATH_SEPARATOR}\n" +
+        "${context.getString(R.string.str_base_item_summary_create_time)}${mCreateLocalDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN))}"
 
     /* =================================================================== */
 

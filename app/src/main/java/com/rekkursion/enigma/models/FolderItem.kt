@@ -45,11 +45,11 @@ class FolderItem(
     // get the identifier of this folder-item (folder name)
     override fun getIdentifier(): String = mFolderName
 
-    // get the details of this folder-item
-    override fun getDetails(context: Context): String =
-        "${getBaseDetails(context)}\n" +
-        "${context.getString(R.string.str_base_item_details_num_of_folders_prefix)}$numOfFolders${context.getString(R.string.str_base_item_details_num_of_folders_suffix)}" +
-        "${context.getString(R.string.str_base_item_details_num_of_vocabularies_prefix)}$numOfVocabularies${context.getString(R.string.str_base_item_details_num_of_vocabularies_suffix)}"
+    // get the summary of this folder-item
+    override fun getSummary(context: Context): String =
+        "${getBaseSummary(context)}\n" +
+        "${context.getString(R.string.str_base_item_summary_num_of_folders_prefix)}$numOfFolders${context.getString(R.string.str_base_item_summary_num_of_folders_suffix)}" +
+        "${context.getString(R.string.str_base_item_summary_num_of_vocabularies_prefix)}$numOfVocabularies${context.getString(R.string.str_base_item_summary_num_of_vocabularies_suffix)}"
 
     /* =================================================================== */
 

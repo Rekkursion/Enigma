@@ -75,22 +75,22 @@
     <!--<string name="str_vocabulary_item_card_tags_field">Tags</string>-->
     <string name="str_vocabulary_item_card_tags_field">標籤</string>
 
-    <!--<string name="str_base_item_details_item_type">Type:&#160;</string>-->
-    <string name="str_base_item_details_item_type">類型：</string>
-    <!--<string name="str_base_item_details_path">Path:&#160;</string>-->
-    <string name="str_base_item_details_path">位置：</string>
-    <!--<string name="str_base_item_details_create_time">Create at:&#160;</string>-->
-    <string name="str_base_item_details_create_time">建立於：</string>
+    <!--<string name="str_base_item_summary_item_type">Type:&#160;</string>-->
+    <string name="str_base_item_summary_item_type">類型：</string>
+    <!--<string name="str_base_item_summary_path">Path:&#160;</string>-->
+    <string name="str_base_item_summary_path">位置：</string>
+    <!--<string name="str_base_item_summary_create_time">Create at:&#160;</string>-->
+    <string name="str_base_item_summary_create_time">建立於：</string>
     <!--suppress CheckTagEmptyBody -->
-    <!--<string name="str_base_item_details_num_of_folders_prefix"></string>-->
-    <string name="str_base_item_details_num_of_folders_prefix">內有&#160;</string>
-    <!--<string name="str_base_item_details_num_of_folders_suffix">&#160;folders(s)</string>-->
-    <string name="str_base_item_details_num_of_folders_suffix">&#160;個分類夾</string>
+    <!--<string name="str_base_item_summary_num_of_folders_prefix"></string>-->
+    <string name="str_base_item_summary_num_of_folders_prefix">內有&#160;</string>
+    <!--<string name="str_base_item_summary_num_of_folders_suffix">&#160;folders(s)</string>-->
+    <string name="str_base_item_summary_num_of_folders_suffix">&#160;個分類夾</string>
 
-    <!--<string name="str_base_item_details_num_of_vocabularies_prefix">&#160;and&#160;</string>-->
-    <string name="str_base_item_details_num_of_vocabularies_prefix">，以及&#160;</string>
-    <!--<string name="str_base_item_details_num_of_vocabularies_suffix">&#160;vocabulary(s) in this folder.</string>-->
-    <string name="str_base_item_details_num_of_vocabularies_suffix">&#160;個單字</string>
+    <!--<string name="str_base_item_summary_num_of_vocabularies_prefix">&#160;and&#160;</string>-->
+    <string name="str_base_item_summary_num_of_vocabularies_prefix">，以及&#160;</string>
+    <!--<string name="str_base_item_summary_num_of_vocabularies_suffix">&#160;vocabulary(s) in this folder.</string>-->
+    <string name="str_base_item_summary_num_of_vocabularies_suffix">&#160;個單字</string>
 
     <!--<string name="str_vocabulary_item_card_english_field_edit_text_hint">Enter a word here.</string>-->
     <string name="str_vocabulary_item_card_english_field_edit_text_hint">欲新增的單字</string>
@@ -115,8 +115,8 @@
 
     <!--<string name="str_folder_item_list_dialog_enter">Enter</string>-->
     <string name="str_folder_item_list_dialog_enter">進入分類</string>
-    <!--<string name="str_folder_item_list_dialog_details">Details</string>-->
-    <string name="str_folder_item_list_dialog_details">分類信息</string>
+    <!--<string name="str_folder_item_list_dialog_summary">Summary</string>-->
+    <string name="str_folder_item_list_dialog_summary">分類摘要</string>
     <!--<string name="str_folder_item_list_dialog_rename">Rename</string>-->
     <string name="str_folder_item_list_dialog_rename">重新命名</string>
     <!--<string name="str_folder_item_list_dialog_move">Move</string>-->
@@ -125,7 +125,13 @@
     <string name="str_folder_item_list_dialog_delete">刪除分類</string>
 
     <!--<string name="str_vocabulary_item_master_list_dialog_details">Details</string>-->
-    <string name="str_vocabulary_item_master_list_dialog_details">單字信息</string>
+    <string name="str_vocabulary_item_master_list_dialog_details">詳細內容</string>
+    <!--<string name="str_vocabulary_item_master_list_dialog_summary">Summary</string>-->
+    <string name="str_vocabulary_item_master_list_dialog_summary">單字摘要</string>
+    <!--<string name="str_vocabulary_item_master_list_dialog_edit">Edit</string>-->
+    <string name="str_vocabulary_item_master_list_dialog_edit">編輯單字</string>
     <!--<string name="str_vocabulary_item_master_list_dialog_move">Move</string>-->
     <string name="str_vocabulary_item_master_list_dialog_move">移動單字</string>
+    <!--<string name="str_vocabulary_item_master_list_dialog_delete">Delete</string>-->
+    <string name="str_vocabulary_item_master_list_dialog_delete">刪除單字</string>
 </resources>
