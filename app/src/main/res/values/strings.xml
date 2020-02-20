@@ -82,9 +82,14 @@
     <!--<string name="str_base_item_details_create_time">Create at:&#160;</string>-->
     <string name="str_base_item_details_create_time">建立於：</string>
     <!--suppress CheckTagEmptyBody -->
-    <!--<string name="str_base_item_details_num_of_vocabularies_prefix"></string>-->
-    <string name="str_base_item_details_num_of_vocabularies_prefix">內有&#160;</string>
-    <!--<string name="str_base_item_details_num_of_vocabularies_suffix">&#160;vocabulary(s) in this folder</string>-->
+    <!--<string name="str_base_item_details_num_of_folders_prefix"></string>-->
+    <string name="str_base_item_details_num_of_folders_prefix">內有&#160;</string>
+    <!--<string name="str_base_item_details_num_of_folders_suffix">&#160;folders(s)</string>-->
+    <string name="str_base_item_details_num_of_folders_suffix">&#160;個分類夾</string>
+
+    <!--<string name="str_base_item_details_num_of_vocabularies_prefix">&#160;and&#160;</string>-->
+    <string name="str_base_item_details_num_of_vocabularies_prefix">，以及&#160;</string>
+    <!--<string name="str_base_item_details_num_of_vocabularies_suffix">&#160;vocabulary(s) in this folder.</string>-->
     <string name="str_base_item_details_num_of_vocabularies_suffix">&#160;個單字</string>
 
     <!--<string name="str_vocabulary_item_card_english_field_edit_text_hint">Enter a word here.</string>-->

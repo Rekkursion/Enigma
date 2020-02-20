@@ -5,13 +5,18 @@ import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
 import java.io.Serializable
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
 abstract class BaseItem: Serializable {
     companion object {
+        // for serialization
         private const val serialVersionUID = 306125L
-        private const val DATE_TIME_FORMATTER_PATTERN = "yyyy-MM-dd HH:mm:ss.SSS"
+        // for formatting the date-time
+        private const val DATE_TIME_FORMATTER_PATTERN = "yyyy-MM-dd HH:mm:ss"
+        // for converting path nodes to the path string
+        const val PATH_SEPARATOR = "\\"
     }
 
     /* =================================================================== */
@@ -26,7 +31,7 @@ abstract class BaseItem: Serializable {
     // the nodes of this item's path
     protected val mPathNodes: ArrayList<String> = ArrayList()
     val pathNodesCopied: ArrayList<String> get() = ArrayList(mPathNodes)
-    val pathString: String get() = mPathNodes.joinToString("/")
+    val pathString: String get() = mPathNodes.joinToString(PATH_SEPARATOR)
 
     // the local-date-time when this item was created
     protected val mCreateLocalDateTime: LocalDateTime = LocalDateTime.now()
@@ -52,8 +57,8 @@ abstract class BaseItem: Serializable {
     // get the base details
     protected fun getBaseDetails(context: Context): String =
         "${context.getString(R.string.str_base_item_details_item_type)}${if (mItemType == ItemType.FOLDER) context.getString(R.string.str_folder) else context.getString(R.string.str_vocabulary)}\n" +
-        "${context.getString(R.string.str_base_item_details_path)}root/$pathString${if (pathString.isEmpty()) "" else "/"}\n" +
-        "${context.getString(R.string.str_base_item_details_create_time)}$mCreateLocalDateTime"
+        "${context.getString(R.string.str_base_item_details_path)}root$PATH_SEPARATOR$pathString${if (pathString.isEmpty()) "" else PATH_SEPARATOR}\n" +
+        "${context.getString(R.string.str_base_item_details_create_time)}${mCreateLocalDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN))}"
 
     /* =================================================================== */
 

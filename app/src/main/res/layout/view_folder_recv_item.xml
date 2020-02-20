@@ -19,7 +19,7 @@
 
         <!-- the number of vocabularies -->
         <TextView
-                android:id="@+id/txtv_num_of_vocabularies_at_folder_recv_item"
+                android:id="@+id/txtv_nums_of_folders_and_vocabularies_at_folder_recv_item"
                 android:textSize="@dimen/dim_folder_recv_item_num_of_vocabularies_text_size"
                 android:textColor="@android:color/darker_gray"
                 android:layout_width="wrap_content"

@@ -3,7 +3,6 @@ package com.rekkursion.enigma.viewholders
 import android.view.View
 import android.widget.TextView
 import com.rekkursion.enigma.R
-import com.rekkursion.enigma.enums.ItemType
 
 class FolderItemViewHolder(itemView: View): BaseItemViewHolder(itemView) {
     // override the view-type as a folder-item
@@ -13,7 +12,7 @@ class FolderItemViewHolder(itemView: View): BaseItemViewHolder(itemView) {
     private val mTxtvFolderName: TextView = itemView.findViewById(R.id.txtv_folder_name_at_folder_recv_item)
     val txtvFolderName get() = mTxtvFolderName
 
-    // the text-view of the number of vocabularies
-    private val mTxtvNumOfVocabularies: TextView = itemView.findViewById(R.id.txtv_num_of_vocabularies_at_folder_recv_item)
-    val txtvNumOfVocabularies get() = mTxtvNumOfVocabularies
+    // the text-view of the numbers of folders and vocabularies
+    private val mTxtvNumsOfFoldersAndVocabularies: TextView = itemView.findViewById(R.id.txtv_nums_of_folders_and_vocabularies_at_folder_recv_item)
+    val txtvNumsOfFoldersAndVocabularies get() = mTxtvNumsOfFoldersAndVocabularies
 }

@@ -48,6 +48,7 @@ class FolderItem(
     // get the details of this folder-item
     override fun getDetails(context: Context): String =
         "${getBaseDetails(context)}\n" +
+        "${context.getString(R.string.str_base_item_details_num_of_folders_prefix)}$numOfFolders${context.getString(R.string.str_base_item_details_num_of_folders_suffix)}" +
         "${context.getString(R.string.str_base_item_details_num_of_vocabularies_prefix)}$numOfVocabularies${context.getString(R.string.str_base_item_details_num_of_vocabularies_suffix)}"
 
     /* =================================================================== */
@@ -60,6 +61,12 @@ class FolderItem(
     // add a vocabulary-item
     fun addVocabulary(vocabulary: VocabularyItem) {
         mVocabularyList.add(vocabulary)
+    }
+
+    // add a base-item
+    fun addItem(item: BaseItem) {
+        if (item is FolderItem) addFolder(item)
+        else addVocabulary(item as VocabularyItem)
     }
 
     // add all base-items in a certain folder

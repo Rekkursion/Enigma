@@ -52,7 +52,7 @@ object PathManager {
     }
 
     // combine the current path nodes and get the current path string
-    fun getCurrentPath(): String = mPathView?.getAllPathNodes()?.joinToString("/") ?: ""
+    fun getCurrentPath(): String = mPathView?.getAllPathNodes()?.joinToString(BaseItem.PATH_SEPARATOR) ?: ""
 
     // get all nodes
     fun getAllPathNodes(): ArrayList<String> = mPathView?.getAllPathNodes() ?: arrayListOf()
@@ -60,14 +60,14 @@ object PathManager {
     // get the last path node of a designated path string
     fun getLastPathNode(pathString: String): String = when {
         pathString.isEmpty() -> ""
-        else -> pathString.split("/").lastOrNull() ?: ""
+        else -> pathString.split(BaseItem.PATH_SEPARATOR).lastOrNull() ?: ""
     }
 
     // get the last stratum path string
     fun getLastStrataPathString(pathString: String): String? {
         return if (pathString.isEmpty()) null
         else {
-            val lastIdxOfSeparator = pathString.lastIndexOf("/")
+            val lastIdxOfSeparator = pathString.lastIndexOf(BaseItem.PATH_SEPARATOR)
             if (lastIdxOfSeparator < 0) ""
             else pathString.substring(0, lastIdxOfSeparator)
         }

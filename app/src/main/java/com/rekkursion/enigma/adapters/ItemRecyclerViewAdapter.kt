@@ -60,7 +60,7 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
             BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal -> {
                 baseItem as FolderItem; vh as FolderItemViewHolder
                 vh.txtvFolderName.text = baseItem.folderName
-                vh.txtvNumOfVocabularies.text = "(${baseItem.numOfVocabularies})"
+                vh.txtvNumsOfFoldersAndVocabularies.text = "(${baseItem.numOfFolders}, ${baseItem.numOfVocabularies})"
             }
 
             // if it's a vocabulary-item
