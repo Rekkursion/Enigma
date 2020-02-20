@@ -57,7 +57,7 @@ class VocabularyItem(
     // get the identifier of this vocabulary-item (english)
     override fun getIdentifier(): String = mEnglish
 
-    // TODO: get the summary of this vocabulary-item
+    // get the summary of this vocabulary-item
     override fun getSummary(context: Context): String = getBaseSummary(context)
 
     /* =================================================================== */

@@ -1,8 +1,10 @@
 package com.rekkursion.enigma.states
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.view.View
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.activities.EditVocabularyActivity
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
@@ -100,7 +102,8 @@ class GeneralRecvState private constructor(): RecvState {
             })
             // edit
             .addListItem(context.getString(R.string.str_vocabulary_item_master_list_dialog_edit), View.OnClickListener {
-
+                val inte = Intent(context, EditVocabularyActivity::class.java)
+                context.startActivity(inte)
             })
             // move
             .addListItem(context.getString(R.string.str_vocabulary_item_master_list_dialog_move), View.OnClickListener {
