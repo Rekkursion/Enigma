@@ -1,5 +1,6 @@
 package com.rekkursion.enigma.models
 
+import android.content.Context
 import com.rekkursion.enigma.enums.ItemType
 
 /**
@@ -50,6 +51,14 @@ class VocabularyItem(
         mPathNodes.clear()
         mPathNodes.addAll(pathNodes)
     }
+
+    /* =================================================================== */
+
+    // get the identifier of this vocabulary-item (english)
+    override fun getIdentifier(): String = mEnglish
+
+    // TODO: get the details of this vocabulary-item
+    override fun getDetails(context: Context): String = getBaseDetails(context)
 
     /* =================================================================== */
 

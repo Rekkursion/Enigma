@@ -16,6 +16,7 @@ import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingAc
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.commands.itemlistcommand.*
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckDetailsCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.enums.ItemType
@@ -146,6 +147,8 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         CommandManager.putCommand(CertainItemExpandOrUnexpandCommand::class, CertainItemExpandOrUnexpandCommand(mRecvItemList))
         // command of entering a certain folder-item
         CommandManager.putCommand(CertainItemEnterFolderCommand::class, CertainItemEnterFolderCommand(mRecvItemList))
+        // command of checking details of a certain item (folder- or vocabulary- item)
+        CommandManager.putCommand(CertainItemCheckDetailsCommand::class, CertainItemCheckDetailsCommand(mRecvItemList))
     }
 
     // initialize events of views

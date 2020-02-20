@@ -1,5 +1,7 @@
 package com.rekkursion.enigma.models
 
+import android.content.Context
+import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -36,6 +38,22 @@ abstract class BaseItem: Serializable {
     // the count of the chakans
     protected var mChakanCount: Int = 0
     var chakanCount get() = mChakanCount; set(value) { mChakanCount = value }
+
+    /* =================================================================== */
+
+    // get the identifier of this item
+    abstract fun getIdentifier(): String
+
+    // get the details of this item
+    abstract fun getDetails(context: Context): String
+
+    /* =================================================================== */
+
+    // get the base details
+    protected fun getBaseDetails(context: Context): String =
+        "${context.getString(R.string.str_base_item_details_item_type)}${if (mItemType == ItemType.FOLDER) context.getString(R.string.str_folder) else context.getString(R.string.str_vocabulary)}\n" +
+        "${context.getString(R.string.str_base_item_details_path)}root/$pathString${if (pathString.isEmpty()) "" else "/"}\n" +
+        "${context.getString(R.string.str_base_item_details_create_time)}$mCreateLocalDateTime"
 
     /* =================================================================== */
 
