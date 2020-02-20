@@ -89,4 +89,20 @@
     <string name="str_example_sentence_label_at_sentence_view">例句：</string>
     <!--<string name="str_new_meaning_setting_view">New meaning</string>-->
     <string name="str_new_meaning_setting_view">新增意義</string>
+
+    <!--<string name="str_folder_item_list_dialog_enter">Enter</string>-->
+    <string name="str_folder_item_list_dialog_enter">進入分類</string>
+    <!--<string name="str_folder_item_list_dialog_details">Details</string>-->
+    <string name="str_folder_item_list_dialog_details">分類信息</string>
+    <!--<string name="str_folder_item_list_dialog_rename">Rename</string>-->
+    <string name="str_folder_item_list_dialog_rename">重新命名</string>
+    <!--<string name="str_folder_item_list_dialog_move">Move</string>-->
+    <string name="str_folder_item_list_dialog_move">移動分類</string>
+    <!--<string name="str_folder_item_list_dialog_delete">Delete</string>-->
+    <string name="str_folder_item_list_dialog_delete">刪除分類</string>
+
+    <!--<string name="str_vocabulary_item_master_list_dialog_details">Details</string>-->
+    <string name="str_vocabulary_item_master_list_dialog_details">單字信息</string>
+    <!--<string name="str_vocabulary_item_master_list_dialog_move">Move</string>-->
+    <string name="str_vocabulary_item_master_list_dialog_move">移動單字</string>
 </resources>

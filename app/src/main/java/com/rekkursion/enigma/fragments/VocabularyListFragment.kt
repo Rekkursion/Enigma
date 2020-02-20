@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +23,8 @@ import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.managers.PathManager
-import com.rekkursion.enigma.states.ItemRecvContext
-import com.rekkursion.enigma.states.ItemRecvState
+import com.rekkursion.enigma.states.RecvStateContext
+import com.rekkursion.enigma.states.RecvState
 import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView
 
@@ -51,10 +52,7 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
     private lateinit var mPathView: PathView
 
     // the context of the item recycler-view
-    private lateinit var mItemRecvContext: ItemRecvContext
-
-    // the current state of the item recycler-view
-    private lateinit var mItemRecvState: ItemRecvState
+    private lateinit var mItemRecvStateContext: RecvStateContext
 
     /* =================================================================== */
 
@@ -130,9 +128,8 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         layoutManager.orientation = RecyclerView.VERTICAL
         mRecvItemList.layoutManager = layoutManager
 
-        // initialize the context and state of the item recycler-view
-        mItemRecvContext = ItemRecvContext(mRecvItemList)
-        mItemRecvState = mItemRecvContext.state
+        // initialize the context of the item recycler-view
+        mItemRecvStateContext = RecvStateContext(mRecvItemList)
     }
 
     // initialize commands
@@ -175,10 +172,10 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
             mRecvItemList,
             object: OnItemListRecyclerViewItemTouchListener.OnItemListItemClickListener {
                 override fun onItemClick(view: View?, position: Int) {
-                    mItemRecvState.doOnClick(mItemRecvContext, position)
+                    mItemRecvStateContext.state.doOnClick(mItemRecvStateContext, position)
                 }
                 override fun onItemLongClick(view: View?, position: Int) {
-                    mItemRecvState.doOnLongClick(mItemRecvContext, position)
+                    mItemRecvStateContext.state.doOnLongClick(mItemRecvStateContext, position)
                 }
             }
         ))

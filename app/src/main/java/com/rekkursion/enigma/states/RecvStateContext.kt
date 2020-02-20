@@ -3,9 +3,9 @@ package com.rekkursion.enigma.states
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemRecvContext(recyclerView: RecyclerView) {
+class RecvStateContext(recyclerView: RecyclerView) {
     // the current state of the item recycler-view
-    private var mState: ItemRecvState = GeneralItemRecvState.getInstance()
+    private var mState: RecvState = GeneralRecvState.getInstance()
     var state get() = mState; set(value) { mState = value }
 
     // the recycler-view of this context
@@ -14,6 +14,6 @@ class ItemRecvContext(recyclerView: RecyclerView) {
 
     /* =================================================================== */
 
-    // get the context (not this item-recv-context)
+    // get the context (not this recv-state-context)
     fun getContext(): Context = recyclerView.context
 }
