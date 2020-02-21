@@ -1,26 +1,24 @@
-package com.rekkursion.enigma.fragments
+package com.rekkursion.enigma.templates
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
-import com.rekkursion.enigma.commands.itemlistcommand.*
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolderCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
 import com.rekkursion.enigma.enums.ItemType
-import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
+import com.rekkursion.enigma.fragments.ItemListFragment
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.managers.PathManager
@@ -28,19 +26,9 @@ import com.rekkursion.enigma.states.RecvStateContext
 import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView
 
-class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeClickListener {
-    // static scope
-    companion object {
-        // create a new instance of this fragment
-        @JvmStatic
-        fun newInstance() = VocabularyListFragment()
-
-        // request codes
-        private const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER = 4731
-        private const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY = 5371
-    }
-
-    /* =================================================================== */
+class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
+    InitializeFragmentTemplate(fragment, rootView),
+    OnPathNodeClickListener {
 
     // the recycler-view for showing the folders and/or vocabularies
     private lateinit var mRecvItemList: RecyclerView
@@ -56,75 +44,24 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
 
     /* =================================================================== */
 
-    // inflate the layout for this fragment
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_vocabulary_list, container, false)
-    }
-
-    // the root-view created, initialize views
-    override fun onViewCreated(rootView: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(rootView, savedInstanceState)
-        init(rootView)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
-    // back from an activity's finishing started at this fragment
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // if back from new-item-activity
-        if (requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER || requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY) {
-            // but the result-code is canceled, return directly
-            if (resultCode == Activity.RESULT_CANCELED) return
-            // add new items
-            CommandManager.doCommand(ItemListAddNewItemsCommand::class)
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    // is equivalent to activity's on-back-pressed
-    override fun onGoBack(): Boolean {
-        CommandManager.doCommand(ItemListBackToPreviousFolderCommand::class)
-        return true
-    }
-
-    // click on a certain path node
     override fun onPathNodeClick(pathView: PathView, index: Int) {
         CommandManager.doCommand(ItemListBackToCertainFolderCommand::class)
     }
 
     /* =================================================================== */
 
-    // initialize everything
-    private fun init(rootView: View) {
-        initViews(rootView)
-        initAttributes()
-        initCommands()
-        initEvents()
-
-        // load all saved items by de-serialization
-        CommandManager.doCommand(ItemListLoadAllItemsCommand::class)
+    override fun initViews() {
+        mPathView = mRootView.findViewById(R.id.path_view)
+        mRecvItemList = mRootView.findViewById(R.id.recv_item_list)
+        mDfabAddFolderOrVocabulary = mRootView.findViewById(R.id.dfab_add_folder_or_vocabulary)
     }
 
-    // initialize views
-    private fun initViews(rootView: View) {
-        mPathView = rootView.findViewById(R.id.path_view)
-        mRecvItemList = rootView.findViewById(R.id.recv_item_list)
-        mDfabAddFolderOrVocabulary = rootView.findViewById(R.id.dfab_add_folder_or_vocabulary)
-    }
-
-    // initialize attributes of views
-    private fun initAttributes() {
+    override fun initAttributes() {
         // set the path view at the path-manager
         PathManager.setPathView(mPathView)
 
         // set the layout-manager on the recycler-view
-        val layoutManager = LinearLayoutManager(context!!)
+        val layoutManager = LinearLayoutManager(mFragment.context!!)
         layoutManager.orientation = RecyclerView.VERTICAL
         mRecvItemList.layoutManager = layoutManager
 
@@ -132,8 +69,7 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         mItemRecvStateContext = RecvStateContext(mRecvItemList)
     }
 
-    // initialize commands
-    private fun initCommands() {
+    override fun initCommands() {
         // command of loading all items by de-serialization
         CommandManager.putCommand(ItemListLoadAllItemsCommand::class, ItemListLoadAllItemsCommand(mRecvItemList))
         // command of adding new items
@@ -154,23 +90,24 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         CommandManager.putCommand(ItemListShowDialogVocabularyItemMasterCommand::class, ItemListShowDialogVocabularyItemMasterCommand(mRecvItemList))
     }
 
-    // initialize events of views
-    private fun initEvents() {
+    override fun initEvents() {
+        val context = mFragment.context!!
+
         // set the event of clicking on a certain path node
         mPathView.setOnPathNodeClickListener(this)
 
         // new folder
-        mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_folder), View.OnClickListener {
-            val intent = Intent(this.context, NewItemActivity::class.java)
+        mDfabAddFolderOrVocabulary.addItem(context.getString(R.string.str_new_folder), View.OnClickListener {
+            val intent = Intent(context, NewItemActivity::class.java)
             intent.putExtra(ItemType::name.toString(), ItemType.FOLDER.name)
-            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER)
+            mFragment.startActivityForResult(intent, ItemListFragment.REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER)
         })
 
         // new vocabulary
-        mDfabAddFolderOrVocabulary.addItem(getString(R.string.str_new_vocabulary), View.OnClickListener {
-            val intent = Intent(this.context, NewItemActivity::class.java)
+        mDfabAddFolderOrVocabulary.addItem(context.getString(R.string.str_new_vocabulary), View.OnClickListener {
+            val intent = Intent(context, NewItemActivity::class.java)
             intent.putExtra(ItemType::name.toString(), ItemType.VOCABULARY.name)
-            startActivityForResult(intent, REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY)
+            mFragment.startActivityForResult(intent, ItemListFragment.REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY)
         })
 
         // click-events of items of the recycler-view
@@ -180,10 +117,16 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
                 override fun onItemClick(view: View?, position: Int) {
                     mItemRecvStateContext.state.doOnClick(mItemRecvStateContext, position)
                 }
+
                 override fun onItemLongClick(view: View?, position: Int) {
                     mItemRecvStateContext.state.doOnLongClick(mItemRecvStateContext, position)
                 }
             }
         ))
+    }
+
+    override fun doAfterInitialization() {
+        // load all saved items by de-serialization
+        CommandManager.doCommand(ItemListLoadAllItemsCommand::class)
     }
 }
