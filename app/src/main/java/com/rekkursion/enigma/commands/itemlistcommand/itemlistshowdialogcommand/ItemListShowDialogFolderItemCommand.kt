@@ -1,0 +1,41 @@
+package com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand
+
+import android.app.AlertDialog
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import com.rekkursion.enigma.R
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
+import com.rekkursion.enigma.managers.CommandManager
+import com.rekkursion.enigma.states.PickingPathRecvState
+import com.rekkursion.enigma.states.RecvStateContext
+import com.rekkursion.enigma.views.ListDialog
+
+class ItemListShowDialogFolderItemCommand(recyclerView: RecyclerView): ItemListShowDialogCommand(recyclerView) {
+    override fun createListDialog(stateContext: RecvStateContext, dialogTitle: String, position: Int): AlertDialog {
+        val context = stateContext.getContext()
+        return ListDialog.Builder(context)
+            // enter
+            .addListItem(context.getString(R.string.str_folder_item_list_dialog_enter), View.OnClickListener {
+                CommandManager.doCommand(CertainItemEnterFolderCommand::class, position)
+            })
+            // summary
+            .addListItem(context.getString(R.string.str_folder_item_list_dialog_summary), View.OnClickListener {
+                CommandManager.doCommand(CertainItemCheckSummaryCommand::class, position)
+            })
+            // rename
+            .addListItem(context.getString(R.string.str_folder_item_list_dialog_rename), View.OnClickListener {
+
+            })
+            // move
+            .addListItem(context.getString(R.string.str_folder_item_list_dialog_move), View.OnClickListener {
+                stateContext.state = PickingPathRecvState.getInstance()
+            })
+            // delete
+            .addListItem(context.getString(R.string.str_folder_item_list_dialog_delete), View.OnClickListener {
+
+            })
+            .setTitle(dialogTitle)
+            .create()
+    }
+}

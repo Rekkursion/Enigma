@@ -11,13 +11,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
-
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.commands.itemlistcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
+import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
+import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
@@ -147,6 +148,10 @@ class VocabularyListFragment: Fragment(), OnFragmentGoBackListener, OnPathNodeCl
         CommandManager.putCommand(CertainItemEnterFolderCommand::class, CertainItemEnterFolderCommand(mRecvItemList))
         // command of checking summary of a certain item (folder- or vocabulary- item)
         CommandManager.putCommand(CertainItemCheckSummaryCommand::class, CertainItemCheckSummaryCommand(mRecvItemList))
+        // command of showing dialog for a folder-item in the recycler-view
+        CommandManager.putCommand(ItemListShowDialogFolderItemCommand::class, ItemListShowDialogFolderItemCommand(mRecvItemList))
+        // command of showing dialog for a vocabulary-item-master in the recycler-view
+        CommandManager.putCommand(ItemListShowDialogVocabularyItemMasterCommand::class, ItemListShowDialogVocabularyItemMasterCommand(mRecvItemList))
     }
 
     // initialize events of views
