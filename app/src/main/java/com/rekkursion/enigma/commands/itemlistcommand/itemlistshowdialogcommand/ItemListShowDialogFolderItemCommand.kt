@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
+import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.states.PickingPathRecvState
 import com.rekkursion.enigma.states.RecvStateContext
@@ -17,11 +18,11 @@ class ItemListShowDialogFolderItemCommand(recyclerView: RecyclerView): ItemListS
         return ListDialog.Builder(context)
             // enter
             .addListItem(context.getString(R.string.str_folder_item_list_dialog_enter), View.OnClickListener {
-                CommandManager.doCommand(CertainItemEnterFolderCommand::class, position)
+                CommandManager.doCommand(CommandType.CERTAIN_ITEM_ENTER_FOLDER, position)
             })
             // summary
             .addListItem(context.getString(R.string.str_folder_item_list_dialog_summary), View.OnClickListener {
-                CommandManager.doCommand(CertainItemCheckSummaryCommand::class, position)
+                CommandManager.doCommand(CommandType.CERTAIN_ITEM_CHECK_SUMMARY, position)
             })
             // rename
             .addListItem(context.getString(R.string.str_folder_item_list_dialog_rename), View.OnClickListener {

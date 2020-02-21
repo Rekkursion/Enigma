@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.LinearLayoutCompat
+import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnActionsClickListener
 import com.rekkursion.enigma.managers.CommandManager
@@ -33,15 +34,15 @@ class ItemCardAddCommand(context: Context, cardContainer: LinearLayoutCompat): I
         // set the listener & title of the card
         card.setOnActionsClickListener(object: OnActionsClickListener {
             override fun onGoUpClickListener() {
-                CommandManager.doCommand(ItemCardGoUpOrGoDownCommand::class, card, true)
+                CommandManager.doCommand(CommandType.ITEM_CARD_GO_UP_OR_GO_DOWN, card, true)
             }
 
             override fun onGoDownClickListener() {
-                CommandManager.doCommand(ItemCardGoUpOrGoDownCommand::class, card, false)
+                CommandManager.doCommand(CommandType.ITEM_CARD_GO_UP_OR_GO_DOWN, card, false)
             }
 
             override fun onCloseClickListener() {
-                CommandManager.doCommand(ItemCardRemoveCommand::class, card, cancelOrSubmitButtonBar, btnAddNewCard)
+                CommandManager.doCommand(CommandType.ITEM_CARD_REMOVE, card, cancelOrSubmitButtonBar, btnAddNewCard)
             }
         })
         card.setTitle(String.format("%02d", mCardContainer.childCount + 1))

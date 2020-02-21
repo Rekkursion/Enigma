@@ -1,0 +1,38 @@
+package com.rekkursion.enigma.enums
+
+import com.rekkursion.enigma.commands.fragmentcommand.FragmentSwitchCommand
+import com.rekkursion.enigma.commands.itemcardcommand.*
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolderCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
+import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEditVocabularyCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
+import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
+import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
+import kotlin.reflect.KClass
+
+enum class CommandType(val kClass: KClass<*>) {
+    FRAGMENT_SWITCH(FragmentSwitchCommand::class),
+
+    ITEM_CARD_ADD(ItemCardAddCommand::class),
+    ITEM_CARD_CREATE_ITEMS(ItemCardCreateItemsCommand::class),
+    ITEM_CARD_GO_UP_OR_GO_DOWN(ItemCardGoUpOrGoDownCommand::class),
+    ITEM_CARD_REMOVE(ItemCardRemoveCommand::class),
+    ITEM_CARD_VALIDATE(ItemCardValidateCommand::class),
+
+    CERTAIN_ITEM_CHECK_SUMMARY(CertainItemCheckSummaryCommand::class),
+    CERTAIN_ITEM_EDIT_VOCABULARY(CertainItemEditVocabularyCommand::class),
+    CERTAIN_ITEM_ENTER_FOLDER(CertainItemEnterFolderCommand::class),
+    CERTAIN_ITEM_EXPAND_OR_UNEXPAND(CertainItemExpandOrUnexpandCommand::class),
+
+    ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM(ItemListShowDialogFolderItemCommand::class),
+    ITEM_LIST_SHOW_DIALOG_VOCABULARY_ITEM_MASTER(ItemListShowDialogVocabularyItemMasterCommand::class),
+
+    ITEM_LIST_ADD_NEW_ITEMS(ItemListAddNewItemsCommand::class),
+    ITEM_LIST_BACK_TO_CERTAIN_FOLDER(ItemListBackToCertainFolderCommand::class),
+    ITEM_LIST_BACK_TO_PREVIOUS_FOLDER(ItemListBackToPreviousFolderCommand::class),
+    ITEM_LIST_LOAD_ALL_ITEMS(ItemListLoadAllItemsCommand::class)
+}

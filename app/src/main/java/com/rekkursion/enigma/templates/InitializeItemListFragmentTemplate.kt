@@ -13,10 +13,12 @@ import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolde
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEditVocabularyCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
+import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.fragments.ItemListFragment
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
@@ -45,7 +47,7 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
     /* =================================================================== */
 
     override fun onPathNodeClick(pathView: PathView, index: Int) {
-        CommandManager.doCommand(ItemListBackToCertainFolderCommand::class)
+        CommandManager.doCommand(CommandType.ITEM_LIST_BACK_TO_CERTAIN_FOLDER)
     }
 
     /* =================================================================== */
@@ -67,27 +69,30 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
 
         // initialize the context of the item recycler-view
         mItemRecvStateContext = RecvStateContext(mRecvItemList)
+        mItemRecvStateContext.fragment = mFragment
     }
 
     override fun initCommands() {
         // command of loading all items by de-serialization
-        CommandManager.putCommand(ItemListLoadAllItemsCommand::class, ItemListLoadAllItemsCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.ITEM_LIST_LOAD_ALL_ITEMS, ItemListLoadAllItemsCommand(mRecvItemList))
         // command of adding new items
-        CommandManager.putCommand(ItemListAddNewItemsCommand::class, ItemListAddNewItemsCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.ITEM_LIST_ADD_NEW_ITEMS, ItemListAddNewItemsCommand(mRecvItemList))
         // command of going back to the previous folder
-        CommandManager.putCommand(ItemListBackToPreviousFolderCommand::class, ItemListBackToPreviousFolderCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.ITEM_LIST_BACK_TO_PREVIOUS_FOLDER, ItemListBackToPreviousFolderCommand(mRecvItemList))
         // command of going back to a certain folder
-        CommandManager.putCommand(ItemListBackToCertainFolderCommand::class, ItemListBackToCertainFolderCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.ITEM_LIST_BACK_TO_CERTAIN_FOLDER, ItemListBackToCertainFolderCommand(mRecvItemList))
         // command of expanding or unexpanding a certain vocabulary-item
-        CommandManager.putCommand(CertainItemExpandOrUnexpandCommand::class, CertainItemExpandOrUnexpandCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.CERTAIN_ITEM_EXPAND_OR_UNEXPAND, CertainItemExpandOrUnexpandCommand(mRecvItemList))
         // command of entering a certain folder-item
-        CommandManager.putCommand(CertainItemEnterFolderCommand::class, CertainItemEnterFolderCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.CERTAIN_ITEM_ENTER_FOLDER, CertainItemEnterFolderCommand(mRecvItemList))
         // command of checking summary of a certain item (folder- or vocabulary- item)
-        CommandManager.putCommand(CertainItemCheckSummaryCommand::class, CertainItemCheckSummaryCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.CERTAIN_ITEM_CHECK_SUMMARY, CertainItemCheckSummaryCommand(mRecvItemList))
+        // command of editing a certain item which is a vocabulary-item
+        CommandManager.putCommand(CommandType.CERTAIN_ITEM_EDIT_VOCABULARY, CertainItemEditVocabularyCommand(mRecvItemList))
         // command of showing dialog for a folder-item in the recycler-view
-        CommandManager.putCommand(ItemListShowDialogFolderItemCommand::class, ItemListShowDialogFolderItemCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM, ItemListShowDialogFolderItemCommand(mRecvItemList))
         // command of showing dialog for a vocabulary-item-master in the recycler-view
-        CommandManager.putCommand(ItemListShowDialogVocabularyItemMasterCommand::class, ItemListShowDialogVocabularyItemMasterCommand(mRecvItemList))
+        CommandManager.putCommand(CommandType.ITEM_LIST_SHOW_DIALOG_VOCABULARY_ITEM_MASTER, ItemListShowDialogVocabularyItemMasterCommand(mRecvItemList))
     }
 
     override fun initEvents() {
@@ -127,6 +132,6 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
 
     override fun doAfterInitialization() {
         // load all saved items by de-serialization
-        CommandManager.doCommand(ItemListLoadAllItemsCommand::class)
+        CommandManager.doCommand(CommandType.ITEM_LIST_LOAD_ALL_ITEMS)
     }
 }

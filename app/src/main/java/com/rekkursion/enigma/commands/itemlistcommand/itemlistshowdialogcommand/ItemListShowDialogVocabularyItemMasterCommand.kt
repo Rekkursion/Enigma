@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.EditVocabularyActivity
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEditVocabularyCommand
+import com.rekkursion.enigma.enums.CommandType
+import com.rekkursion.enigma.fragments.ItemListFragment
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.states.PickingPathRecvState
 import com.rekkursion.enigma.states.RecvStateContext
@@ -22,12 +25,12 @@ class ItemListShowDialogVocabularyItemMasterCommand(recyclerView: RecyclerView):
             })
             // summary
             .addListItem(context.getString(R.string.str_vocabulary_item_master_list_dialog_summary), View.OnClickListener {
-                CommandManager.doCommand(CertainItemCheckSummaryCommand::class, position)
+                CommandManager.doCommand(CommandType.CERTAIN_ITEM_CHECK_SUMMARY, position)
             })
             // edit
             .addListItem(context.getString(R.string.str_vocabulary_item_master_list_dialog_edit), View.OnClickListener {
                 val intentToEditVocabularyActivity = Intent(context, EditVocabularyActivity::class.java)
-                context.startActivity(intentToEditVocabularyActivity)
+                stateContext.fragment?.startActivityForResult(intentToEditVocabularyActivity, ItemListFragment.REQ_GO_TO_EDIT_VOCABULARY_ACTIVITY)
             })
             // move
             .addListItem(context.getString(R.string.str_vocabulary_item_master_list_dialog_move), View.OnClickListener {

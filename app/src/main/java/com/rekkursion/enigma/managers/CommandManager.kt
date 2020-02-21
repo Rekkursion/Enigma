@@ -1,35 +1,31 @@
 package com.rekkursion.enigma.managers
 
 import com.rekkursion.enigma.commands.BaseCommand
+import com.rekkursion.enigma.enums.CommandType
 import kotlin.reflect.KClass
 
 object CommandManager {
     // the hash-map to store commands
-    private val mCommands = HashMap<String, BaseCommand>()
+    private val mCommands = HashMap<CommandType, BaseCommand>()
 
     /* =================================================================== */
 
     // put or replace a new command
-    fun putCommand(commandClass: KClass<*>, command: BaseCommand) {
-        mCommands[getSelector(commandClass)] = command
+    fun putCommand(commandType: CommandType, command: BaseCommand) {
+        mCommands[commandType] = command
     }
 
     // remove a command
-    fun removeCommand(commandClass: KClass<*>) {
-        if (hasCommand(commandClass))
-            mCommands.remove(getSelector(commandClass))
+    fun removeCommand(commandType: CommandType) {
+        if (hasCommand(commandType))
+            mCommands.remove(commandType)
     }
 
     // check if has a certain command or not
-    fun hasCommand(commandClass: KClass<*>): Boolean = mCommands.containsKey(getSelector(commandClass))
+    fun hasCommand(commandType: CommandType): Boolean = mCommands.containsKey(commandType)
 
     // do a command
-    fun doCommand(commandClass: KClass<*>, vararg args: Any?) {
-        mCommands[getSelector(commandClass)]?.execute(*args)
+    fun doCommand(commandType: CommandType, vararg args: Any?) {
+        mCommands[commandType]?.execute(*args)
     }
-
-    /* =================================================================== */
-
-    // convert a command-class into a selector for selecting the command from the hash-map
-    private fun getSelector(commandClass: KClass<*>): String = commandClass.java.name
 }

@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.commands.itemcardcommand.*
+import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.managers.CommandManager
@@ -53,7 +54,7 @@ class InitializeNewItemActivityTemplate(activity: AppCompatActivity):
             // first, set the result of result-ok
             mActivity.setResult(Activity.RESULT_OK)
             // create all items and store them in the new-item-list of new-item-manager
-            CommandManager.doCommand(ItemCardCreateItemsCommand::class, *(mLlyCardsContainer.children.toList().toTypedArray()))
+            CommandManager.doCommand(CommandType.ITEM_CARD_CREATE_ITEMS, *(mLlyCardsContainer.children.toList().toTypedArray()))
             // finish this activity
             mActivity.finish()
         }
@@ -78,15 +79,15 @@ class InitializeNewItemActivityTemplate(activity: AppCompatActivity):
 
     override fun initCommands() {
         // command of adding a new item-card
-        CommandManager.putCommand(ItemCardAddCommand::class, ItemCardAddCommand(mActivity, mLlyCardsContainer))
+        CommandManager.putCommand(CommandType.ITEM_CARD_ADD, ItemCardAddCommand(mActivity, mLlyCardsContainer))
         // command of removing a certain item-card
-        CommandManager.putCommand(ItemCardRemoveCommand::class, ItemCardRemoveCommand(mActivity, mLlyCardsContainer))
+        CommandManager.putCommand(CommandType.ITEM_CARD_REMOVE, ItemCardRemoveCommand(mActivity, mLlyCardsContainer))
         // command of going-up or going-down of a certain item-card
-        CommandManager.putCommand(ItemCardGoUpOrGoDownCommand::class, ItemCardGoUpOrGoDownCommand(mActivity, mLlyCardsContainer))
+        CommandManager.putCommand(CommandType.ITEM_CARD_GO_UP_OR_GO_DOWN, ItemCardGoUpOrGoDownCommand(mActivity, mLlyCardsContainer))
         // command of creating all items
-        CommandManager.putCommand(ItemCardCreateItemsCommand::class, ItemCardCreateItemsCommand(mActivity, mLlyCardsContainer))
+        CommandManager.putCommand(CommandType.ITEM_CARD_CREATE_ITEMS, ItemCardCreateItemsCommand(mActivity, mLlyCardsContainer))
         // command of validating if cards are all valid or not before the submission
-        CommandManager.putCommand(ItemCardValidateCommand::class, ItemCardValidateCommand(mActivity, mLlyCardsContainer))
+        CommandManager.putCommand(CommandType.ITEM_CARD_VALIDATE, ItemCardValidateCommand(mActivity, mLlyCardsContainer))
     }
 
     @SuppressLint("SetTextI18n")
@@ -119,12 +120,12 @@ class InitializeNewItemActivityTemplate(activity: AppCompatActivity):
 
     // add a new item card
     private fun addNewCard(itemType: ItemType) {
-        CommandManager.doCommand(ItemCardAddCommand::class, itemType, mCancelSubmitButtonBar, mBtnAddNewCard)
+        CommandManager.doCommand(CommandType.ITEM_CARD_ADD, itemType, mCancelSubmitButtonBar, mBtnAddNewCard)
     }
 
     // check if all fields are valid or not before the submission
     private fun validateFieldsBeforeSubmission(): Boolean {
-        CommandManager.doCommand(ItemCardValidateCommand::class, mItemType)
+        CommandManager.doCommand(CommandType.ITEM_CARD_VALIDATE, mItemType)
         val valid = ItemCardValidateCommand.validateResult == ItemCardValidateCommand.ValidationResult.VALID
         if (!valid)
             AlertDialog.Builder(mActivity)

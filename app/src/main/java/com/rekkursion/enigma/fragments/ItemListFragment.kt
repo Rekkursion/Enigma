@@ -1,6 +1,7 @@
 package com.rekkursion.enigma.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.Certain
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
+import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
@@ -40,6 +42,7 @@ class ItemListFragment: Fragment(), OnFragmentGoBackListener {
         // request codes
         internal const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER = 4731
         internal const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY = 5371
+        internal const val REQ_GO_TO_EDIT_VOCABULARY_ACTIVITY = 8620
     }
 
     /* =================================================================== */
@@ -69,16 +72,24 @@ class ItemListFragment: Fragment(), OnFragmentGoBackListener {
         // if back from new-item-activity
         if (requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER || requestCode == REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY) {
             // but the result-code is canceled, return directly
-            if (resultCode == Activity.RESULT_CANCELED) return
+            if (resultCode == Activity.RESULT_CANCELED)
+                return
+
             // add new items
-            CommandManager.doCommand(ItemListAddNewItemsCommand::class)
+            CommandManager.doCommand(CommandType.ITEM_LIST_ADD_NEW_ITEMS)
         }
+
+        // if back from edit-vocabulary-activity
+        else if (requestCode == REQ_GO_TO_EDIT_VOCABULARY_ACTIVITY) {
+            AlertDialog.Builder(context).setMessage("Good!!!!").show()
+        }
+
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     // is equivalent to activity's on-back-pressed
     override fun onGoBack(): Boolean {
-        CommandManager.doCommand(ItemListBackToPreviousFolderCommand::class)
+        CommandManager.doCommand(CommandType.ITEM_LIST_BACK_TO_PREVIOUS_FOLDER)
         return true
     }
 }

@@ -7,6 +7,12 @@ import com.rekkursion.enigma.commands.itemlistcommand.ItemListCommand
 import com.rekkursion.enigma.states.RecvStateContext
 
 abstract class ItemListShowDialogCommand(recyclerView: RecyclerView): ItemListCommand(recyclerView) {
+    /**
+     * @param args: varargs Any? {
+     *      1. RecvStateContext: the recv-state-context
+     *      2. Int: the position of the item in the recycler-view
+     * }
+     */
     override fun execute(vararg args: Any?) {
         val stateContext = args[0] as RecvStateContext
         val position = args[1] as Int

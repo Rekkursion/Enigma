@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.commands.fragmentcommand.FragmentSwitchCommand
+import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.fragments.ItemListFragment
 import com.rekkursion.enigma.managers.CommandManager
 
@@ -30,13 +31,13 @@ class InitializeMainActivityTemplate(activity: AppCompatActivity):
         return when (item.itemId) {
             // item list
             R.id.bnav_item_vocabulary_list -> {
-                CommandManager.doCommand(FragmentSwitchCommand::class, R.id.lly_fragment_root_at_main, mItemListFragment)
+                CommandManager.doCommand(CommandType.FRAGMENT_SWITCH, R.id.lly_fragment_root_at_main, mItemListFragment)
                 true
             }
 
             // practice
             R.id.bnav_item_practice -> {
-                CommandManager.doCommand(FragmentSwitchCommand::class, R.id.lly_fragment_root_at_main, mFragment)
+                CommandManager.doCommand(CommandType.FRAGMENT_SWITCH, R.id.lly_fragment_root_at_main, mFragment)
                 // TODO: practice
                 true
             }
@@ -66,7 +67,7 @@ class InitializeMainActivityTemplate(activity: AppCompatActivity):
 
     override fun initCommands() {
         // command of switching among fragments in main-activity
-        CommandManager.putCommand(FragmentSwitchCommand::class, FragmentSwitchCommand(mActivity.supportFragmentManager))
+        CommandManager.putCommand(CommandType.FRAGMENT_SWITCH, FragmentSwitchCommand(mActivity.supportFragmentManager))
     }
 
     override fun initEvents() {
@@ -76,7 +77,7 @@ class InitializeMainActivityTemplate(activity: AppCompatActivity):
 
     override fun doAfterInitialization() {
         // initially add the item-list-fragment
-        CommandManager.doCommand(FragmentSwitchCommand::class, R.id.lly_fragment_root_at_main, mItemListFragment)
+        CommandManager.doCommand(CommandType.FRAGMENT_SWITCH, R.id.lly_fragment_root_at_main, mItemListFragment)
 
     }
 }

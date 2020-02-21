@@ -5,6 +5,7 @@ import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.Certain
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
+import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.viewholders.BaseItemViewHolder
 
@@ -22,11 +23,11 @@ class GeneralRecvState private constructor(): RecvState {
         when (stateContext.recyclerView.adapter?.getItemViewType(position)) {
             // folder-item
             BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal ->
-                CommandManager.doCommand(CertainItemEnterFolderCommand::class, position)
+                CommandManager.doCommand(CommandType.CERTAIN_ITEM_ENTER_FOLDER, position)
 
             // vocabulary-item-master
             BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal ->
-                CommandManager.doCommand(CertainItemExpandOrUnexpandCommand::class, position)
+                CommandManager.doCommand(CommandType.CERTAIN_ITEM_EXPAND_OR_UNEXPAND, position)
         }
     }
 
@@ -38,9 +39,9 @@ class GeneralRecvState private constructor(): RecvState {
         val viewType = adapter.getItemViewType(position)
 
         if (viewType == BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal)
-            CommandManager.doCommand(ItemListShowDialogFolderItemCommand::class, stateContext, position)
+            CommandManager.doCommand(CommandType.ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM, stateContext, position)
         else if (viewType == BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal)
-            CommandManager.doCommand(ItemListShowDialogVocabularyItemMasterCommand::class, stateContext, position)
+            CommandManager.doCommand(CommandType.ITEM_LIST_SHOW_DIALOG_VOCABULARY_ITEM_MASTER, stateContext, position)
     }
 
     override fun toString(): String = "GENERAL_STATE"
