@@ -1,15 +1,16 @@
 package com.rekkursion.enigma.commands.itemcardcommand
 
+import android.content.Context
 import android.widget.EditText
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.rekkursion.enigma.R
-import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.views.itemcard.FolderItemCard
 import com.rekkursion.enigma.views.itemcard.VocabularyItemCard
 
-class ItemCardValidateCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
+class ItemCardValidateCommand(context: Context, cardContainer: LinearLayoutCompat): ItemCardCommand(context, cardContainer) {
     // the possible results of an item-card validation
     enum class ValidationResult(val warningStringId: Int) {
         VALID(0),
@@ -28,13 +29,21 @@ class ItemCardValidateCommand(newItemActivity: NewItemActivity): ItemCardCommand
 
     /* =================================================================== */
 
+    /**
+     * @param args: varargs Any? {
+     *      1. ItemType: the type of the item-card to be validated (folder-item-card or vocabulary-item-card)
+     * }
+     */
     override fun execute(vararg args: Any?) {
+        // the item-type to be validated
+        val itemType = args[0] as ItemType
+
         // for detecting duplicated items
         val mNameHashSet = HashSet<String>()
 
         // cards are the folder-item-cards
-        if (mNewItemActivityInstance.intent.getStringExtra(ItemType::name.toString()) == ItemType.FOLDER.name) {
-            mNewItemActivityInstance.mLlyCardsContainer.children.forEach { card ->
+        if (itemType == ItemType.FOLDER) {
+            mCardContainer.children.forEach { card ->
                 val allFields = (card as FolderItemCard).getAllFieldsContentViews()
                 val folderName = (allFields.getOrNull(1) as? EditText)?.text?.toString()
 
@@ -59,7 +68,7 @@ class ItemCardValidateCommand(newItemActivity: NewItemActivity): ItemCardCommand
         }
         // cards are the vocabulary-item-cards
         else {
-            mNewItemActivityInstance.mLlyCardsContainer.children.forEach { card ->
+            mCardContainer.children.forEach { card ->
                 val allFields = (card as VocabularyItemCard).getAllFieldsContentViews()
                 val english = (allFields.getOrNull(1) as? EditText)?.text?.toString()
 

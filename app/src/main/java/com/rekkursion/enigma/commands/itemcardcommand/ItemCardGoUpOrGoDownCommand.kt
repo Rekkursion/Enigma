@@ -1,10 +1,11 @@
 package com.rekkursion.enigma.commands.itemcardcommand
 
+import android.content.Context
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
-import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.views.itemcard.BaseItemCard
 
-class ItemCardGoUpOrGoDownCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
+class ItemCardGoUpOrGoDownCommand(context: Context, cardContainer: LinearLayoutCompat): ItemCardCommand(context, cardContainer) {
     /**
      * @param args: varargs Any? {
      *      1. BaseItemCard: the item-card which is about to be moved (go up or go down)
@@ -19,21 +20,21 @@ class ItemCardGoUpOrGoDownCommand(newItemActivity: NewItemActivity): ItemCardCom
 
     // go up
     private fun goUp(card: BaseItemCard) {
-        val indexOfThisCard = mNewItemActivityInstance.mLlyCardsContainer.indexOfChild(card)
+        val indexOfThisCard = mCardContainer.indexOfChild(card)
         if (indexOfThisCard <= 0) return
-        mNewItemActivityInstance.mLlyCardsContainer.removeViewAt(indexOfThisCard)
-        mNewItemActivityInstance.mLlyCardsContainer.addView(card, indexOfThisCard - 1)
-        (mNewItemActivityInstance.mLlyCardsContainer.getChildAt(indexOfThisCard) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 1))
-        (mNewItemActivityInstance.mLlyCardsContainer.getChildAt(indexOfThisCard - 1) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard))
+        mCardContainer.removeViewAt(indexOfThisCard)
+        mCardContainer.addView(card, indexOfThisCard - 1)
+        (mCardContainer.getChildAt(indexOfThisCard) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 1))
+        (mCardContainer.getChildAt(indexOfThisCard - 1) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard))
     }
 
     // go down
     private fun goDown(card: BaseItemCard) {
-        val indexOfThisCard = mNewItemActivityInstance.mLlyCardsContainer.indexOfChild(card)
-        if (indexOfThisCard < 0 || indexOfThisCard >= mNewItemActivityInstance.mLlyCardsContainer.children.toList().size - 1) return
-        mNewItemActivityInstance.mLlyCardsContainer.removeViewAt(indexOfThisCard)
-        mNewItemActivityInstance.mLlyCardsContainer.addView(card, indexOfThisCard + 1)
-        (mNewItemActivityInstance.mLlyCardsContainer.getChildAt(indexOfThisCard) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 1))
-        (mNewItemActivityInstance.mLlyCardsContainer.getChildAt(indexOfThisCard + 1) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 2))
+        val indexOfThisCard = mCardContainer.indexOfChild(card)
+        if (indexOfThisCard < 0 || indexOfThisCard >= mCardContainer.children.toList().size - 1) return
+        mCardContainer.removeViewAt(indexOfThisCard)
+        mCardContainer.addView(card, indexOfThisCard + 1)
+        (mCardContainer.getChildAt(indexOfThisCard) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 1))
+        (mCardContainer.getChildAt(indexOfThisCard + 1) as BaseItemCard).setTitle(String.format("%02d", indexOfThisCard + 2))
     }
 }

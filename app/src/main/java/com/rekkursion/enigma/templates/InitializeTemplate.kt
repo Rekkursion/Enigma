@@ -1,6 +1,6 @@
 package com.rekkursion.enigma.templates
 
-abstract class InitializeViewsTemplate {
+abstract class InitializeTemplate {
     // to be implemented: initialize views
     protected abstract fun initViews()
 

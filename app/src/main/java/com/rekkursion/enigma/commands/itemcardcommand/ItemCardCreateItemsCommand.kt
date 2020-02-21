@@ -1,8 +1,9 @@
 package com.rekkursion.enigma.commands.itemcardcommand
 
+import android.content.Context
 import android.view.View
 import android.widget.EditText
-import com.rekkursion.enigma.activities.NewItemActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.rekkursion.enigma.managers.NewItemManager
 import com.rekkursion.enigma.models.FolderItem
 import com.rekkursion.enigma.models.VocabularyItem
@@ -13,7 +14,7 @@ import com.rekkursion.exactratingbar.ExactRatingBar
 import com.rekkursion.pathview.PathView
 import com.rekkursion.tagview.TagCloud
 
-class ItemCardCreateItemsCommand(newItemActivity: NewItemActivity): ItemCardCommand(newItemActivity) {
+class ItemCardCreateItemsCommand(context: Context, cardContainer: LinearLayoutCompat): ItemCardCommand(context, cardContainer) {
     /**
      * @param args: varargs Any? -> varargs BaseItemCard (FolderItemCard or VocabularyItemCard)
      */

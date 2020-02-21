@@ -3,7 +3,7 @@ package com.rekkursion.enigma.templates
 import android.view.View
 import androidx.fragment.app.Fragment
 
-abstract class InitializeFragmentTemplate(fragment: Fragment, rootView: View): InitializeViewsTemplate() {
+abstract class InitializeFragmentTemplate(fragment: Fragment, rootView: View): InitializeTemplate() {
     // the fragment to be initialized
     protected val mFragment = fragment
 

@@ -1,9 +1,13 @@
 package com.rekkursion.enigma.commands.itemcardcommand
 
-import com.rekkursion.enigma.activities.NewItemActivity
+import android.content.Context
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.rekkursion.enigma.commands.BaseCommand
 
-abstract class ItemCardCommand(newItemActivity: NewItemActivity): BaseCommand {
-    // the new-item-activity
-    val mNewItemActivityInstance: NewItemActivity = newItemActivity
+abstract class ItemCardCommand(context: Context, cardContainer: LinearLayoutCompat): BaseCommand {
+    // the context
+    val mContext: Context = context
+
+    // the container of item-cards
+    val mCardContainer: LinearLayoutCompat = cardContainer
 }
