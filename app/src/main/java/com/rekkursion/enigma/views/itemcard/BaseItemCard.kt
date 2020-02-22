@@ -9,7 +9,6 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.listeners.OnActionsClickListener
-import com.rekkursion.enigma.listeners.OnItemCardCloseListener
 import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.models.BaseItem
 import com.rekkursion.enigma.views.ActionsTitleImageButtonBar

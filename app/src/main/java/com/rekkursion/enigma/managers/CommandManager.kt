@@ -2,7 +2,6 @@ package com.rekkursion.enigma.managers
 
 import com.rekkursion.enigma.commands.BaseCommand
 import com.rekkursion.enigma.enums.CommandType
-import kotlin.reflect.KClass
 
 object CommandManager {
     // the hash-map to store commands

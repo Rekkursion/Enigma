@@ -1,10 +1,6 @@
 package com.rekkursion.enigma.states
 
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
-import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
-import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
 import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.viewholders.BaseItemViewHolder

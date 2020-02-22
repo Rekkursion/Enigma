@@ -1,15 +1,10 @@
 package com.rekkursion.enigma.templates
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.managers.CommandManager
-import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
 import com.rekkursion.enigma.views.itemcard.VocabularyItemCard

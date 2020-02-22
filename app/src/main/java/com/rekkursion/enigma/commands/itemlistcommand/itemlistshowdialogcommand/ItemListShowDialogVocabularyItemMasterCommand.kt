@@ -3,14 +3,12 @@ package com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.EditVocabularyActivity
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.enums.CommandType
-import com.rekkursion.enigma.fragments.ItemListFragment
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.states.PickingPathRecvState

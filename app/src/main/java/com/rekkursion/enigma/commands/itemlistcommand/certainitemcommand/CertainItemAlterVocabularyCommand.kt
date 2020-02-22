@@ -1,12 +1,11 @@
 package com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand
 
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.models.BaseItem
 
-class CertainItemEditVocabularyCommand(recyclerView: RecyclerView): CertainItemCommand(recyclerView) {
+class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItemCommand(recyclerView) {
     /**
      * @param args: *no parameters*
      */

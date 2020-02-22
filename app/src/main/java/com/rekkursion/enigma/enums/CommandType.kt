@@ -7,7 +7,7 @@ import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolde
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEditVocabularyCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemAlterVocabularyCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
@@ -24,7 +24,7 @@ enum class CommandType(val kClass: KClass<*>) {
     ITEM_CARD_VALIDATE(ItemCardValidateCommand::class),
 
     CERTAIN_ITEM_CHECK_SUMMARY(CertainItemCheckSummaryCommand::class),
-    CERTAIN_ITEM_EDIT_VOCABULARY(CertainItemEditVocabularyCommand::class),
+    CERTAIN_ITEM_EDIT_VOCABULARY(CertainItemAlterVocabularyCommand::class),
     CERTAIN_ITEM_ENTER_FOLDER(CertainItemEnterFolderCommand::class),
     CERTAIN_ITEM_EXPAND_OR_UNEXPAND(CertainItemExpandOrUnexpandCommand::class),
 

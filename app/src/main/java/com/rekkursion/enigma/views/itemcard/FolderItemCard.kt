@@ -7,7 +7,6 @@ import com.rekkursion.enigma.R
 import com.rekkursion.enigma.models.BaseItem
 import com.rekkursion.enigma.models.FolderItem
 import com.rekkursion.enigma.views.ItemCardField
-import com.rekkursion.pathview.PathView
 
 class FolderItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCard(context, attrs) {
     // the edit-text of the folder name field

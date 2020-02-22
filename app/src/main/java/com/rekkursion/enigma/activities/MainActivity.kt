@@ -1,9 +1,9 @@
 package com.rekkursion.enigma.activities
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.templates.InitializeMainActivityTemplate
 import com.rekkursion.enigma.utils.GoBackListenerUtils

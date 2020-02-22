@@ -1,7 +1,6 @@
 package com.rekkursion.enigma.utils
 
 import java.io.*
-import java.lang.ClassCastException
 
 @Suppress("UNCHECKED_CAST")
 object SerializationUtils {

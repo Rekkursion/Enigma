@@ -1,38 +1,18 @@
 package com.rekkursion.enigma.fragments
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
+import androidx.fragment.app.Fragment
 import com.rekkursion.enigma.R
-import com.rekkursion.enigma.activities.NewItemActivity
-import com.rekkursion.enigma.commands.itemlistcommand.*
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
-import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
-import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
 import com.rekkursion.enigma.enums.CommandType
-import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
-import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
-import com.rekkursion.enigma.managers.PathManager
-import com.rekkursion.enigma.models.VocabularyItem
-import com.rekkursion.enigma.states.RecvStateContext
-import com.rekkursion.enigma.templates.InitializeFragmentTemplate
 import com.rekkursion.enigma.templates.InitializeItemListFragmentTemplate
-import com.rekkursion.pathview.OnPathNodeClickListener
-import com.rekkursion.pathview.PathView
 
 class ItemListFragment: Fragment(), OnFragmentGoBackListener {
     // static scope

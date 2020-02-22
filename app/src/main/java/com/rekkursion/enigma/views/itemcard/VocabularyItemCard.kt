@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.widget.EditText
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.models.BaseItem
-import com.rekkursion.enigma.models.FolderItem
 import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.views.ItemCardField
 import com.rekkursion.enigma.views.MeaningSettingFieldContentView

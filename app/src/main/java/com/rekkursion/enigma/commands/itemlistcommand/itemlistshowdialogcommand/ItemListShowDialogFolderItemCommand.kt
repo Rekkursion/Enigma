@@ -4,8 +4,6 @@ import android.app.AlertDialog
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
 import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.states.PickingPathRecvState
