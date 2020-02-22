@@ -13,9 +13,9 @@ abstract class CertainItemCommand(recyclerView: RecyclerView): ItemListCommand(r
      */
     final override fun execute(vararg args: Any?) {
         val position = args[0] as Int
-        executeAt(position)
+        executeAt(position, *(args.copyOfRange(1, args.size)))
     }
 
     // and replace it with a method whose parameter is a single Int which means the position of the recycler-view
-    abstract fun executeAt(position: Int)
+    abstract fun executeAt(position: Int, vararg args: Any?)
 }

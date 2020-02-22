@@ -98,6 +98,23 @@ class MeaningSettingView(context: Context, attrs: AttributeSet? = null): LinearL
         mActionsBar.setOnActionsClickListener(onActionsClickListener)
     }
 
+    // set the data by a model of meaning
+    fun setDataByMeaningModel(meaning: Meaning?) {
+        meaning?.let {
+            mSelectedPartOfSpeech = it.partOfSpeech
+            mBtnSelectPartOfSpeech.text = it.partOfSpeech.abbr
+
+            mEdtChinese.setText(it.chinese)
+
+            mEdtNotes.setText(it.notes)
+
+            mSentencesContainer.removeAllViews()
+            it.exampleSentenceListCopied.forEach { sentence ->
+                mSentencesContainer.addView(SentenceView(context, sentence))
+            }
+        }
+    }
+
     // create a new meaning model
     fun createMeaningModel(): Meaning = Meaning(
         mSelectedPartOfSpeech,

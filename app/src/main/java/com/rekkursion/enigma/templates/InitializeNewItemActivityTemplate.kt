@@ -3,7 +3,6 @@ package com.rekkursion.enigma.templates
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ClipData
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -54,7 +53,7 @@ class InitializeNewItemActivityTemplate(activity: AppCompatActivity):
             // first, set the result of result-ok
             mActivity.setResult(Activity.RESULT_OK)
             // create all items and store them in the new-item-list of new-item-manager
-            CommandManager.doCommand(CommandType.ITEM_CARD_CREATE_ITEMS, *(mLlyCardsContainer.children.toList().toTypedArray()))
+            CommandManager.doCommand(CommandType.ITEM_CARD_CREATE_ITEMS_AND_STORE_THEM_IN_NEW_ITEM_MANAGER, *(mLlyCardsContainer.children.toList().toTypedArray()))
             // finish this activity
             mActivity.finish()
         }
@@ -85,7 +84,7 @@ class InitializeNewItemActivityTemplate(activity: AppCompatActivity):
         // command of going-up or going-down of a certain item-card
         CommandManager.putCommand(CommandType.ITEM_CARD_GO_UP_OR_GO_DOWN, ItemCardGoUpOrGoDownCommand(mActivity, mLlyCardsContainer))
         // command of creating all items
-        CommandManager.putCommand(CommandType.ITEM_CARD_CREATE_ITEMS, ItemCardCreateItemsCommand(mActivity, mLlyCardsContainer))
+        CommandManager.putCommand(CommandType.ITEM_CARD_CREATE_ITEMS_AND_STORE_THEM_IN_NEW_ITEM_MANAGER, ItemCardCreateItemsAndStoreThemInNewItemManagerCommand(mActivity, mLlyCardsContainer))
         // command of validating if cards are all valid or not before the submission
         CommandManager.putCommand(CommandType.ITEM_CARD_VALIDATE, ItemCardValidateCommand(mActivity, mLlyCardsContainer))
     }

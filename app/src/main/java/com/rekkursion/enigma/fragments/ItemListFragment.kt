@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import com.rekkursion.enigma.listeners.OnFragmentGoBackListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.managers.PathManager
+import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.states.RecvStateContext
 import com.rekkursion.enigma.templates.InitializeFragmentTemplate
 import com.rekkursion.enigma.templates.InitializeItemListFragmentTemplate
@@ -42,7 +44,6 @@ class ItemListFragment: Fragment(), OnFragmentGoBackListener {
         // request codes
         internal const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_FOLDER = 4731
         internal const val REQ_GO_TO_NEW_ITEM_ACTIVITY_FOR_NEW_VOCABULARY = 5371
-        internal const val REQ_GO_TO_EDIT_VOCABULARY_ACTIVITY = 8620
     }
 
     /* =================================================================== */
@@ -77,11 +78,6 @@ class ItemListFragment: Fragment(), OnFragmentGoBackListener {
 
             // add new items
             CommandManager.doCommand(CommandType.ITEM_LIST_ADD_NEW_ITEMS)
-        }
-
-        // if back from edit-vocabulary-activity
-        else if (requestCode == REQ_GO_TO_EDIT_VOCABULARY_ACTIVITY) {
-            AlertDialog.Builder(context).setMessage("Good!!!!").show()
         }
 
         super.onActivityResult(requestCode, resultCode, data)

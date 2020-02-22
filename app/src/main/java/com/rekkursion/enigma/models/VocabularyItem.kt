@@ -60,6 +60,21 @@ class VocabularyItem(
     // get the summary of this vocabulary-item
     override fun getSummary(context: Context): String = getBaseSummary(context)
 
+    // alter the data from another vocabulary-item
+    override fun alterFrom(another: BaseItem) {
+        if (another !is VocabularyItem) return
+
+        super.alterFrom(another)
+        mEnglish = another.mEnglish
+        mMeaningList.clear()
+        mMeaningList.addAll(another.meaningListCopied)
+        mProficiency = another.mProficiency
+        mRemark = another.mRemark
+        mTagList.clear()
+        mTagList.addAll(another.tagListCopied)
+        mIsExpanded = another.mIsExpanded
+    }
+
     /* =================================================================== */
 
     // get the meaning by a certain index

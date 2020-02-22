@@ -23,6 +23,7 @@ abstract class BaseItem: Serializable {
 
     // the unique id of every instance
     protected val mId: String = UUID.randomUUID().toString()
+    val id get() = mId
 
     // the item-type (FOLDER or VOCABULARY)
     protected abstract val mItemType: ItemType
@@ -59,6 +60,19 @@ abstract class BaseItem: Serializable {
         "${context.getString(R.string.str_base_item_summary_item_type)}${if (mItemType == ItemType.FOLDER) context.getString(R.string.str_folder) else context.getString(R.string.str_vocabulary)}\n" +
         "${context.getString(R.string.str_base_item_summary_path)}root$PATH_SEPARATOR$pathString${if (pathString.isEmpty()) "" else PATH_SEPARATOR}\n" +
         "${context.getString(R.string.str_base_item_summary_create_time)}${mCreateLocalDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN))}"
+
+    /* =================================================================== */
+
+    // alter the data from another base-item
+    open fun alterFrom(another: BaseItem) {
+        if (mItemType != another.mItemType)
+            return
+
+        mPathNodes.clear()
+        mPathNodes.addAll(another.pathNodesCopied)
+        mLastModifiedLocalDateTime = another.mLastModifiedLocalDateTime
+        mChakanCount = another.mChakanCount
+    }
 
     /* =================================================================== */
 

@@ -11,6 +11,7 @@ import com.rekkursion.enigma.R
 import com.rekkursion.enigma.listeners.OnActionsClickListener
 import com.rekkursion.enigma.listeners.OnItemCardCloseListener
 import com.rekkursion.enigma.managers.PathManager
+import com.rekkursion.enigma.models.BaseItem
 import com.rekkursion.enigma.views.ActionsTitleImageButtonBar
 import com.rekkursion.enigma.views.ItemCardField
 import com.rekkursion.pathview.PathView
@@ -21,7 +22,7 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
     protected lateinit var mPathView: PathView
 
     // the actions bar
-    protected val mActionsBar: ActionsTitleImageButtonBar
+    private val mActionsBar: ActionsTitleImageButtonBar
 
     // the linear-layout for placing all fields
     protected val mLlyFieldsContainer: LinearLayoutCompat
@@ -55,11 +56,17 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
 
     /* =================================================================== */
 
-    // initialize all fields which are to be set
-    protected abstract fun initFields()
+    // initialize all content views which are to be set
+    protected abstract fun initContentViews()
+
+    // set the data of all content views by a model of item
+    protected abstract fun setDataOfContentViewsByItemModel(item: BaseItem? = null)
 
     // set the fields determined by the type of the item, i.e., folder or vocabulary
     protected abstract fun setFields()
+
+    // create an item model
+    abstract fun createItemModel(): BaseItem
 
     /* =================================================================== */
 
@@ -71,6 +78,16 @@ abstract class BaseItemCard(context: Context, attrs: AttributeSet?): FrameLayout
     // set the title of actions-title-bar
     fun setTitle(title: String) {
         mActionsBar.setTitle(title)
+    }
+
+    // show the actions-bar
+    fun showActionsBar() {
+        mActionsBar.visibility = View.VISIBLE
+    }
+
+    // hide the actions-bar
+    fun hideActionsBar() {
+        mActionsBar.visibility = View.GONE
     }
 
     // get content views of all fields

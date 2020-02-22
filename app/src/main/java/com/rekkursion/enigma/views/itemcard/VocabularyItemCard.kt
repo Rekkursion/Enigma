@@ -4,6 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.EditText
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.models.BaseItem
+import com.rekkursion.enigma.models.FolderItem
+import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.views.ItemCardField
 import com.rekkursion.enigma.views.MeaningSettingFieldContentView
 import com.rekkursion.exactratingbar.ExactRatingBar
@@ -32,15 +35,15 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
     // primary constructor
     init {
         // initialize fields prior to the step of set
-        initFields()
+        initContentViews()
         // after the initialization of all fields, set them
         setFields()
     }
 
     /* =================================================================== */
 
-    // initialize all fields of a vocabulary-item-card
-    override fun initFields() {
+    // initialize all content views of a vocabulary-item-card
+    override fun initContentViews() {
         // the edit-text of the english field
         mEdtEnglish = EditText(context)
         mEdtEnglish.isSingleLine = true
@@ -61,6 +64,20 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
         // the tag-cloud to let the user to add tags for this vocabulary
         mTagCloud = TagCloud(context)
         mTagCloud.possibleBackgroundColors = hashSetOf(TagView.DefaultBackgroundColor.YELLOW.color)
+    }
+
+    // set the data of all content views by a model of vocabulary-item
+    public override fun setDataOfContentViewsByItemModel(item: BaseItem?) {
+        if (item == null || item !is VocabularyItem)
+            return
+
+        mPathView.clear()
+        mPathView.pushAll(item.pathNodesCopied)
+        mEdtEnglish.setText(item.english)
+        item.meaningListCopied.forEach { mMeaningSettingFieldContentView.addMeaningSettingView(it) }
+        mErbProficiency.currentValue = item.proficiency
+        mEdtRemark.setText(item.remark)
+        item.tagListCopied.forEach { mTagCloud.addTag(it) }
     }
 
     // set all fields of a folder-item-card
@@ -107,4 +124,14 @@ class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseIte
             .create()
         mLlyFieldsContainer.addView(tagsField)
     }
+
+    // create a model of folder-item
+    override fun createItemModel(): BaseItem = VocabularyItem(
+        mPathView.getAllPathNodes(),
+        mEdtEnglish.text.toString(),
+        mMeaningSettingFieldContentView.getAllMeanings(),
+        mErbProficiency.currentValue,
+        mEdtRemark.text.toString(),
+        mTagCloud.getAllTagStrings().toCollection(ArrayList())
+    )
 }

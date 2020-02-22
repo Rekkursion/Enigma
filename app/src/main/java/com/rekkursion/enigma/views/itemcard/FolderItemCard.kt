@@ -4,7 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.EditText
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.models.BaseItem
+import com.rekkursion.enigma.models.FolderItem
 import com.rekkursion.enigma.views.ItemCardField
+import com.rekkursion.pathview.PathView
 
 class FolderItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCard(context, attrs) {
     // the edit-text of the folder name field
@@ -15,7 +18,7 @@ class FolderItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCar
     // primary constructor
     init {
         // initialize fields prior to the step of set
-        initFields()
+        initContentViews()
         // after the initialization of all fields, set them
         setFields()
     }
@@ -23,10 +26,20 @@ class FolderItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCar
     /* =================================================================== */
 
     // initialize all fields of a folder-item-card
-    override fun initFields() {
+    override fun initContentViews() {
         // the edit-text of the folder name field
         mEdtFolderName = EditText(context)
         mEdtFolderName.isSingleLine = true
+    }
+
+    // set the data of all content views by a model of folder-item
+    override fun setDataOfContentViewsByItemModel(item: BaseItem?) {
+        if (item == null || item !is FolderItem)
+            return
+
+        mPathView.clear()
+        mPathView.pushAll(item.pathNodesCopied)
+        mEdtFolderName.setText(item.folderName)
     }
 
     // set all fields of a folder-item-card
@@ -45,4 +58,10 @@ class FolderItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCar
             .create()
         mLlyFieldsContainer.addView(folderNameField)
     }
+
+    // create a model of folder-item
+    override fun createItemModel(): BaseItem = FolderItem(
+        mPathView.getAllPathNodes(),
+        mEdtFolderName.text.toString()
+    )
 }

@@ -51,6 +51,18 @@ class FolderItem(
         "${context.getString(R.string.str_base_item_summary_num_of_folders_prefix)}$numOfFolders${context.getString(R.string.str_base_item_summary_num_of_folders_suffix)}" +
         "${context.getString(R.string.str_base_item_summary_num_of_vocabularies_prefix)}$numOfVocabularies${context.getString(R.string.str_base_item_summary_num_of_vocabularies_suffix)}"
 
+    // alter the data from another folder-item
+    override fun alterFrom(another: BaseItem) {
+        if (another !is FolderItem) return
+
+        super.alterFrom(another)
+        mFolderName = another.folderName
+        mFolderList.clear()
+        mFolderList.addAll(another.folderListCopied)
+        mVocabularyList.clear()
+        mVocabularyList.addAll(another.vocabularyListCopied)
+    }
+
     /* =================================================================== */
 
     // add a folder-item

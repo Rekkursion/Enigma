@@ -18,7 +18,7 @@ enum class CommandType(val kClass: KClass<*>) {
     FRAGMENT_SWITCH(FragmentSwitchCommand::class),
 
     ITEM_CARD_ADD(ItemCardAddCommand::class),
-    ITEM_CARD_CREATE_ITEMS(ItemCardCreateItemsCommand::class),
+    ITEM_CARD_CREATE_ITEMS_AND_STORE_THEM_IN_NEW_ITEM_MANAGER(ItemCardCreateItemsAndStoreThemInNewItemManagerCommand::class),
     ITEM_CARD_GO_UP_OR_GO_DOWN(ItemCardGoUpOrGoDownCommand::class),
     ITEM_CARD_REMOVE(ItemCardRemoveCommand::class),
     ITEM_CARD_VALIDATE(ItemCardValidateCommand::class),

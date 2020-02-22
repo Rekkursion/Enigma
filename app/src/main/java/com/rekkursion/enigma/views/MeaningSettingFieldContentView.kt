@@ -29,15 +29,19 @@ class MeaningSettingFieldContentView(context: Context, attrs: AttributeSet? = nu
         mBtnAddMeaningSettingView = findViewById(R.id.btn_add_new_meaning_setting_view_at_meaning_setting_field_content_view)
 
         // set events
-        mBtnAddMeaningSettingView.setOnClickListener { addMeaningSettingView() }
+        mBtnAddMeaningSettingView.setOnClickListener { addMeaningSettingView(null) }
     }
 
     /* =================================================================== */
 
     // add a new meaning-setting-view
-    private fun addMeaningSettingView() {
+    fun addMeaningSettingView(meaning: Meaning?) {
         // create a new meaning-setting-view
         val meaningSettingView = MeaningSettingView(context)
+
+        // set the data by a meaning model
+        meaningSettingView.setDataByMeaningModel(meaning)
+
         // set the actions of this new meaning-setting-view
         meaningSettingView.setOnActionsClickListener(object: OnActionsClickListener {
             override fun onGoUpClickListener() {
@@ -60,6 +64,7 @@ class MeaningSettingFieldContentView(context: Context, attrs: AttributeSet? = nu
                 mLlyMeaningSettingViewsContainer.removeViewAt(indexOfThisView)
             }
         })
+
         // add it into the container
         mLlyMeaningSettingViewsContainer.addView(meaningSettingView)
     }
