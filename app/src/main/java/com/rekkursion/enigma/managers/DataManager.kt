@@ -75,12 +75,6 @@ object DataManager {
         if (shouldUpdatePathManagersItemListForRecv) PathManager.updateListForRecv()
     }
 
-    // alter a certain item which has been edited
-    fun alterCertainItemAt(position: Int, item: BaseItem) {
-//        val itemInList = mBaseItemHashMap[item.pathString]?.getOrNull(position) ?: return
-//        itemInList.alterFrom(item)
-    }
-
     // get all items at a certain path
     fun getAllItemsAtCertainPath(pathString: String): ArrayList<BaseItem> = mBaseItemHashMap.getOrDefault(pathString, arrayListOf())
 
