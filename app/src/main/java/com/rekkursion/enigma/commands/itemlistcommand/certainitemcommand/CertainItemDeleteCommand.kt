@@ -1,14 +1,12 @@
 package com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand
 
 import android.app.AlertDialog
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.models.FolderItem
-import com.rekkursion.enigma.models.VocabularyItem
 
 class CertainItemDeleteCommand(recyclerView: RecyclerView): CertainItemCommand(recyclerView) {
     override fun executeAt(position: Int, vararg args: Any?) {
@@ -21,7 +19,7 @@ class CertainItemDeleteCommand(recyclerView: RecyclerView): CertainItemCommand(r
                 .setTitle(
                     context.getString(R.string.str_attention_of_removing_item_dialog_title_prefix) +
                             if (baseItem is FolderItem) context.getString(R.string.str_folder) else context.getString(R.string.str_vocabulary) +
-                            " \"${baseItem.getIdentifier()}\"" +
+                            " \"${baseItem.getName()}\"" +
                             context.getString(R.string.str_attention_of_removing_item_dialog_title_suffix)
                 )
                 .setMessage(context.getString(R.string.str_attention_of_removing_item_dialog_message))
@@ -40,7 +38,7 @@ class CertainItemDeleteCommand(recyclerView: RecyclerView): CertainItemCommand(r
                             "${if (baseItem is FolderItem)
                                 context.getString(R.string.str_folder)
                             else
-                                context.getString(R.string.str_vocabulary)} \"${baseItem.getIdentifier()}\"" +
+                                context.getString(R.string.str_vocabulary)} \"${baseItem.getName()}\"" +
                         context.getString(R.string.str_snack_bar_remove_item_suffix),
                         Snackbar.LENGTH_SHORT
                     ).show()

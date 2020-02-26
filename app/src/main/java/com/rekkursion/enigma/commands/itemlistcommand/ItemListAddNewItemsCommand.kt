@@ -30,9 +30,9 @@ class ItemListAddNewItemsCommand(recyclerView: RecyclerView): ItemListCommand(re
                             NewItemManager.newItemList.size.toString() +
                             context.getString(R.string.str_snack_bar_add_vocabularies_suffix)
                 else
-                    context.getString(R.string.str_snack_bar_add_vocabularies_prefix) +
+                    context.getString(R.string.str_snack_bar_add_folders_prefix) +
                             NewItemManager.newItemList.size.toString() +
-                            context.getString(R.string.str_snack_bar_add_vocabularies_suffix),
+                            context.getString(R.string.str_snack_bar_add_folders_suffix),
                 Snackbar.LENGTH_SHORT
             ).show()
         }

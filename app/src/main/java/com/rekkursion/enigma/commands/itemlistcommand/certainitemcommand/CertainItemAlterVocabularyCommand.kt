@@ -27,7 +27,7 @@ class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItem
         Snackbar.make(
             mRecvItemList,
             context.getString(R.string.str_snack_bar_edit_vocabulary_prefix) +
-                    itemInList.getIdentifier() +
+                    itemInList.getName() +
                     context.getString(R.string.str_snack_bar_edit_vocabulary_suffix),
             Snackbar.LENGTH_SHORT
         ).show()

@@ -43,7 +43,7 @@ class FolderItem(
     /* =================================================================== */
 
     // get the identifier of this folder-item (folder name)
-    override fun getIdentifier(): String = mFolderName
+    override fun getName(): String = mFolderName
 
     // get the summary of this folder-item
     override fun getSummary(context: Context): String =

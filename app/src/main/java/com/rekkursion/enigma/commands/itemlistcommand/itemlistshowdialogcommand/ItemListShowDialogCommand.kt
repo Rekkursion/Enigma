@@ -24,7 +24,7 @@ abstract class ItemListShowDialogCommand(recyclerView: RecyclerView): ItemListCo
         val item = adapter.getBaseItemAndItsTruePosition(position).first
 
         // create the list-dialog and show it
-        createListDialog(stateContext, item.getIdentifier(), position).show()
+        createListDialog(stateContext, item.getName(), position).show()
     }
 
     abstract fun createListDialog(stateContext: RecvStateContext, dialogTitle: String, position: Int): AlertDialog

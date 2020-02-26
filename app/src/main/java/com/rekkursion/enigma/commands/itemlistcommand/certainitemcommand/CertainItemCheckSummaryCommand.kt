@@ -14,7 +14,7 @@ class CertainItemCheckSummaryCommand(recyclerView: RecyclerView): CertainItemCom
         val baseItem = (mRecvItemList.adapter as? ItemRecyclerViewAdapter)?.getBaseItemAndItsTruePosition(position)?.first
         baseItem?.let {
             AlertDialog.Builder(mRecvItemList.context)
-                .setTitle(baseItem.getIdentifier())
+                .setTitle(baseItem.getName())
                 .setMessage(baseItem.getSummary(mRecvItemList.context))
                 .setPositiveButton(mRecvItemList.context.getString(R.string.str_ok), null)
                 .create()

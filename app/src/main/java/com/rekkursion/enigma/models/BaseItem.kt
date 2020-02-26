@@ -47,8 +47,8 @@ abstract class BaseItem: Serializable {
 
     /* =================================================================== */
 
-    // get the identifier of this item
-    abstract fun getIdentifier(): String
+    // get the name of this item
+    abstract fun getName(): String
 
     // get the summary of this item
     abstract fun getSummary(context: Context): String
