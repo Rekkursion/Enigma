@@ -12,10 +12,7 @@ import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemAlterVocabularyCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
 import com.rekkursion.enigma.enums.CommandType
@@ -89,6 +86,8 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
         CommandManager.putCommand(CommandType.CERTAIN_ITEM_CHECK_SUMMARY, CertainItemCheckSummaryCommand(mRecvItemList))
         // command of editing a certain item which is a vocabulary-item
         CommandManager.putCommand(CommandType.CERTAIN_ITEM_EDIT_VOCABULARY, CertainItemAlterVocabularyCommand(mRecvItemList))
+        // command of deleting a certain item (folder- or vocabulary- item)
+        CommandManager.putCommand(CommandType.CERTAIN_ITEM_DELETE, CertainItemDeleteCommand(mRecvItemList))
         // command of showing dialog for a folder-item in the recycler-view
         CommandManager.putCommand(CommandType.ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM, ItemListShowDialogFolderItemCommand(mRecvItemList))
         // command of showing dialog for a vocabulary-item-master in the recycler-view

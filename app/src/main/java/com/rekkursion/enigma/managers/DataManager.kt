@@ -75,6 +75,16 @@ object DataManager {
         if (shouldUpdatePathManagersItemListForRecv) PathManager.updateListForRecv()
     }
 
+    // remove a certain item
+    fun removeItem(item: BaseItem) {
+        val list = mBaseItemHashMap[item.pathString]
+        val itemInList = list?.find { it == item }
+        itemInList?.let {
+            list.remove(itemInList)
+            PathManager.updateListForRecv()
+        }
+    }
+
     // get all items at a certain path
     fun getAllItemsAtCertainPath(pathString: String): ArrayList<BaseItem> = mBaseItemHashMap.getOrDefault(pathString, arrayListOf())
 

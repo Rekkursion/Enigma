@@ -45,6 +45,12 @@
     <string name="str_attention_of_invalid_duplicated_new_folders">欲新增的所有分類夾中有名稱重複的情況</string>
     <!--<string name="str_attention_of_invalid_duplicated_new_vocabularies">There\'re duplicated words among your new vocabularies.</string>-->
     <string name="str_attention_of_invalid_duplicated_new_vocabularies">欲新增的所有單字中有名字重複的情況</string>
+    <!--<string name="str_attention_of_removing_item_dialog_title_prefix">Are you sure you want to remove this&#160;</string>-->
+    <string name="str_attention_of_removing_item_dialog_title_prefix">確定要永久刪除這個</string>
+    <!--<string name="str_attention_of_removing_item_dialog_title_suffix">&#160;\?</string>-->
+    <string name="str_attention_of_removing_item_dialog_title_suffix">&#160;嗎？</string>
+    <!--<string name="str_attention_of_removing_item_dialog_message">It will be removed permanently and this action CANNOT be cancelled.</string>-->
+    <string name="str_attention_of_removing_item_dialog_message">此動作將無法復原。</string>
 
     <!--<string name="str_cancel">Cancel</string>-->
     <string name="str_cancel">取消</string>
@@ -148,4 +154,8 @@
     <string name="str_snack_bar_edit_vocabulary_prefix">單字&#160;</string>
     <!--<string name="str_snack_bar_edit_vocabulary_suffix">\"&#160;has been edited successfully.</string>-->
     <string name="str_snack_bar_edit_vocabulary_suffix">&#160;編輯成功</string>
+    <!--<string name="str_snack_bar_remove_item_prefix">The&#160;</string>-->
+    <string name="str_snack_bar_remove_item_prefix" />
+    <!--<string name="str_snack_bar_remove_item_suffix">&#160;has been removed successfully.</string>-->
+    <string name="str_snack_bar_remove_item_suffix">&#160;刪除成功</string>
 </resources>

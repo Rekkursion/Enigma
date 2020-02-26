@@ -20,7 +20,7 @@ class ItemListAddNewItemsCommand(recyclerView: RecyclerView): ItemListCommand(re
             // update the adapter of the recycler-view
             changeAdapter()
 
-            // show the snack-bar to let the user know the adding operation is successful
+            // show the snack-bar to let the user know the adding operation is succeed
             val context = mRecvItemList.context
             val itemType = NewItemManager.newItemList[0].type
             Snackbar.make(

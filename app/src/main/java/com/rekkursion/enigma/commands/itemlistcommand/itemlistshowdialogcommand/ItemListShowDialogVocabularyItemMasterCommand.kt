@@ -56,7 +56,8 @@ class ItemListShowDialogVocabularyItemMasterCommand(recyclerView: RecyclerView):
 
             // delete
             .addListItem(context.getString(R.string.str_vocabulary_item_master_list_dialog_delete), View.OnClickListener {
-
+                // delete this vocabulary-item
+                CommandManager.doCommand(CommandType.CERTAIN_ITEM_DELETE, position)
             })
 
             .setTitle(dialogTitle)

@@ -22,7 +22,7 @@ class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItem
         // update the adapter of the recycler-view
         changeAdapter()
 
-        // show the snack-bar to let the user know the editing operation is successful
+        // show the snack-bar to let the user know the editing operation is succeed
         val context = mRecvItemList.context
         Snackbar.make(
             mRecvItemList,

@@ -6,10 +6,7 @@ import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemCheckSummaryCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemAlterVocabularyCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemEnterFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.CertainItemExpandOrUnexpandCommand
+import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
 import kotlin.reflect.KClass
@@ -27,6 +24,7 @@ enum class CommandType(val kClass: KClass<*>) {
     CERTAIN_ITEM_EDIT_VOCABULARY(CertainItemAlterVocabularyCommand::class),
     CERTAIN_ITEM_ENTER_FOLDER(CertainItemEnterFolderCommand::class),
     CERTAIN_ITEM_EXPAND_OR_UNEXPAND(CertainItemExpandOrUnexpandCommand::class),
+    CERTAIN_ITEM_DELETE(CertainItemDeleteCommand::class),
 
     ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM(ItemListShowDialogFolderItemCommand::class),
     ITEM_LIST_SHOW_DIALOG_VOCABULARY_ITEM_MASTER(ItemListShowDialogVocabularyItemMasterCommand::class),
