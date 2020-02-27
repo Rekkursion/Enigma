@@ -32,19 +32,19 @@ class ItemRecyclerViewAdapter(items: ArrayList<BaseItem>): RecyclerView.Adapter<
             // if it's a folder-item
             BaseItemViewHolder.BaseItemViewType.FOLDER_ITEM.ordinal ->
                 FolderItemViewHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.view_folder_recv_item, parent, false)
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_folder_recv, parent, false)
                 )
 
             // if it's a vocabulary-item-master
             BaseItemViewHolder.BaseItemViewType.VOCABULARY_ITEM_MASTER.ordinal ->
                 VocabularyItemMasterViewHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item_master, parent, false)
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_vocabulary_master_recv, parent, false)
                 )
 
             // if it's a vocabulary-item-slave
             else ->
                 VocabularyItemSlaveViewHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.view_vocabulary_recv_item_slave, parent, false)
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_vocabulary_slave_recv, parent, false)
                 )
         }
     }
