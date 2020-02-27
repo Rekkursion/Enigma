@@ -12,4 +12,7 @@
 
     <!-- the color of remark when displaying a vocabulary's details -->
     <color name="color_remark">#9877AB</color>
+
+    <!-- the color of dividers of the meaning recycler-view when showing details -->
+    <color name="color_divider_meaning_recv">#5D2FC1</color>
 </resources>

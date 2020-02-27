@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.adapters.MeaningRecyclerViewAdapter
+import com.rekkursion.enigma.itemdecorations.MeaningRecyclerViewItemDecoration
 import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.exactratingbar.ExactRatingBar
 import com.rekkursion.pathview.PathView
@@ -57,6 +58,7 @@ class VocabularyDetailsView(context: Context, attrs: AttributeSet? = null): Fram
         mRecvMeanings.layoutManager = layoutManager
 
         // initialize attributes
+        mRecvMeanings.addItemDecoration(MeaningRecyclerViewItemDecoration(context, 10))
         mTagCloud.possibleBackgroundColors = hashSetOf(TagView.DefaultBackgroundColor.YELLOW.color)
 
         // set events
