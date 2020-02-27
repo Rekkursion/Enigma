@@ -88,6 +88,10 @@ object DataManager {
     // get all items at a certain path
     fun getAllItemsAtCertainPath(pathString: String): ArrayList<BaseItem> = mBaseItemHashMap.getOrDefault(pathString, arrayListOf())
 
+    // get all vocabulary-items at a certain path
+    fun getAllVocabularyItemsAtCertainPath(pathString: String): ArrayList<VocabularyItem>
+            = getAllItemsAtCertainPath(pathString).filter { it is VocabularyItem }.map { it as VocabularyItem }.toCollection(ArrayList())
+
     // check if it contains a certain folder at a certain path
     fun containsFolderAtCertainPath(folderName: String, pathString: String = PathManager.getCurrentPath()): Boolean = getAllItemsAtCertainPath(pathString)
         .map { (it as? FolderItem)?.folderName }

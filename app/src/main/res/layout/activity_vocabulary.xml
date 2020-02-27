@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.VocabularyActivity">
+
+    <!-- the d-fab for editing or other operations of the current-showing vocabulary -->
+    <com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
+            android:id="@+id/dfab_edit_at_vocabulary_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/dim_fab_margin"
+            android:src="@android:drawable/ic_menu_edit"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <!-- include the content -->
+    <include layout="@layout/activity_vocabulary_content" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

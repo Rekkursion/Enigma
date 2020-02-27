@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!-- the view-pager-2 for showing a certain vocabulary -->
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager_2_at_vocabulary_activity"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+</androidx.appcompat.widget.LinearLayoutCompat>
