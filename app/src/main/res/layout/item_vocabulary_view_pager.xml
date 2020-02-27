@@ -10,9 +10,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <!-- the view-pager-2's item-card -->
-        <com.rekkursion.enigma.views.itemcard.VocabularyItemCard
-                android:id="@+id/item_card_at_vocabulary_activity"
+        <!-- the view-pager-2's vocabulary-details-view -->
+        <com.rekkursion.enigma.views.VocabularyDetailsView
+                android:id="@+id/vocabulary_details_view_at_vocabulary_view_pager_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@drawable/background_vocabulary_details_view"
+        android:layout_margin="@dimen/dim_base_item_card_margin"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- the location -->
+    <com.rekkursion.pathview.PathView
+            android:id="@+id/path_view_at_vocabulary_details"
+            app:put_single_separator_when_nothing="true"
+            app:separator_color="@android:color/black"
+            app:node_text_color="@android:color/black"
+            app:separator="\\"
+            app:text_height="20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <!-- the english's horizontal-scroll-view -->
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <!-- the english -->
+        <TextView
+                    android:id="@+id/txtv_english_at_vocabulary_details"
+                    android:textSize="32sp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+
+    <!-- the proficiency -->
+    <com.rekkursion.exactratingbar.ExactRatingBar
+            android:id="@+id/erb_proficiency_at_vocabulary_details"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:star_size="50"
+            android:layout_marginBottom="12dp"
+            app:spacing="0"
+            app:stars_num="5"
+            app:is_indicator="true"
+            app:star_style="star"
+            app:value_change_scale="continuous"
+            app:gravity="center_vertical|left" />
+
+    <!-- the meanings -->
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recv_meaning_list_at_vocabulary_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <!-- the remark -->
+    <TextView
+            android:id="@+id/txtv_remark_at_vocabulary_details"
+            android:textColor="@color/color_remark"
+            android:textSize="@dimen/dim_general_text_size"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <!-- the tag-cloud -->
+    <com.rekkursion.tagview.TagCloud
+            android:id="@+id/tag_cloud_at_vocabulary_details"
+            app:is_indicator="true"
+            app:is_showing_appearing_times="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>

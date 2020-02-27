@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/background_meaning_recv_item"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- for placing the part of speech and chinese -->
+    <HorizontalScrollView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <!-- the part of speech -->
+            <TextView
+                    android:id="@+id/txtv_part_of_speech_at_meaning_recv"
+                    android:textSize="@dimen/dim_general_text_size"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="italic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <!-- the chinese -->
+            <TextView
+                    android:id="@+id/txtv_chinese_at_meaning_recv"
+                    android:textSize="@dimen/dim_general_text_size"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginStart="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </HorizontalScrollView>
+
+    <!-- the notes -->
+    <TextView
+            android:id="@+id/txtv_notes_at_meaning_recv"
+            android:textSize="@dimen/dim_general_text_size"
+            android:textColor="@android:color/darker_gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <!-- the container of all example sentences -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lly_sentences_container_at_meaning_recv"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>

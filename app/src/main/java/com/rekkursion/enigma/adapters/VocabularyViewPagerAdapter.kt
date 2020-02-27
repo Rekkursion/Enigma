@@ -6,19 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.models.VocabularyItem
-import com.rekkursion.enigma.views.itemcard.VocabularyItemCard
+import com.rekkursion.enigma.views.VocabularyDetailsView
 
 class VocabularyViewPagerAdapter(vocabularyItems: ArrayList<VocabularyItem>): RecyclerView.Adapter<VocabularyViewPagerAdapter.ViewHolder>() {
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val mItemCard: VocabularyItemCard = itemView.findViewById(R.id.item_card_at_vocabulary_activity) as VocabularyItemCard
-
-        fun setItemContent(item: VocabularyItem) {
-            mItemCard.setDataOfContentViewsByItemModel(item)
-        }
-    }
-
-    /* =================================================================== */
-
     // the list of all to-be-shown vocabularies
     private val mVocabularyItemList = ArrayList<VocabularyItem>(vocabularyItems)
 
@@ -35,4 +25,14 @@ class VocabularyViewPagerAdapter(vocabularyItems: ArrayList<VocabularyItem>): Re
     }
 
     override fun getItemCount(): Int = mVocabularyItemList.size
+
+    /* =================================================================== */
+
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        private val mVocabularyDetailsView: VocabularyDetailsView = itemView.findViewById(R.id.vocabulary_details_view_at_vocabulary_view_pager_2)
+
+        fun setItemContent(item: VocabularyItem) {
+            mVocabularyDetailsView.setItem(item)
+        }
+    }
 }

@@ -9,4 +9,7 @@
 
     <!-- the color of vocabulary-item-slave's background of the recycler-view -->
     <color name="color_vocabulary_recv_item_slave_background">#4BBB</color>
+
+    <!-- the color of remark when displaying a vocabulary's details -->
+    <color name="color_remark">#9877AB</color>
 </resources>

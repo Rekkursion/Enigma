@@ -13,7 +13,7 @@ import com.rekkursion.exactratingbar.enums.ValueChangeScale
 import com.rekkursion.tagview.TagCloud
 import com.rekkursion.tagview.TagView
 
-class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCard(context, attrs) {
+open class VocabularyItemCard(context: Context, attrs: AttributeSet? = null): BaseItemCard(context, attrs) {
     // the edit-text of the english field
     private lateinit var mEdtEnglish: EditText
 
