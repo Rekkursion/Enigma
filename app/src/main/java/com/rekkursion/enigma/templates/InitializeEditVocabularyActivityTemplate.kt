@@ -1,10 +1,14 @@
 package com.rekkursion.enigma.templates
 
+import android.app.AlertDialog
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.commands.itemcardcommand.ItemCardValidateCommand
 import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.managers.CommandManager
+import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
 import com.rekkursion.enigma.views.itemcard.VocabularyItemCard
@@ -22,6 +26,9 @@ class InitializeEditVocabularyActivityTemplate(activity: AppCompatActivity):
     // the item-card of the editing vocabulary
     private lateinit var mItemCard: VocabularyItemCard
 
+    // the original english (for checking if the english field has been altered or not)
+    private lateinit var mOriginalEnglish: String
+
     // the position of the selected child-view in the recycler-view
     private var mPositionInRecv: Int = 0
 
@@ -33,10 +40,17 @@ class InitializeEditVocabularyActivityTemplate(activity: AppCompatActivity):
     }
 
     override fun onSubmitClickListener() {
-        // do the command of altering the item in the recycler-view
-        CommandManager.doCommand(CommandType.CERTAIN_ITEM_EDIT_VOCABULARY, mPositionInRecv, mItemCard.createItemModel())
-        // finish this activity
-        mActivity.finish()
+        // valid
+        if (validateEnglishDuplicatedBeforeSubmission()) {
+            // do the command of altering the item in the recycler-view
+            CommandManager.doCommand(CommandType.CERTAIN_ITEM_ALTER_VOCABULARY, mPositionInRecv, mItemCard.createItemModel())
+            // finish this activity
+            mActivity.finish()
+        }
+        // invalid (the same english-word has already existed)
+        else AlertDialog.Builder(mActivity).setMessage(
+            R.string.str_attention_of_invalid_same_vocabulary
+        ).create().show()
     }
 
     /* ================================================================== */
@@ -67,6 +81,9 @@ class InitializeEditVocabularyActivityTemplate(activity: AppCompatActivity):
 
         // set the position of the selected child in the recycler-view
         mPositionInRecv = pos!!
+
+        // set the original english
+        mOriginalEnglish = mItem.english
     }
 
     override fun initCommands() {
@@ -80,5 +97,14 @@ class InitializeEditVocabularyActivityTemplate(activity: AppCompatActivity):
 
     override fun doAfterInitialization() {
 
+    }
+
+    /* ================================================================== */
+
+    // check if the altered english is duplicated or not before the submission
+    private fun validateEnglishDuplicatedBeforeSubmission(): Boolean {
+        val item = mItemCard.createItemModel() as? VocabularyItem ?: return false
+        val hasEnglishBeenAltered = item.english != mOriginalEnglish
+        return hasEnglishBeenAltered.not() || DataManager.containsVocabulary(item.english).not()
     }
 }

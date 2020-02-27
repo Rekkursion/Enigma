@@ -58,7 +58,7 @@ class VocabularyDetailsView(context: Context, attrs: AttributeSet? = null): Fram
         mRecvMeanings.layoutManager = layoutManager
 
         // initialize attributes
-        mRecvMeanings.addItemDecoration(MeaningRecyclerViewItemDecoration(context, 10))
+        mRecvMeanings.addItemDecoration(MeaningRecyclerViewItemDecoration(context, 6))
         mTagCloud.possibleBackgroundColors = hashSetOf(TagView.DefaultBackgroundColor.YELLOW.color)
 
         // set events

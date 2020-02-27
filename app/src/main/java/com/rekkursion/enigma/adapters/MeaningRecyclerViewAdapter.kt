@@ -41,7 +41,7 @@ class MeaningRecyclerViewAdapter(meanings: ArrayList<Meaning>): RecyclerView.Ada
             mTxtvPartOfSpeech.setOnClickListener {
                 mMeaning?.let {
                     mTxtvPartOfSpeech.text = if (mTxtvPartOfSpeech.text.toString() == it.partOfSpeech.abbr)
-                        it.chinese
+                        it.partOfSpeech.chinese
                     else
                         it.partOfSpeech.abbr
                 }
@@ -53,6 +53,7 @@ class MeaningRecyclerViewAdapter(meanings: ArrayList<Meaning>): RecyclerView.Ada
             mTxtvPartOfSpeech.text = meaning.partOfSpeech.abbr
             mTxtvChinese.text = meaning.chinese
             mTxtvNotes.text = meaning.notes
+            mTxtvNotes.visibility = if (meaning.notes.trim().isEmpty()) View.GONE else View.VISIBLE
             mLlySentencesContainer.removeAllViews()
             meaning.exampleSentenceListCopied.forEach {
                 mLlySentencesContainer.addView(SentenceView(itemView.context, it))

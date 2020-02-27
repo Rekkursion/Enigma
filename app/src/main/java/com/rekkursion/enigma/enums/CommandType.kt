@@ -21,7 +21,7 @@ enum class CommandType(val kClass: KClass<*>) {
     ITEM_CARD_VALIDATE(ItemCardValidateCommand::class),
 
     CERTAIN_ITEM_CHECK_SUMMARY(CertainItemCheckSummaryCommand::class),
-    CERTAIN_ITEM_EDIT_VOCABULARY(CertainItemAlterVocabularyCommand::class),
+    CERTAIN_ITEM_ALTER_VOCABULARY(CertainItemAlterVocabularyCommand::class),
     CERTAIN_ITEM_ENTER_FOLDER(CertainItemEnterFolderCommand::class),
     CERTAIN_ITEM_EXPAND_OR_UNEXPAND(CertainItemExpandOrUnexpandCommand::class),
     CERTAIN_ITEM_DELETE(CertainItemDeleteCommand::class),
