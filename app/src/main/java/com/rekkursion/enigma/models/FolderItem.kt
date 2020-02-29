@@ -70,10 +70,16 @@ class FolderItem(
         mFolderList.add(folder)
     }
 
+    // remove a folder-item
+    fun removeFolder(folder: FolderItem): Boolean = mFolderList.remove(folder)
+
     // add a vocabulary-item
     fun addVocabulary(vocabulary: VocabularyItem) {
         mVocabularyList.add(vocabulary)
     }
+
+    // remove a vocabulary-item
+    fun removeVocabulary(vocabulary: VocabularyItem): Boolean = mVocabularyList.remove(vocabulary)
 
     // add a base-item
     fun addItem(item: BaseItem) {
@@ -81,7 +87,13 @@ class FolderItem(
         else addVocabulary(item as VocabularyItem)
     }
 
-    // add all base-items in a certain folder
+    // remove a base-item
+    fun removeItem(item: BaseItem): Boolean = if (item is FolderItem)
+        removeFolder(item)
+    else
+        removeVocabulary(item as VocabularyItem)
+
+    // add all base-items which are in a certain folder
     fun addAllItemsInCertainFolder(folder: FolderItem) {
         folder.mFolderList.forEach { addFolder(it) }
         folder.mVocabularyList.forEach { addVocabulary(it) }

@@ -53,15 +53,8 @@ object DataManager {
             else
                 mBaseItemHashMap[item.pathString] = arrayListOf(item)
 
-            // find the folder we are currently staying to add the vocabulary into it
-            val lastPathNode = PathManager.getLastPathNode(item.pathString)
-            val lastStrataPathString = PathManager.getLastStrataPathString(item.pathString)
-
-            lastStrataPathString?.let {
-                val folder = mBaseItemHashMap[lastStrataPathString]
-                    ?.find { it is FolderItem && it.folderName == lastPathNode } as? FolderItem
-                folder?.addItem(item)
-            }
+            // find the folder we are currently staying to add the item into it
+            item.getStayingFolder()?.addItem(item)
         }
     }
 
@@ -70,7 +63,10 @@ object DataManager {
         val list = mBaseItemHashMap[item.pathString]
         val itemInList = list?.find { it == item }
         itemInList?.let {
+            // remove it from the list of hash-map in data-manager
             list.remove(itemInList)
+            // find the folder we are currently staying to remove the item from it
+            itemInList.getStayingFolder()?.removeItem(itemInList)
         }
     }
 
@@ -94,4 +90,8 @@ object DataManager {
                 .contains(english)
         }
         .contains(true)
+
+    // get a certain folder at a certain path
+    fun getFolderAtCertainPath(folderName: String, pathString: String): FolderItem? = getAllItemsAtCertainPath(pathString)
+        .find { it is FolderItem && it.folderName == folderName } as? FolderItem
 }

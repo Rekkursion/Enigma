@@ -3,6 +3,8 @@ package com.rekkursion.enigma.models
 import android.content.Context
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
+import com.rekkursion.enigma.managers.DataManager
+import com.rekkursion.enigma.managers.PathManager
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -72,6 +74,21 @@ abstract class BaseItem: Serializable {
         mPathNodes.addAll(another.pathNodesCopied)
         mLastModifiedLocalDateTime = another.mLastModifiedLocalDateTime
         mChakanCount = another.mChakanCount
+    }
+
+    // get the staying folder of this base-item
+    fun getStayingFolder(): FolderItem? {
+        // get the path string of this item
+        val pathStr = pathString
+        // get the last path node
+        val lastPathNode = PathManager.getLastPathNode(pathStr)
+        // get the last strata path string
+        val lastStrataPathString = PathManager.getLastStrataPathString(pathStr)
+
+        return if (lastStrataPathString == null)
+            null
+        else
+            DataManager.getFolderAtCertainPath(lastPathNode, lastStrataPathString)
     }
 
     /* =================================================================== */
