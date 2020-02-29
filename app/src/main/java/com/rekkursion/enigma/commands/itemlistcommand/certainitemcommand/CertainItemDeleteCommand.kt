@@ -1,6 +1,7 @@
 package com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand
 
 import android.app.AlertDialog
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
@@ -31,16 +32,16 @@ class CertainItemDeleteCommand(recyclerView: RecyclerView): CertainItemCommand(r
                     // update the adapter of the recycler-view
                     changeAdapter()
 
-                    // show the snack-bar to let the user know the removing operation is succeed
-                    Snackbar.make(
-                        mRecvItemList,
-                        context.getString(R.string.str_snack_bar_remove_item_prefix) +
+                    // show the toast to let the user know the removing operation is succeed
+                    Toast.makeText(
+                        mRecvItemList.context,
+                        context.getString(R.string.str_toast_remove_item_prefix) +
                             "${if (baseItem is FolderItem)
                                 context.getString(R.string.str_folder)
                             else
                                 context.getString(R.string.str_vocabulary)} \"${baseItem.getName()}\"" +
-                        context.getString(R.string.str_snack_bar_remove_item_suffix),
-                        Snackbar.LENGTH_SHORT
+                        context.getString(R.string.str_toast_remove_item_suffix),
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
                 .setNegativeButton(context.getString(R.string.str_cancel), null)

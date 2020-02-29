@@ -1,5 +1,6 @@
 package com.rekkursion.enigma.commands.itemlistcommand
 
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
@@ -20,20 +21,20 @@ class ItemListAddNewItemsCommand(recyclerView: RecyclerView): ItemListCommand(re
             // update the adapter of the recycler-view
             changeAdapter()
 
-            // show the snack-bar to let the user know the adding operation is succeed
+            // show the toast to let the user know the adding operation is succeed
             val context = mRecvItemList.context
             val itemType = NewItemManager.newItemList[0].type
-            Snackbar.make(
-                mRecvItemList,
+            Toast.makeText(
+                mRecvItemList.context,
                 if (itemType == ItemType.VOCABULARY)
-                    context.getString(R.string.str_snack_bar_add_vocabularies_prefix) +
+                    context.getString(R.string.str_toast_add_vocabularies_prefix) +
                             NewItemManager.newItemList.size.toString() +
-                            context.getString(R.string.str_snack_bar_add_vocabularies_suffix)
+                            context.getString(R.string.str_toast_add_vocabularies_suffix)
                 else
-                    context.getString(R.string.str_snack_bar_add_folders_prefix) +
+                    context.getString(R.string.str_toast_add_folders_prefix) +
                             NewItemManager.newItemList.size.toString() +
-                            context.getString(R.string.str_snack_bar_add_folders_suffix),
-                Snackbar.LENGTH_SHORT
+                            context.getString(R.string.str_toast_add_folders_suffix),
+                Toast.LENGTH_SHORT
             ).show()
         }
     }

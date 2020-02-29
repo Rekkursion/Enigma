@@ -146,20 +146,20 @@
     <string name="str_vocabulary_item_master_list_dialog_delete">刪除單字</string>
 
 
-    <!--<string name="str_snack_bar_add_vocabularies_prefix"></string>-->
-    <string name="str_snack_bar_add_vocabularies_prefix"/>
-    <!--<string name="str_snack_bar_add_vocabularies_suffix">&#160;vocabularies have been added successfully.</string>-->
-    <string name="str_snack_bar_add_vocabularies_suffix">&#160;個單字新增成功</string>
-    <!--<string name="str_snack_bar_add_folders_prefix"></string>-->
-    <string name="str_snack_bar_add_folders_prefix"/>
-    <!--<string name="str_snack_bar_add_folders_suffix">&#160;folders have been added successfully.</string>-->
-    <string name="str_snack_bar_add_folders_suffix">&#160;個分類夾新增成功</string>
-    <!--<string name="str_snack_bar_edit_vocabulary_prefix">The word&#160;\"</string>-->
-    <string name="str_snack_bar_edit_vocabulary_prefix">單字&#160;</string>
-    <!--<string name="str_snack_bar_edit_vocabulary_suffix">\"&#160;has been edited successfully.</string>-->
-    <string name="str_snack_bar_edit_vocabulary_suffix">&#160;編輯成功</string>
-    <!--<string name="str_snack_bar_remove_item_prefix">The&#160;</string>-->
-    <string name="str_snack_bar_remove_item_prefix"/>
-    <!--<string name="str_snack_bar_remove_item_suffix">&#160;has been removed successfully.</string>-->
-    <string name="str_snack_bar_remove_item_suffix">&#160;刪除成功</string>
+    <!--<string name="str_toast_add_vocabularies_prefix" />-->
+    <string name="str_toast_add_vocabularies_prefix" />
+    <!--<string name="str_toast_add_vocabularies_suffix">&#160;vocabularies have been added successfully.</string>-->
+    <string name="str_toast_add_vocabularies_suffix">&#160;個單字新增成功</string>
+    <!--<string name="str_toast_add_folders_prefix" />-->
+    <string name="str_toast_add_folders_prefix" />
+    <!--<string name="str_toast_add_folders_suffix">&#160;folders have been added successfully.</string>-->
+    <string name="str_toast_add_folders_suffix">&#160;個分類夾新增成功</string>
+    <!--<string name="str_toast_edit_vocabulary_prefix">The word&#160;\"</string>-->
+    <string name="str_toast_edit_vocabulary_prefix">單字&#160;</string>
+    <!--<string name="str_toast_edit_vocabulary_suffix">\"&#160;has been edited successfully.</string>-->
+    <string name="str_toast_edit_vocabulary_suffix">&#160;編輯成功</string>
+    <!--<string name="str_toast_remove_item_prefix">The&#160;</string>-->
+    <string name="str_toast_remove_item_prefix" />
+    <!--<string name="str_toast_remove_item_suffix">&#160;has been removed successfully.</string>-->
+    <string name="str_toast_remove_item_suffix">&#160;刪除成功</string>
 </resources>

@@ -27,9 +27,9 @@ class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItem
         val context = mRecvItemList.context
         Toast.makeText(
             context,
-            context.getString(R.string.str_snack_bar_edit_vocabulary_prefix) +
+            context.getString(R.string.str_toast_edit_vocabulary_prefix) +
                     itemInList.getName() +
-                    context.getString(R.string.str_snack_bar_edit_vocabulary_suffix),
+                    context.getString(R.string.str_toast_edit_vocabulary_suffix),
             Toast.LENGTH_SHORT
         ).show()
     }
