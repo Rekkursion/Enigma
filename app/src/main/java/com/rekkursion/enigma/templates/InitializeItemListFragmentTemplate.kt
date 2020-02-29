@@ -1,13 +1,16 @@
 package com.rekkursion.enigma.templates
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
+import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolderCommand
 import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
@@ -22,6 +25,7 @@ import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
 import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.states.RecvStateContext
+import com.rekkursion.enigma.views.AdapterListenableRecyclerView
 import com.rekkursion.pathview.OnPathNodeClickListener
 import com.rekkursion.pathview.PathView
 
@@ -30,7 +34,7 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
     OnPathNodeClickListener {
 
     // the recycler-view for showing the folders and/or vocabularies
-    private lateinit var mRecvItemList: RecyclerView
+    private lateinit var mRecvItemList: AdapterListenableRecyclerView
 
     // d-fab to prompt up the list-bottom-sheet-dialog and let the user choose add folder or vocabulary
     private lateinit var mDfabAddFolderOrVocabulary: ListBottomSheetDialogFloatingActionButton
@@ -40,6 +44,9 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
 
     // the context of the item recycler-view
     private lateinit var mItemRecvStateContext: RecvStateContext
+
+    // the text-view for hinting the user that there's still nothing in this folder
+    private lateinit var mTxtvHintNothingInFolder: TextView
 
     /* =================================================================== */
 
@@ -53,6 +60,7 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
         mPathView = mRootView.findViewById(R.id.path_view)
         mRecvItemList = mRootView.findViewById(R.id.recv_item_list)
         mDfabAddFolderOrVocabulary = mRootView.findViewById(R.id.dfab_add_folder_or_vocabulary)
+        mTxtvHintNothingInFolder = mRootView.findViewById(R.id.txtv_attention_nothing_in_folder)
     }
 
     override fun initAttributes() {
@@ -127,6 +135,16 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
                 }
             }
         ))
+
+        // set the listener which is invoked when the adapter has been changed
+        mRecvItemList.setOnAdapterChangeListener(object: AdapterListenableRecyclerView.OnAdapterChangeListener {
+            override fun onAdapterChange(oldAdapter: RecyclerView.Adapter<*>?, newAdapter: RecyclerView.Adapter<*>?) {
+                // set the visibility of the hint text-view
+                mTxtvHintNothingInFolder.visibility =
+                    if (newAdapter == null || newAdapter.itemCount == 0) View.VISIBLE
+                    else View.GONE
+            }
+        })
     }
 
     override fun doAfterInitialization() {

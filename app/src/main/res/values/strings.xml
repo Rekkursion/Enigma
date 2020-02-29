@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Enigma</string>
 
+
     <!--<string name="str_action_settings">Settings</string>-->
     <string name="str_action_settings">設置</string>
 
@@ -10,6 +11,7 @@
     <!--<string name="str_vocabulary">Vocabulary</string>-->
     <string name="str_vocabulary">單字</string>
 
+
     <!--<string name="str_close">close</string>-->
     <string name="str_close">關閉</string>
     <!--<string name="str_go_up">Go up</string>-->
@@ -17,15 +19,18 @@
     <!--<string name="str_go_down">Go down</string>-->
     <string name="str_go_down">往下</string>
 
+
     <!--<string name="str_new_folder">New folder</string>-->
     <string name="str_new_folder">新分類夾</string>
     <!--<string name="str_new_vocabulary">New vocabulary</string>-->
     <string name="str_new_vocabulary">新單字</string>
 
+
     <!--<string name="str_edit">Edit</string>-->
     <string name="str_edit">編輯</string>
     <!--<string name="str_delete">Delete</string>-->
     <string name="str_delete">刪除</string>
+
 
     <!--<string name="str_bnav_item_vocabulary_list">List</string>-->
     <string name="str_bnav_item_vocabulary_list">單字</string>
@@ -33,6 +38,7 @@
     <string name="str_bnav_item_practice">練習</string>
     <!--<string name="str_bnav_item_more">More</string>-->
     <string name="str_bnav_item_more">更多</string>
+
 
     <!--<string name="str_attention_of_maximum_new_items_prefix">The maximum is&#160;</string>-->
     <string name="str_attention_of_maximum_new_items_prefix">一次最多只能新增&#160;</string>
@@ -56,6 +62,9 @@
     <string name="str_attention_of_removing_item_dialog_title_suffix">&#160;嗎？</string>
     <!--<string name="str_attention_of_removing_item_dialog_message">It will be removed permanently and this action CANNOT be cancelled.</string>-->
     <string name="str_attention_of_removing_item_dialog_message">此動作將無法復原。</string>
+    <!--<string name="str_attention_there_s_nothing_in_this_folder">There\'s nothing in this folder.</string>-->
+    <string name="str_attention_there_s_nothing_in_this_folder">這個分類夾裡面還沒有任何東西</string>
+
 
     <!--<string name="str_cancel">Cancel</string>-->
     <string name="str_cancel">取消</string>
@@ -66,8 +75,10 @@
     <!--<string name="str_ok">OK</string>-->
     <string name="str_ok">好</string>
 
+
     <!--<string name="str_add_more">Add more</string>-->
     <string name="str_add_more">再加一個</string>
+
 
     <!--<string name="str_base_item_card_path_field">Path</string>-->
     <string name="str_base_item_card_path_field">位置</string>
@@ -86,6 +97,7 @@
     <!--<string name="str_vocabulary_item_card_tags_field">Tags</string>-->
     <string name="str_vocabulary_item_card_tags_field">標籤</string>
 
+
     <!--<string name="str_base_item_summary_item_type">Type:&#160;</string>-->
     <string name="str_base_item_summary_item_type">類型：</string>
     <!--<string name="str_base_item_summary_path">Path:&#160;</string>-->
@@ -101,6 +113,7 @@
     <string name="str_base_item_summary_num_of_vocabularies_prefix">，以及&#160;</string>
     <!--<string name="str_base_item_summary_num_of_vocabularies_suffix">&#160;vocabulary(s) in this folder.</string>-->
     <string name="str_base_item_summary_num_of_vocabularies_suffix">&#160;個單字</string>
+
 
     <!--<string name="str_vocabulary_item_card_english_field_edit_text_hint">Enter a word here.</string>-->
     <string name="str_vocabulary_item_card_english_field_edit_text_hint">欲新增的單字</string>
@@ -122,6 +135,7 @@
     <string name="str_example_sentence_label_at_sentence_view">例句：</string>
     <!--<string name="str_new_meaning_setting_view">New meaning</string>-->
     <string name="str_new_meaning_setting_view">新增意義</string>
+
 
     <!--<string name="str_folder_item_list_dialog_enter">Enter</string>-->
     <string name="str_folder_item_list_dialog_enter">進入分類</string>

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content" />
 
         <!-- the recycler-view for showing the folders and/or vocabularies -->
-        <androidx.recyclerview.widget.RecyclerView
+        <com.rekkursion.enigma.views.AdapterListenableRecyclerView
                 android:id="@+id/recv_item_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -34,6 +34,17 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+        <!-- the text-view for hinting the user that there's still nothing in this folder -->
+        <TextView
+                android:id="@+id/txtv_attention_nothing_in_folder"
+                android:text="@string/str_attention_there_s_nothing_in_this_folder"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         <!-- the d-fab for adding new item (folder or vocabulary) -->
         <com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingActionButton
