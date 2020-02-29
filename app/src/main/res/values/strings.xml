@@ -104,15 +104,24 @@
     <string name="str_base_item_summary_path">位置：</string>
     <!--<string name="str_base_item_summary_create_time">Create at:&#160;</string>-->
     <string name="str_base_item_summary_create_time">建立於：</string>
-    <!--<string name="str_base_item_summary_num_of_folders_prefix" />-->
-    <string name="str_base_item_summary_num_of_folders_prefix">內有&#160;</string>
-    <!--<string name="str_base_item_summary_num_of_folders_suffix">&#160;folders(s)</string>-->
-    <string name="str_base_item_summary_num_of_folders_suffix">&#160;個分類夾</string>
 
-    <!--<string name="str_base_item_summary_num_of_vocabularies_prefix">&#160;and&#160;</string>-->
-    <string name="str_base_item_summary_num_of_vocabularies_prefix">，以及&#160;</string>
-    <!--<string name="str_base_item_summary_num_of_vocabularies_suffix">&#160;vocabulary(s) in this folder.</string>-->
-    <string name="str_base_item_summary_num_of_vocabularies_suffix">&#160;個單字</string>
+    <!--<string name="str_folder_item_summary_num_of_folders_prefix" />-->
+    <string name="str_folder_item_summary_num_of_folders_prefix">內有&#160;</string>
+    <!--<string name="str_folder_item_summary_num_of_folders_suffix">&#160;folders(s)</string>-->
+    <string name="str_folder_item_summary_num_of_folders_suffix">&#160;個分類夾</string>
+    <!--<string name="str_folder_item_summary_num_of_vocabularies_prefix">&#160;and&#160;</string>-->
+    <string name="str_folder_item_summary_num_of_vocabularies_prefix">，以及&#160;</string>
+    <!--<string name="str_folder_item_summary_num_of_vocabularies_suffix">&#160;vocabulary(s) in this folder.</string>-->
+    <string name="str_folder_item_summary_num_of_vocabularies_suffix">&#160;個單字</string>
+
+    <!--<string name="str_vocabulary_item_summary_num_of_tags_prefix">And there\'re also&#160;</string>-->
+    <string name="str_vocabulary_item_summary_num_of_tags_prefix">並被加上了&#160;</string>
+    <!--<string name="str_vocabulary_item_summary_num_of_tags_suffix">&#160;tag(s):</string>-->
+    <string name="str_vocabulary_item_summary_num_of_tags_suffix">&#160;個標籤：</string>
+    <!--<string name="str_vocabulary_item_summary_num_of_meanings_prefix">There\'re&#160;</string>-->
+    <string name="str_vocabulary_item_summary_num_of_meanings_prefix">共有&#160;</string>
+    <!--<string name="str_vocabulary_item_summary_num_of_meanings_suffix">&#160;meaning(s):</string>-->
+    <string name="str_vocabulary_item_summary_num_of_meanings_suffix">&#160;個意思：</string>
 
 
     <!--<string name="str_vocabulary_item_card_english_field_edit_text_hint">Enter a word here.</string>-->

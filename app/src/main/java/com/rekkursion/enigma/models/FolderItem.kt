@@ -48,8 +48,8 @@ class FolderItem(
     // get the summary of this folder-item
     override fun getSummary(context: Context): String =
         "${getBaseSummary(context)}\n" +
-        "${context.getString(R.string.str_base_item_summary_num_of_folders_prefix)}$numOfFolders${context.getString(R.string.str_base_item_summary_num_of_folders_suffix)}" +
-        "${context.getString(R.string.str_base_item_summary_num_of_vocabularies_prefix)}$numOfVocabularies${context.getString(R.string.str_base_item_summary_num_of_vocabularies_suffix)}"
+        "${context.getString(R.string.str_folder_item_summary_num_of_folders_prefix)}$numOfFolders${context.getString(R.string.str_folder_item_summary_num_of_folders_suffix)}" +
+        "${context.getString(R.string.str_folder_item_summary_num_of_vocabularies_prefix)}$numOfVocabularies${context.getString(R.string.str_folder_item_summary_num_of_vocabularies_suffix)}"
 
     // alter the data from another folder-item
     override fun alterFrom(another: BaseItem) {

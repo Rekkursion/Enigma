@@ -1,6 +1,7 @@
 package com.rekkursion.enigma.models
 
 import android.content.Context
+import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
 
 /**
@@ -39,6 +40,7 @@ class VocabularyItem(
     // the tags of this word
     private val mTagList = ArrayList<String>(tags)
     val tagListCopied get() = ArrayList(mTagList)
+    val numOfTags get() = mTagList.size
 
     // if the item on the recycler-view is expanded or not
     private var mIsExpanded: Boolean = false
@@ -58,7 +60,13 @@ class VocabularyItem(
     override fun getName(): String = mEnglish
 
     // get the summary of this vocabulary-item
-    override fun getSummary(context: Context): String = getBaseSummary(context)
+    override fun getSummary(context: Context): String =
+        "${getBaseSummary(context)}\n\n" +
+        "${context.getString(R.string.str_vocabulary_item_summary_num_of_meanings_prefix)}$numOfMeanings${context.getString(R.string.str_vocabulary_item_summary_num_of_meanings_suffix)}\n" +
+        mMeaningList.joinToString("\n") { "\t[${it.partOfSpeech.abbr}]  ${it.chinese}" } +
+        "\n\n" +
+        "${context.getString(R.string.str_vocabulary_item_summary_num_of_tags_prefix)}$numOfTags${context.getString(R.string.str_vocabulary_item_summary_num_of_tags_suffix)}\n" +
+        mTagList.joinToString("\n") { "\t$it" }
 
     // alter the data from another vocabulary-item
     override fun alterFrom(another: BaseItem) {

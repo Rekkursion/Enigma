@@ -14,7 +14,7 @@ class CertainItemExpandOrUnexpandCommand(recyclerView: RecyclerView): CertainIte
         baseItem?.let {
             if (baseItem is VocabularyItem) {
                 baseItem.isExpanded = !baseItem.isExpanded
-                mRecvItemList.adapter?.notifyDataSetChanged()
+                changeAdapter()
             }
         }
     }
