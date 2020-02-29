@@ -10,10 +10,6 @@ object PathManager {
     // the path view
     private var mPathView: PathView? = null
 
-    // the list for the recycler-view
-    private val mCurrentItemListForRecv: ArrayList<BaseItem> = arrayListOf()
-    val itemListForRecv get() = mCurrentItemListForRecv
-
     /* =================================================================== */
 
     // set the path view
@@ -24,20 +20,9 @@ object PathManager {
             mPathView?.pushAll(defaultNodes)
     }
 
-    // update the list which is used for the recycler-view
-    fun updateListForRecv() {
-        mCurrentItemListForRecv.clear()
-        val allItems = DataManager.getAllItemsAtCertainPath(getCurrentPath())
-        val allFolderItems = allItems.filter { it is FolderItem }
-        val allVocabularyItems = allItems.filter { it is VocabularyItem }
-        mCurrentItemListForRecv.addAll(allFolderItems)
-        mCurrentItemListForRecv.addAll(allVocabularyItems)
-    }
-
     // push a path node to the tail
     fun pushPathNode(nodeString: String) {
         mPathView?.push(nodeString)
-        updateListForRecv()
     }
 
     // pop a path node from the tail
@@ -45,7 +30,6 @@ object PathManager {
         if (mPathView?.getAllPathNodes()?.isNotEmpty() == true) {
             val lastNode = mPathView?.getAllPathNodes()?.last() ?: return null
             mPathView?.pop()
-            updateListForRecv()
             return lastNode
         }
         return null

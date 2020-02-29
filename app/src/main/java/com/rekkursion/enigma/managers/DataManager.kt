@@ -40,14 +40,11 @@ object DataManager {
             if (!serialOutFile.exists()) return
             val loaded = SerializationUtils.deSerialize<HashMap<String, ArrayList<BaseItem>>>(serialOutFile.path)
             mBaseItemHashMap.putAll(loaded ?: hashMapOf())
-
-            PathManager.updateListForRecv()
         }
     }
 
     // add a list of new items
     fun addItems(items: ArrayList<BaseItem>) {
-        var shouldUpdatePathManagersItemListForRecv = false
         items.forEach { item ->
             // already have this path
             if (mBaseItemHashMap.containsKey(item.pathString))
@@ -65,14 +62,7 @@ object DataManager {
                     ?.find { it is FolderItem && it.folderName == lastPathNode } as? FolderItem
                 folder?.addItem(item)
             }
-
-            // if there's any item added at the current path, an update on path-manager is a must
-            if (!shouldUpdatePathManagersItemListForRecv && item.pathString == PathManager.getCurrentPath())
-                shouldUpdatePathManagersItemListForRecv = true
         }
-
-        // update the list for recv on path-manager if needs
-        if (shouldUpdatePathManagersItemListForRecv) PathManager.updateListForRecv()
     }
 
     // remove a certain item
@@ -81,7 +71,6 @@ object DataManager {
         val itemInList = list?.find { it == item }
         itemInList?.let {
             list.remove(itemInList)
-            PathManager.updateListForRecv()
         }
     }
 

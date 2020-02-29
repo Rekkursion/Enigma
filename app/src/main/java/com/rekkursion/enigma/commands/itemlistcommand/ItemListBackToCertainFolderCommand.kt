@@ -8,7 +8,6 @@ class ItemListBackToCertainFolderCommand(recyclerView: RecyclerView): ItemListCo
      * @param args: *no parameters*
      */
     override fun execute(vararg args: Any?) {
-        PathManager.updateListForRecv()
         changeAdapter()
     }
 }

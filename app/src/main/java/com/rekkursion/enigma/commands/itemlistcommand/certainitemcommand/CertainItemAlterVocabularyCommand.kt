@@ -1,5 +1,6 @@
 package com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand
 
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.rekkursion.enigma.R
@@ -22,14 +23,14 @@ class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItem
         // update the adapter of the recycler-view
         changeAdapter()
 
-        // show the snack-bar to let the user know the editing operation is succeed
+        // show the toast to let the user know the editing operation is succeed
         val context = mRecvItemList.context
-        Snackbar.make(
-            mRecvItemList,
+        Toast.makeText(
+            context,
             context.getString(R.string.str_snack_bar_edit_vocabulary_prefix) +
                     itemInList.getName() +
                     context.getString(R.string.str_snack_bar_edit_vocabulary_suffix),
-            Snackbar.LENGTH_SHORT
+            Toast.LENGTH_SHORT
         ).show()
     }
 }
