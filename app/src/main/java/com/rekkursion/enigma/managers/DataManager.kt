@@ -67,6 +67,22 @@ object DataManager {
             list.remove(itemInList)
             // find the folder we are currently staying to remove the item from it
             itemInList.getStayingFolder()?.removeItem(itemInList)
+            // remove all lists in data-manager due to the removing of this folder-item
+            if (itemInList is FolderItem) {
+                Thread {
+                    val extendedPathStr = (item.pathString + BaseItem.PATH_SEPARATOR + itemInList.folderName).trim(BaseItem.PATH_SEPARATOR[0])
+                    val filtered = mBaseItemHashMap.filterKeys { it.startsWith(extendedPathStr) }
+                    filtered.forEach { (key, _) -> mBaseItemHashMap.remove(key) }
+                }.start()
+            }
+        }
+    }
+
+    // rename a certain folder-item
+    fun renameFolderItem(folderItem: FolderItem, newFolderName: String) {
+        val itemInList = mBaseItemHashMap[folderItem.pathString]?.find { it == folderItem } as? FolderItem
+        itemInList?.let {
+            itemInList.updateFolderName(newFolderName)
         }
     }
 
@@ -94,4 +110,15 @@ object DataManager {
     // get a certain folder at a certain path
     fun getFolderAtCertainPath(folderName: String, pathString: String): FolderItem? = getAllItemsAtCertainPath(pathString)
         .find { it is FolderItem && it.folderName == folderName } as? FolderItem
+
+    // replace the path string with a new path string
+    fun replacePaths(oldPathString: String, newPathString: String) {
+        val oldList = mBaseItemHashMap[oldPathString]
+        val newList = mBaseItemHashMap[newPathString]
+        newList?.clear()
+        if (oldList != null) {
+            mBaseItemHashMap[newPathString] = ArrayList(oldList)
+            mBaseItemHashMap.remove(oldPathString)
+        }
+    }
 }

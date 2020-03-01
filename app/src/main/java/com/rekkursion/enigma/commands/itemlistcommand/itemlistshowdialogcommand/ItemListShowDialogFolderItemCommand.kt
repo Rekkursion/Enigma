@@ -28,7 +28,8 @@ class ItemListShowDialogFolderItemCommand(recyclerView: RecyclerView): ItemListS
 
             // rename
             .addListItem(context.getString(R.string.str_folder_item_list_dialog_rename), View.OnClickListener {
-
+                // rename this folder-item
+                CommandManager.doCommand(CommandType.CERTAIN_ITEM_RENAME_FOLDER, position)
             })
 
             // move

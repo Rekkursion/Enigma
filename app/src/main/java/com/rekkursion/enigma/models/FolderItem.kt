@@ -1,8 +1,11 @@
 package com.rekkursion.enigma.models
 
 import android.content.Context
+import android.util.Log
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
+import com.rekkursion.enigma.managers.DataManager
+import com.rekkursion.enigma.managers.PathManager
 
 /**
  * 6 members in the superclass: id, item-type, path-nodes, create-local-date-time, last-modified-local-date-time, chakan-count
@@ -20,7 +23,7 @@ class FolderItem(
 
     // the folder's name
     private var mFolderName: String = folderName
-    var folderName get() = mFolderName; set(value) { mFolderName = value }
+    val folderName get() = mFolderName
 
     // all folders in this folder
     private val mFolderList = ArrayList(folders)
@@ -50,18 +53,6 @@ class FolderItem(
         "${getBaseSummary(context)}\n" +
         "${context.getString(R.string.str_folder_item_summary_num_of_folders_prefix)}$numOfFolders${context.getString(R.string.str_folder_item_summary_num_of_folders_suffix)}" +
         "${context.getString(R.string.str_folder_item_summary_num_of_vocabularies_prefix)}$numOfVocabularies${context.getString(R.string.str_folder_item_summary_num_of_vocabularies_suffix)}"
-
-    // alter the data from another folder-item
-    override fun alterFrom(another: BaseItem) {
-        if (another !is FolderItem) return
-
-        super.alterFrom(another)
-        mFolderName = another.folderName
-        mFolderList.clear()
-        mFolderList.addAll(another.folderListCopied)
-        mVocabularyList.clear()
-        mVocabularyList.addAll(another.vocabularyListCopied)
-    }
 
     /* =================================================================== */
 
@@ -103,5 +94,33 @@ class FolderItem(
     fun clear() {
         mVocabularyList.clear()
         mFolderList.clear()
+    }
+
+    // update this folder-item's folder name
+    fun updateFolderName(newFolderName: String) {
+        // get the original and new extended path strings
+        val origExtendedPathStr = (pathString + PATH_SEPARATOR + mFolderName).trim(PATH_SEPARATOR[0])
+        val newExtendedPathStr = (pathString + PATH_SEPARATOR + newFolderName).trim(PATH_SEPARATOR[0])
+
+        // recursively update all items in this folder
+        Thread {
+            updatePathNodesRecursively(origExtendedPathStr, newExtendedPathStr)
+        }.start()
+
+        // change the this folder's name
+        mFolderName = newFolderName
+    }
+
+    // helper function: recursively update all items in a certain folder
+    private fun updatePathNodesRecursively(curPathStr: String, newPathStr: String) {
+        DataManager.getAllItemsAtCertainPath(curPathStr).forEach {
+            if (it is FolderItem)
+                updatePathNodesRecursively(
+                    (curPathStr + PATH_SEPARATOR + it.folderName).trim(PATH_SEPARATOR[0]),
+                    (newPathStr + PATH_SEPARATOR + it.folderName).trim(PATH_SEPARATOR[0])
+                )
+            it.updatePathNodesByPathString(newPathStr)
+        }
+        DataManager.replacePaths(curPathStr, newPathStr)
     }
 }

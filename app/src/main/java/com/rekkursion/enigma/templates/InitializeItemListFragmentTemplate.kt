@@ -96,6 +96,8 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
         CommandManager.putCommand(CommandType.CERTAIN_ITEM_ALTER_VOCABULARY, CertainItemAlterVocabularyCommand(mRecvItemList))
         // command of deleting a certain item (folder- or vocabulary- item)
         CommandManager.putCommand(CommandType.CERTAIN_ITEM_DELETE, CertainItemDeleteCommand(mRecvItemList))
+        // command of renaming a certain folder-item
+        CommandManager.putCommand(CommandType.CERTAIN_ITEM_RENAME_FOLDER, CertainItemRenameFolderCommand(mRecvItemList))
         // command of showing dialog for a folder-item in the recycler-view
         CommandManager.putCommand(CommandType.ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM, ItemListShowDialogFolderItemCommand(mRecvItemList))
         // command of showing dialog for a vocabulary-item-master in the recycler-view

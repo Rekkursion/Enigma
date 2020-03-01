@@ -7,6 +7,7 @@ import com.rekkursion.enigma.R
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.managers.DataManager
 import com.rekkursion.enigma.models.BaseItem
+import com.rekkursion.enigma.models.VocabularyItem
 
 class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItemCommand(recyclerView) {
     /**
@@ -14,7 +15,7 @@ class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItem
      */
     override fun executeAt(position: Int, vararg args: Any?) {
         val editedItem = args[0] as BaseItem
-        val itemInList = (mRecvItemList.adapter as? ItemRecyclerViewAdapter)?.getBaseItemAndItsTruePosition(position)?.first ?: return
+        val itemInList = ((mRecvItemList.adapter as? ItemRecyclerViewAdapter)?.getBaseItemAndItsTruePosition(position)?.first ?: return) as? VocabularyItem ?: return
 
         // alter this item stored in the list
         itemInList.alterFrom(editedItem)

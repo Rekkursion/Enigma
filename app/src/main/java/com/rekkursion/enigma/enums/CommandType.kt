@@ -25,6 +25,7 @@ enum class CommandType(val kClass: KClass<*>) {
     CERTAIN_ITEM_ENTER_FOLDER(CertainItemEnterFolderCommand::class),
     CERTAIN_ITEM_EXPAND_OR_UNEXPAND(CertainItemExpandOrUnexpandCommand::class),
     CERTAIN_ITEM_DELETE(CertainItemDeleteCommand::class),
+    CERTAIN_ITEM_RENAME_FOLDER(CertainItemRenameFolderCommand::class),
 
     ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM(ItemListShowDialogFolderItemCommand::class),
     ITEM_LIST_SHOW_DIALOG_VOCABULARY_ITEM_MASTER(ItemListShowDialogVocabularyItemMasterCommand::class),

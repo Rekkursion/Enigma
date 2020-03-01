@@ -69,10 +69,15 @@ class VocabularyItem(
         mTagList.joinToString("\n") { "\t$it" }
 
     // alter the data from another vocabulary-item
-    override fun alterFrom(another: BaseItem) {
+    fun alterFrom(another: BaseItem) {
         if (another !is VocabularyItem) return
+        if (mItemType != another.mItemType) return
 
-        super.alterFrom(another)
+        mPathNodes.clear()
+        mPathNodes.addAll(another.pathNodesCopied)
+        mLastModifiedLocalDateTime = another.mLastModifiedLocalDateTime
+        mChakanCount = another.mChakanCount
+
         mEnglish = another.mEnglish
         mMeaningList.clear()
         mMeaningList.addAll(another.meaningListCopied)

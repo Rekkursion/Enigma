@@ -1,6 +1,7 @@
 package com.rekkursion.enigma.models
 
 import android.content.Context
+import android.util.Log
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.managers.DataManager
@@ -65,17 +66,6 @@ abstract class BaseItem: Serializable {
 
     /* =================================================================== */
 
-    // alter the data from another base-item
-    open fun alterFrom(another: BaseItem) {
-        if (mItemType != another.mItemType)
-            return
-
-        mPathNodes.clear()
-        mPathNodes.addAll(another.pathNodesCopied)
-        mLastModifiedLocalDateTime = another.mLastModifiedLocalDateTime
-        mChakanCount = another.mChakanCount
-    }
-
     // get the staying folder of this base-item
     fun getStayingFolder(): FolderItem? {
         // get the path string of this item
@@ -89,6 +79,19 @@ abstract class BaseItem: Serializable {
             null
         else
             DataManager.getFolderAtCertainPath(lastPathNode, lastStrataPathString)
+    }
+
+    // update the list of path nodes by a new path string
+    fun updatePathNodesByPathString(newPathString: String) {
+        val oldPathStr = pathString
+
+        mPathNodes.clear()
+        if (newPathString.isEmpty() || newPathString == PATH_SEPARATOR)
+            return
+        mPathNodes.addAll(newPathString.split(PATH_SEPARATOR))
+
+        val newPathStr = pathString
+        Log.e("REKK_TAG inner", "<${getName()}>[$oldPathStr][$newPathStr]")
     }
 
     /* =================================================================== */
