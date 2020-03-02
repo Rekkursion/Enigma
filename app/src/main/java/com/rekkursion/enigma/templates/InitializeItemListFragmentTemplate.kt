@@ -11,10 +11,7 @@ import com.rekkursion.dialogfloatingactionbutton.ListBottomSheetDialogFloatingAc
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.NewItemActivity
 import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
@@ -86,6 +83,8 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
         CommandManager.putCommand(CommandType.ITEM_LIST_BACK_TO_PREVIOUS_FOLDER, ItemListBackToPreviousFolderCommand(mRecvItemList))
         // command of going back to a certain folder
         CommandManager.putCommand(CommandType.ITEM_LIST_BACK_TO_CERTAIN_FOLDER, ItemListBackToCertainFolderCommand(mRecvItemList))
+        // command of updating (changing) the adapter of the recv
+        CommandManager.putCommand(CommandType.ITEM_LIST_UPDATE, ItemListUpdateCommand(mRecvItemList))
         // command of expanding or unexpanding a certain vocabulary-item
         CommandManager.putCommand(CommandType.CERTAIN_ITEM_EXPAND_OR_UNEXPAND, CertainItemExpandOrUnexpandCommand(mRecvItemList))
         // command of entering a certain folder-item

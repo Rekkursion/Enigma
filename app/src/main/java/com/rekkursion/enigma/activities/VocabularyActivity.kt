@@ -31,4 +31,9 @@ class VocabularyActivity: AppCompatActivity() {
             mInitializer.updateViewPager2()
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    override fun finish() {
+
+        super.finish()
+    }
 }

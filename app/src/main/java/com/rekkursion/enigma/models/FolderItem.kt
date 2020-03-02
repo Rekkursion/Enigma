@@ -1,11 +1,9 @@
 package com.rekkursion.enigma.models
 
 import android.content.Context
-import android.util.Log
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.enums.ItemType
 import com.rekkursion.enigma.managers.DataManager
-import com.rekkursion.enigma.managers.PathManager
 
 /**
  * 6 members in the superclass: id, item-type, path-nodes, create-local-date-time, last-modified-local-date-time, chakan-count
@@ -121,6 +119,6 @@ class FolderItem(
                 )
             it.updatePathNodesByPathString(newPathStr)
         }
-        DataManager.replacePaths(curPathStr, newPathStr)
+        DataManager.replaceCertainPath(curPathStr, newPathStr)
     }
 }

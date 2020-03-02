@@ -112,7 +112,7 @@ object DataManager {
         .find { it is FolderItem && it.folderName == folderName } as? FolderItem
 
     // replace the path string with a new path string
-    fun replacePaths(oldPathString: String, newPathString: String) {
+    fun replaceCertainPath(oldPathString: String, newPathString: String) {
         val oldList = mBaseItemHashMap[oldPathString]
         val newList = mBaseItemHashMap[newPathString]
         newList?.clear()

@@ -2,10 +2,7 @@ package com.rekkursion.enigma.enums
 
 import com.rekkursion.enigma.commands.fragmentcommand.FragmentSwitchCommand
 import com.rekkursion.enigma.commands.itemcardcommand.*
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListAddNewItemsCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToCertainFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListBackToPreviousFolderCommand
-import com.rekkursion.enigma.commands.itemlistcommand.ItemListLoadAllItemsCommand
+import com.rekkursion.enigma.commands.itemlistcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.certainitemcommand.*
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogFolderItemCommand
 import com.rekkursion.enigma.commands.itemlistcommand.itemlistshowdialogcommand.ItemListShowDialogVocabularyItemMasterCommand
@@ -33,5 +30,6 @@ enum class CommandType(val kClass: KClass<*>) {
     ITEM_LIST_ADD_NEW_ITEMS(ItemListAddNewItemsCommand::class),
     ITEM_LIST_BACK_TO_CERTAIN_FOLDER(ItemListBackToCertainFolderCommand::class),
     ITEM_LIST_BACK_TO_PREVIOUS_FOLDER(ItemListBackToPreviousFolderCommand::class),
-    ITEM_LIST_LOAD_ALL_ITEMS(ItemListLoadAllItemsCommand::class)
+    ITEM_LIST_LOAD_ALL_ITEMS(ItemListLoadAllItemsCommand::class),
+    ITEM_LIST_UPDATE(ItemListUpdateCommand::class)
 }
