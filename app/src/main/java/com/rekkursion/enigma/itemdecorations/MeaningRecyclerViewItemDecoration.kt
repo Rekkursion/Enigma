@@ -8,6 +8,7 @@ import android.view.View
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.viewholders.BaseItemViewHolder
 
 class MeaningRecyclerViewItemDecoration(context: Context, size: Int): RecyclerView.ItemDecoration() {
     // the context
@@ -35,13 +36,17 @@ class MeaningRecyclerViewItemDecoration(context: Context, size: Int): RecyclerVi
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
-        parent.children.forEachIndexed { idx, child ->
+
+        for (idx in 0 until parent.childCount) {
+            val child = parent.getChildAt(idx)
+            val position = parent.getChildAdapterPosition(child)
+
             val params = child.layoutParams as RecyclerView.LayoutParams
             val top = child.bottom - params.bottomMargin - parent.paddingTop
             val bottom = top + mSize
 
             c.drawRect(Rect(left, top, right, bottom), mPaint)
-            if (idx == 0)
+            if (position == 0)
                 c.drawRect(Rect(left, child.top, right, child.top + mSize), mPaint)
         }
     }

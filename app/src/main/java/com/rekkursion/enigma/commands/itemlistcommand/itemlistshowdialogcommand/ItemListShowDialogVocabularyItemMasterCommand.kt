@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
 import com.rekkursion.enigma.activities.EditVocabularyActivity
@@ -45,6 +46,7 @@ class ItemListShowDialogVocabularyItemMasterCommand(recyclerView: RecyclerView):
 
             // move
             .addListItem(context.getString(R.string.str_vocabulary_item_master_list_dialog_move), View.OnClickListener {
+                CommandManager.doCommand(CommandType.ITEM_LIST_EXPAND_OR_UNEXPAND_ALL_VOCABULARIES, false)
                 stateContext.state = PickingPathRecvState.getInstance()
             })
 

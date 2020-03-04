@@ -8,11 +8,16 @@
     <color name="color_meaning_setting_view_background">#50E190AA</color>
 
     <!-- the color of vocabulary-item-slave's background of the recycler-view -->
-    <color name="color_vocabulary_recv_item_slave_background">#4BBB</color>
+    <color name="color_vocabulary_recv_item_slave_background">#6BBB</color>
 
     <!-- the color of remark when displaying a vocabulary's details -->
     <color name="color_remark">#9877AB</color>
 
     <!-- the color of dividers of the meaning recycler-view when showing details -->
     <color name="color_divider_meaning_recv">#5D2FC1</color>
+
+    <color name="color_general_folder_item">#00000000</color>
+    <color name="color_general_vocabulary_item_master">#168956FF</color>
+    <color name="color_general_vocabulary_item_slave">#00000000</color>
+    <color name="color_picking_path_vocabulary_item_master">#CCBBBBBB</color>
 </resources>

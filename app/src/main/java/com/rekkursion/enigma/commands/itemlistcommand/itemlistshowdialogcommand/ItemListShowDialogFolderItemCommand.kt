@@ -34,6 +34,7 @@ class ItemListShowDialogFolderItemCommand(recyclerView: RecyclerView): ItemListS
 
             // move
             .addListItem(context.getString(R.string.str_folder_item_list_dialog_move), View.OnClickListener {
+                CommandManager.doCommand(CommandType.ITEM_LIST_EXPAND_OR_UNEXPAND_ALL_VOCABULARIES, false)
                 stateContext.state = PickingPathRecvState.getInstance()
             })
 

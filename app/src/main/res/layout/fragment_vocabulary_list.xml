@@ -6,28 +6,60 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".fragments.ItemListFragment">
 
-    <!-- the linear-layout for placing the path-view and the recycler-view -->
     <androidx.appcompat.widget.LinearLayoutCompat
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <!-- the path view -->
-        <com.rekkursion.pathview.PathView
-                android:id="@+id/path_view"
-                app:put_single_separator_when_nothing="true"
-                app:separator_color="@color/colorPrimary"
-                app:node_text_color="@color/colorPrimaryDark"
-                app:separator="\\"
-                app:text_height="20"
+        <!-- the linear-layout for placing the path-view and the recycler-view -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:orientation="vertical"
+                android:layout_weight="7"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp">
 
-        <!-- the recycler-view for showing the folders and/or vocabularies -->
-        <com.rekkursion.enigma.views.AdapterListenableRecyclerView
-                android:id="@+id/recv_item_list"
+            <!-- the path view -->
+            <com.rekkursion.pathview.PathView
+                    android:id="@+id/path_view"
+                    app:put_single_separator_when_nothing="true"
+                    app:separator_color="@color/colorPrimary"
+                    app:node_text_color="@color/colorPrimaryDark"
+                    app:separator="\\"
+                    app:text_height="20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- the recycler-view for showing the folders and/or vocabularies -->
+            <com.rekkursion.enigma.views.AdapterListenableRecyclerView
+                    android:id="@+id/recv_item_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- the linear-layout for placing the UIs when picking a path -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lly_picking_path_ui_container"
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp">
+
+            <!-- the text-view for hinting the user to pick a path -->
+            <TextView
+                    android:id="@+id/txtv_attention_of_picking_a_path"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- the cancel-or-submit-button-bar -->
+            <com.rekkursion.enigma.views.CancelOrSubmitButtonBar
+                    android:id="@+id/cancel_or_submit_button_bar_at_item_list_fragment_when_picking_path"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <!-- the relative-layout for placing floating views -->
@@ -37,8 +69,8 @@
 
         <!-- the text-view for hinting the user that there's still nothing in this folder -->
         <TextView
-                android:id="@+id/txtv_attention_nothing_in_folder"
-                android:text="@string/str_attention_there_s_nothing_in_this_folder"
+                android:id="@+id/txtv_attention_of_nothing_in_folder"
+                android:text="@string/str_attention_of_there_s_nothing_in_this_folder"
                 android:textSize="20sp"
                 android:textAlignment="center"
                 android:gravity="center"

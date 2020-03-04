@@ -28,6 +28,10 @@ class ItemListFragment: Fragment(), OnFragmentGoBackListener {
 
     /* =================================================================== */
 
+    private lateinit var mInitializer: InitializeItemListFragmentTemplate
+
+    /* =================================================================== */
+
     // inflate the layout for this fragment
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_vocabulary_list, container, false)
@@ -36,8 +40,9 @@ class ItemListFragment: Fragment(), OnFragmentGoBackListener {
     // the root-view created, initialize views
     override fun onViewCreated(rootView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(rootView, savedInstanceState)
-        // initialize
-        InitializeItemListFragmentTemplate(this, rootView).initialize()
+
+        mInitializer = InitializeItemListFragmentTemplate(this, rootView)
+        mInitializer.initialize()
     }
 
     override fun onAttach(context: Context) {
@@ -67,5 +72,11 @@ class ItemListFragment: Fragment(), OnFragmentGoBackListener {
     override fun onGoBack(): Boolean {
         CommandManager.doCommand(CommandType.ITEM_LIST_BACK_TO_PREVIOUS_FOLDER)
         return true
+    }
+
+    /* =================================================================== */
+
+    fun adjustViewsVisibilities() {
+        mInitializer.adjustViewsVisibilities()
     }
 }

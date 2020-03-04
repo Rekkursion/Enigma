@@ -161,8 +161,10 @@ class InitializeVocabularyActivityTemplate(activity: AppCompatActivity):
         mVocabularyList.clear()
         mVocabularyList.addAll(DataManager.getAllVocabularyItemsAtCertainPath(PathManager.getCurrentPath()))
 
+        // if the vocabulary-list is empty, finish the activity directly
         if (mVocabularyList.isEmpty())
             mActivity.finish()
+        // otherwise, generally update the view-pager-2
         else {
             // set the adapter of the view-pager-2
             mViewPager2.adapter = VocabularyViewPagerAdapter(mVocabularyList)

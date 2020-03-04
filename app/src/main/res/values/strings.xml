@@ -63,13 +63,17 @@
     <!--<string name="str_attention_of_removing_item_dialog_message">It will be removed permanently and this action CANNOT be cancelled.</string>-->
     <string name="str_attention_of_removing_item_dialog_message">此動作將無法復原。</string>
     <!--<string name="str_attention_there_s_nothing_in_this_folder">There\'s nothing in this folder.</string>-->
-    <string name="str_attention_there_s_nothing_in_this_folder">這個分類夾裡面還沒有任何東西</string>
+    <string name="str_attention_of_there_s_nothing_in_this_folder">這個分類夾裡面還沒有任何東西</string>
     <!--<string name="str_attention_of_renaming_folder_item_dialog_title">Original name:&#160;</string>-->
     <string name="str_attention_of_renaming_folder_item_dialog_title">原分類名：</string>
     <!--<string name="str_attention_of_renaming_folder_item_dialog_edit_text_hint">Type a new folder name here.</string>-->
     <string name="str_attention_of_renaming_folder_item_dialog_edit_text_hint">在這裡輸入新的分類夾名稱</string>
     <!--<string name="str_attention_of_renamed_folder_no_change">There\'s no change compared to the old one.</string>-->
     <string name="str_attention_of_renamed_folder_no_change">分類夾名稱沒有變化</string>
+    <!--<string name="str_attention_of_picking_a_path_prefix">Please pick a path and click&#160;</string>-->
+    <string name="str_attention_of_picking_a_path_prefix">請選取一個路徑然後按下「</string>
+    <!--<string name="str_attention_of_picking_a_path_suffix">&#160;button.</string>-->
+    <string name="str_attention_of_picking_a_path_suffix">」鍵</string>
 
 
     <!--<string name="str_cancel">Cancel</string>-->
