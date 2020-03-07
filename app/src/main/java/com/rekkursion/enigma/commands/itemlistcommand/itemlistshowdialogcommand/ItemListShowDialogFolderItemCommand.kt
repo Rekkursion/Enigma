@@ -4,15 +4,23 @@ import android.app.AlertDialog
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.rekkursion.enigma.R
+import com.rekkursion.enigma.adapters.ItemRecyclerViewAdapter
 import com.rekkursion.enigma.enums.CommandType
 import com.rekkursion.enigma.managers.CommandManager
+import com.rekkursion.enigma.managers.MovingItemManager
+import com.rekkursion.enigma.managers.PathManager
+import com.rekkursion.enigma.models.FolderItem
+import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.states.PickingPathRecvState
 import com.rekkursion.enigma.states.RecvStateContext
 import com.rekkursion.enigma.views.ListDialog
 
 class ItemListShowDialogFolderItemCommand(recyclerView: RecyclerView): ItemListShowDialogCommand(recyclerView) {
-    override fun createListDialog(stateContext: RecvStateContext, dialogTitle: String, position: Int): AlertDialog {
+    override fun createListDialog(stateContext: RecvStateContext, dialogTitle: String, position: Int): AlertDialog? {
         val context = stateContext.getContext()
+        val item = (mRecvItemList.adapter as? ItemRecyclerViewAdapter)?.getBaseItemAndItsTruePosition(position)?.first as? FolderItem
+            ?: return null
+
         return ListDialog.Builder(context)
             // enter
             .addListItem(context.getString(R.string.str_folder_item_list_dialog_enter), View.OnClickListener {
@@ -35,6 +43,7 @@ class ItemListShowDialogFolderItemCommand(recyclerView: RecyclerView): ItemListS
             // move
             .addListItem(context.getString(R.string.str_folder_item_list_dialog_move), View.OnClickListener {
                 CommandManager.doCommand(CommandType.ITEM_LIST_EXPAND_OR_UNEXPAND_ALL_VOCABULARIES, false)
+                MovingItemManager.startMoving(item, PathManager.getCurrentPath(), position)
                 stateContext.state = PickingPathRecvState.getInstance()
             })
 

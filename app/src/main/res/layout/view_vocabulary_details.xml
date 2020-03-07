@@ -71,7 +71,6 @@
     <com.rekkursion.tagview.TagCloud
             android:id="@+id/tag_cloud_at_vocabulary_details"
             app:is_indicator="true"
-            app:is_showing_appearing_times="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 </androidx.appcompat.widget.LinearLayoutCompat>

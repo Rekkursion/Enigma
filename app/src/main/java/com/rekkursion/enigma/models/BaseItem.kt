@@ -83,15 +83,10 @@ abstract class BaseItem: Serializable {
 
     // update the list of path nodes by a new path string
     fun updatePathNodesByPathString(newPathString: String) {
-        val oldPathStr = pathString
-
         mPathNodes.clear()
         if (newPathString.isEmpty() || newPathString == PATH_SEPARATOR)
             return
         mPathNodes.addAll(newPathString.split(PATH_SEPARATOR))
-
-        val newPathStr = pathString
-        Log.e("REKK_TAG inner", "<${getName()}>[$oldPathStr][$newPathStr]")
     }
 
     /* =================================================================== */

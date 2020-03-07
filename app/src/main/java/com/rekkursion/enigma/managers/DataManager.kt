@@ -78,6 +78,22 @@ object DataManager {
         }
     }
 
+    // move a certain item
+    fun moveItem(item: BaseItem, newPathString: String) {
+        val oldPathString = item.pathString
+        val oldStayingFolder = item.getStayingFolder()
+
+        if (mBaseItemHashMap[oldPathString]?.remove(item) == true) {
+            oldStayingFolder?.removeItem(item)
+            item.updatePathNodesByPathString(newPathString)
+            addItems(arrayListOf(item))
+
+            if (item is FolderItem) {
+                // TODO
+            }
+        }
+    }
+
     // rename a certain folder-item
     fun renameFolderItem(folderItem: FolderItem, newFolderName: String) {
         val itemInList = mBaseItemHashMap[folderItem.pathString]?.find { it == folderItem } as? FolderItem

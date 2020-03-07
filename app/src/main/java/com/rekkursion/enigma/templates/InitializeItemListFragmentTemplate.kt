@@ -22,6 +22,8 @@ import com.rekkursion.enigma.fragments.ItemListFragment
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
+import com.rekkursion.enigma.managers.DataManager
+import com.rekkursion.enigma.managers.MovingItemManager
 import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.states.GeneralRecvState
 import com.rekkursion.enigma.states.PickingPathRecvState
@@ -73,7 +75,10 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
     }
 
     override fun onSubmitClickListener() {
-        // TODO: submit the picked path
+        // do the command of moving the selected item
+        CommandManager.doCommand(CommandType.ITEM_LIST_MOVE_ITEM_COMMAND)
+        // turn back to general state
+        mItemRecvStateContext.state = GeneralRecvState.getInstance()
     }
 
     /* =================================================================== */
@@ -139,6 +144,8 @@ class InitializeItemListFragmentTemplate(fragment: Fragment, rootView: View):
         CommandManager.putCommand(CommandType.ITEM_LIST_SHOW_DIALOG_FOLDER_ITEM, ItemListShowDialogFolderItemCommand(mRecvItemList))
         // command of showing dialog for a vocabulary-item-master in the recycler-view
         CommandManager.putCommand(CommandType.ITEM_LIST_SHOW_DIALOG_VOCABULARY_ITEM_MASTER, ItemListShowDialogVocabularyItemMasterCommand(mRecvItemList))
+        // command of moving the selected item
+        CommandManager.putCommand(CommandType.ITEM_LIST_MOVE_ITEM_COMMAND, ItemListMoveItemCommand(mRecvItemList))
     }
 
     override fun initEvents() {

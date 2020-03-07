@@ -32,5 +32,6 @@ enum class CommandType(val kClass: KClass<*>) {
     ITEM_LIST_BACK_TO_PREVIOUS_FOLDER(ItemListBackToPreviousFolderCommand::class),
     ITEM_LIST_LOAD_ALL_ITEMS(ItemListLoadAllItemsCommand::class),
     ITEM_LIST_UPDATE(ItemListUpdateCommand::class),
-    ITEM_LIST_EXPAND_OR_UNEXPAND_ALL_VOCABULARIES(ItemListExpandOrUnexpandAllVocabulariesCommand::class)
+    ITEM_LIST_EXPAND_OR_UNEXPAND_ALL_VOCABULARIES(ItemListExpandOrUnexpandAllVocabulariesCommand::class),
+    ITEM_LIST_MOVE_ITEM_COMMAND(ItemListMoveItemCommand::class)
 }
