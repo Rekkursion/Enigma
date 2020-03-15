@@ -11,35 +11,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <!-- the linear-layout for placing the UIs when picking a path -->
-        <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/lly_picking_path_ui_container"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <!-- the text-view for hinting the user to pick a path -->
-            <TextView
-                    android:id="@+id/txtv_attention_of_picking_a_path"
-                    android:textSize="14sp"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:layout_alignParentTop="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- the cancel-or-submit-button-bar -->
-            <com.rekkursion.enigma.views.CancelOrSubmitButtonBar
-                    android:id="@+id/cancel_or_submit_button_bar_at_item_list_fragment_when_picking_path"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
         <!-- the linear-layout for placing the path-view and the recycler-view -->
         <androidx.appcompat.widget.LinearLayoutCompat
                 android:orientation="vertical"
+                android:layout_weight="13"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp">
 
             <!-- the path view -->
             <com.rekkursion.pathview.PathView
@@ -55,6 +32,32 @@
             <!-- the recycler-view for showing the folders and/or vocabularies -->
             <com.rekkursion.enigma.views.AdapterListenableRecyclerView
                     android:id="@+id/recv_item_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- the linear-layout for placing the UIs when picking a path -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lly_picking_path_ui_container"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+            <!-- the text-view for hinting the user to pick a path -->
+            <TextView
+                    android:id="@+id/txtv_attention_of_picking_a_path"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- the cancel-or-submit-button-bar -->
+            <com.rekkursion.enigma.views.CancelOrSubmitButtonBar
+                    android:id="@+id/cancel_or_submit_button_bar_at_item_list_fragment_when_picking_path"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
         </androidx.appcompat.widget.LinearLayoutCompat>

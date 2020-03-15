@@ -50,11 +50,7 @@ class CertainItemRenameFolderCommand(recyclerView: RecyclerView): CertainItemCom
                         changeAdapter()
 
                         // show the toast to let the user know the folder-renaming operation is succeed
-                        Toast.makeText(
-                            mRecvItemList.context,
-                            context.getString(R.string.str_toast_rename_folder_item),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showToast(R.string.str_toast_rename_folder_item)
 
                         // dismiss the dialog
                         dialog.dismiss()

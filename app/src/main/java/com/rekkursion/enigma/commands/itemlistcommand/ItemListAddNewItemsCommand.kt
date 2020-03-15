@@ -23,19 +23,16 @@ class ItemListAddNewItemsCommand(recyclerView: RecyclerView): ItemListCommand(re
 
             // show the toast to let the user know the adding operation is succeed
             val context = mRecvItemList.context
-            val itemType = NewItemManager.newItemList[0].type
-            Toast.makeText(
-                mRecvItemList.context,
-                if (itemType == ItemType.VOCABULARY)
+            showToast(
+                if (NewItemManager.newItemList[0].type == ItemType.VOCABULARY)
                     context.getString(R.string.str_toast_add_vocabularies_prefix) +
                             NewItemManager.newItemList.size.toString() +
                             context.getString(R.string.str_toast_add_vocabularies_suffix)
                 else
                     context.getString(R.string.str_toast_add_folders_prefix) +
                             NewItemManager.newItemList.size.toString() +
-                            context.getString(R.string.str_toast_add_folders_suffix),
-                Toast.LENGTH_SHORT
-            ).show()
+                            context.getString(R.string.str_toast_add_folders_suffix)
+            )
         }
     }
 }

@@ -25,13 +25,10 @@ class CertainItemAlterVocabularyCommand(recyclerView: RecyclerView): CertainItem
         changeAdapter()
 
         // show the toast to let the user know the editing operation is succeed
-        val context = mRecvItemList.context
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_toast_edit_vocabulary_prefix) +
+        showToast(
+            mRecvItemList.context.getString(R.string.str_toast_edit_vocabulary_prefix) +
                     itemInList.getName() +
-                    context.getString(R.string.str_toast_edit_vocabulary_suffix),
-            Toast.LENGTH_SHORT
-        ).show()
+                    mRecvItemList.context.getString(R.string.str_toast_edit_vocabulary_suffix)
+        )
     }
 }

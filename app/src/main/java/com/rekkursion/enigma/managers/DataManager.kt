@@ -7,6 +7,7 @@ import com.rekkursion.enigma.models.FolderItem
 import com.rekkursion.enigma.models.VocabularyItem
 import com.rekkursion.enigma.utils.SerializationUtils
 import java.io.File
+import java.util.concurrent.ConcurrentHashMap
 
 object DataManager {
     // the destination file of base-item serialization
@@ -45,17 +46,20 @@ object DataManager {
 
     // add a list of new items
     fun addItems(items: ArrayList<BaseItem>) {
-        items.forEach { item ->
-            // already have this path
-            if (mBaseItemHashMap.containsKey(item.pathString))
-                mBaseItemHashMap[item.pathString]!!.add(item)
-            // didn't have this path, add the copied one
-            else
-                mBaseItemHashMap[item.pathString] = arrayListOf(item)
+        items.forEach { item -> addItem(item) }
+    }
 
-            // find the folder we are currently staying to add the item into it
-            item.getStayingFolder()?.addItem(item)
-        }
+    // add a single item
+    fun addItem(item: BaseItem) {
+        // already have this path
+        if (mBaseItemHashMap.containsKey(item.pathString))
+            mBaseItemHashMap[item.pathString]!!.add(item)
+        // didn't have this path, add the copied one
+        else
+            mBaseItemHashMap[item.pathString] = arrayListOf(item)
+
+        // find the folder we are currently staying to add the item into it
+        item.getStayingFolder()?.addItem(item)
     }
 
     // remove a certain item
@@ -86,10 +90,25 @@ object DataManager {
         if (mBaseItemHashMap[oldPathString]?.remove(item) == true) {
             oldStayingFolder?.removeItem(item)
             item.updatePathNodesByPathString(newPathString)
-            addItems(arrayListOf(item))
+            addItem(item)
 
             if (item is FolderItem) {
-                // TODO
+                Thread {
+                    item.clear()
+
+                    val oldExtendedPathStr = (oldPathString + BaseItem.PATH_SEPARATOR + item.folderName).trim(BaseItem.PATH_SEPARATOR[0])
+                    val newExtendedPathStr = (item.pathString + BaseItem.PATH_SEPARATOR + item.folderName).trim(BaseItem.PATH_SEPARATOR[0])
+
+                    val filtered = mBaseItemHashMap.filterKeys { it.startsWith(oldExtendedPathStr) }
+                    filtered.forEach { (key, list) ->
+                        list.forEach { innerItem ->
+                            val newStayingPathStr = innerItem.pathString.replaceFirst(oldExtendedPathStr, newExtendedPathStr).trim(BaseItem.PATH_SEPARATOR[0])
+                            innerItem.updatePathNodesByPathString(newStayingPathStr)
+                            addItem(innerItem)
+                        }
+                        mBaseItemHashMap.remove(key)
+                    }
+                }.start()
             }
         }
     }

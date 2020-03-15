@@ -197,4 +197,12 @@
     <string name="str_toast_remove_item_suffix">&#160;刪除成功</string>
     <!--<string name="str_toast_rename_folder_item">The folder has been renamed successfully.</string>-->
     <string name="str_toast_rename_folder_item">重新命名成功</string>
+    <!--<string name="str_toast_move_item_successfully">The item has been moved to the designated location successfully.</string>-->
+    <string name="str_toast_move_item_successfully">移動成功</string>
+    <!--<string name="str_toast_move_item_failed_due_to_no_change_on_path">Moving operation failed. The location is the same as the original one.</string>-->
+    <string name="str_toast_move_item_failed_due_to_no_change_on_path">移動失敗，選取的路徑即為原路徑</string>
+    <!--<string name="str_toast_move_item_failed_due_to_same_folder_name_exists">Moving operation failed. The picked location already contains the folder with the same name.</string>-->
+    <string name="str_toast_move_item_failed_due_to_same_folder_name_exists">移動失敗，選取的路徑中已含有同名的分類夾</string>
+    <!--<string name="str_toast_move_item_failed_due_to_recursion">Moving operation failed. The picked new location cannot be in the to-be-moved folder.</string>-->
+    <string name="str_toast_move_item_failed_due_to_recursion">移動失敗，選取的路徑不可以在欲移動的分類夾內</string>
 </resources>

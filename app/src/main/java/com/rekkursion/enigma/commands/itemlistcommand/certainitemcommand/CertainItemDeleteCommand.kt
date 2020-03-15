@@ -34,16 +34,14 @@ class CertainItemDeleteCommand(recyclerView: RecyclerView): CertainItemCommand(r
                     changeAdapter()
 
                     // show the toast to let the user know the removing operation is succeed
-                    Toast.makeText(
-                        mRecvItemList.context,
+                    showToast(
                         context.getString(R.string.str_toast_remove_item_prefix) +
-                            "${if (baseItem is FolderItem)
-                                context.getString(R.string.str_folder)
-                            else
-                                context.getString(R.string.str_vocabulary)} \"${baseItem.getName()}\"" +
-                        context.getString(R.string.str_toast_remove_item_suffix),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                                "${if (baseItem is FolderItem)
+                                    context.getString(R.string.str_folder)
+                                else
+                                    context.getString(R.string.str_vocabulary)} \"${baseItem.getName()}\"" +
+                                context.getString(R.string.str_toast_remove_item_suffix)
+                    )
                 }
                 .setNegativeButton(context.getString(R.string.str_cancel), null)
                 .create()

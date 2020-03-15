@@ -22,12 +22,9 @@ import com.rekkursion.enigma.fragments.ItemListFragment
 import com.rekkursion.enigma.listeners.OnButtonBarClickListener
 import com.rekkursion.enigma.listeners.OnItemListRecyclerViewItemTouchListener
 import com.rekkursion.enigma.managers.CommandManager
-import com.rekkursion.enigma.managers.DataManager
-import com.rekkursion.enigma.managers.MovingItemManager
 import com.rekkursion.enigma.managers.PathManager
 import com.rekkursion.enigma.states.GeneralRecvState
 import com.rekkursion.enigma.states.PickingPathRecvState
-import com.rekkursion.enigma.states.RecvState
 import com.rekkursion.enigma.states.RecvStateContext
 import com.rekkursion.enigma.views.AdapterListenableRecyclerView
 import com.rekkursion.enigma.views.CancelOrSubmitButtonBar
